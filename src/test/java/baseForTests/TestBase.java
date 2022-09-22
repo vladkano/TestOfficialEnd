@@ -148,8 +148,7 @@ public class TestBase {
 
     //Бой
     protected String getUrl = "https://poisondrop.ru/";
-
-//    protected String getUrl = "https://poisondrop.com/";
+    protected String getComUrl = "https://poisondrop.com/";
 
     //Тест(Сталинград)
 //    protected String getUrl = "https://ru.stalingrad.poisontestdrop.ru/";
@@ -159,6 +158,7 @@ public class TestBase {
 
     //Тест(Курск)
 //    protected String getUrl = "https://ru.kursk.poisontestdrop.ru/";
+//    protected String getComUrl = "https://en.kursk.poisontestdrop.ru/";
 
     //Тест(Тула)
 //    protected static String getUrl = "https://ru.tula.poisontestdrop.ru/";

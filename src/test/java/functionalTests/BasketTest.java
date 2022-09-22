@@ -254,7 +254,7 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Проверка того, что нельзя положить в корзину больше товара, чем есть на остатках")
     public void checkBalanceItem() {
-        takeScreenshot("Open catalog");
+//        takeScreenshot("Open catalog");
         Integer balance = basket.getBalance();
         basket.clickToItemButton();
         basket.clickToItemInBasketButton();

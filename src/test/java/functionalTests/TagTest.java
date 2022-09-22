@@ -1,6 +1,7 @@
 package functionalTests;
 
 import baseForTests.TestBase;
+import catalog.CatalogNavigation;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +18,7 @@ public class TagTest extends TestBase {
     public void setUp() {
         mainSetUp();
         tag = new Tags(driver);
+        navigation = new CatalogNavigation(driver);
     }
 
     /**
@@ -50,6 +52,7 @@ public class TagTest extends TestBase {
     @Description("Отображение тегов в каталогах: Кольца")
     public void tagIsVisibleRings() {
         driver.get(getUrl + "catalog/koltsa");
+        navigation.clickOnShowMoreButton();
         String firstTag = tag.getTag();
         String sqlTag = tag.nameOfRingTags();
         assertEquals(sqlTag.toUpperCase(), firstTag);
@@ -87,6 +90,7 @@ public class TagTest extends TestBase {
     @Description("Отображение всех тегов по товару: Кольца")
     public void tagIsCorrectRings() {
         driver.get(getUrl + "catalog/koltsa");
+        navigation.clickOnShowMoreButton();
         String firstTag = tag.getRingsTag();
         String output = Character.toUpperCase(firstTag.charAt(0)) + firstTag.substring(1);
         String tagsFromSql = tag.nameOfRingTags();

@@ -14,9 +14,9 @@ import java.util.List;
 public class DesignersFilter extends Base {
 
     private final By designersButton = By.xpath("(//div[@class='filters__list-tab'])[6]");
-    private final By sinitsynButton = By.xpath("//div[text()='Aleksandr Sinitsyn']");
-    private final By jewlryButton = By.xpath("//div[text()='Prosto Jewlry']");
-    private final By avgvstButton = By.xpath("//div[text()='Avgvst']");
+    private final By sinitsynButton = By.xpath("//div[contains(text(), 'Aleksandr Sinitsyn')]");
+    private final By jewlryButton = By.xpath("//div[contains(text(), 'Prosto Jewlry')]");
+    private final By avgvstButton = By.xpath("//div[contains(text(), 'Avgvst')]");
 
     public DesignersFilter(WebDriver driver) {
         super(driver);

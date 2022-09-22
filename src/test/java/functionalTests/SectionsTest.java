@@ -141,7 +141,7 @@ public class SectionsTest extends TestBase {
         String header = wishlist.getWishListHeader();
         Assertions.assertAll(
                 () -> assertEquals(getUrl + "wishlist/", url),
-                () -> assertEquals("Избранное", header));
+                () -> assertEquals("избранное", header));
     }
 
     /**
@@ -296,6 +296,9 @@ public class SectionsTest extends TestBase {
     @Description("Проверка разделов футера. Вконтакте.")
     public void vkButton() {
         footer.clickToVkButton();
+        //переключения между окнами
+        ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
         String url = driver.getCurrentUrl();
         assertEquals("https://vk.com/poisondrop", url);
     }
@@ -307,6 +310,11 @@ public class SectionsTest extends TestBase {
     @Description("Проверка разделов футера. Телеграм.")
     public void telegaButton() {
         footer.clickToTelegaButton();
+        //переключения между вкладками
+        ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
+//        driver.close();
+//        driver.switchTo().window(tabs2.get(0));
         String url = driver.getCurrentUrl();
         String header = footer.getTelegaHeader();
         Assertions.assertAll(
@@ -321,6 +329,8 @@ public class SectionsTest extends TestBase {
     @Description("Проверка разделов футера. Тик Ток.")
     public void tikTokButton() {
         footer.clickToTikTokButton();
+        ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
         String url = driver.getCurrentUrl();
         assertEquals("https://www.tiktok.com/@poisondropru?lang=ru-RU", url);
     }
@@ -332,6 +342,8 @@ public class SectionsTest extends TestBase {
     @Description("Проверка разделов футера. Ютуб.")
     public void youtubeButton() {
         footer.clickToYoutubeButton();
+        ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
         String url = driver.getCurrentUrl();
         String header = footer.getYoutubeHeader();
         Assertions.assertAll(
@@ -346,6 +358,8 @@ public class SectionsTest extends TestBase {
     @Description("Проверка разделов футера. Вотсап.")
     public void whatsAppButton() {
         footer.clickToWhatsAppButton();
+        ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
         String url = driver.getCurrentUrl();
         String header = footer.getWhatsAppHeader();
         Assertions.assertAll(

@@ -139,7 +139,7 @@ public class MainPageTest extends TestBase {
         String incorrectSigInCodeHeader = mainPage.getIncorrectSigInCodeHeader();
         mainPage.clickOnCloseButton();
         Assertions.assertAll(
-                () -> assertEquals("Неверный код подтверждения", incorrectSigInCodeHeader));
+                () -> assertEquals("неверный код подтверждения", incorrectSigInCodeHeader));
     }
 
     /**

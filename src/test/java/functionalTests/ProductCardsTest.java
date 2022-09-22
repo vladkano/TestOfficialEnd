@@ -318,7 +318,7 @@ public class ProductCardsTest extends TestBase {
     public void checkSetWindowKoltsa() {
         set = new Set(driver);
         rings = new Rings(driver);
-        String s = rings.getItemsFromSet().get(1);
+        String s = rings.getItemsFromSet().get(0);
         driver.get(getUrl + "catalog/koltsa/" + s);
         set.getSetWindow();
         String setHeader = set.getSetHeader();

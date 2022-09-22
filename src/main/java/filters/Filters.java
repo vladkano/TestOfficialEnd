@@ -26,10 +26,15 @@ public class Filters extends Base {
     private final By seventyPercentButton = By.xpath("//div[text()='От 70%']");
 
     private final By allEarringsButton = By.xpath("//div[text()='Серьги']");
-    private final By allEarringsButton2 = By.xpath("(//div[text()='Серьги'])[2]");
+    private final By allEarringsButton2 = By.xpath("//div[contains(text(), 'Серьги')]");
 
+    private final By allEarringsComButton = By.xpath("//div[text()='Earrings']");
     private final By allRingsButton = By.xpath("//div[text()='Кольца']");
+
+    private final By allRingsComButton = By.xpath("//div[text()='Rings']");
     private final By allNecklacesButton = By.xpath("//div[text()='Колье']");
+
+    private final By allNecklacesComButton = By.xpath("//div[text()='Necklace']");
     private final By allBraceletsButton = By.xpath("//div[text()='Браслеты']");
     private final By allBroochesButton = By.xpath("//div[text()='Броши']");
     private final By priceButton = By.xpath("//div[text()='Цена']");
@@ -81,8 +86,6 @@ public class Filters extends Base {
     }
 
     public void clickToShowProductsButton() {
-//        ((JavascriptExecutor) driver).executeScript(
-//                "arguments[0].click();", driver.findElement(showProductsButton));
         click(showProductsButton);
     }
 
@@ -91,8 +94,16 @@ public class Filters extends Base {
                 "arguments[0].click();", driver.findElement(allRingsButton));
     }
 
+    public void clickToAllRingsButtonCom() {
+        click(allRingsComButton);
+    }
+
     public void clickToAllEarringsButton() {
         click(allEarringsButton);
+    }
+
+    public void clickToAllEarringsComButton() {
+        click(allEarringsComButton);
     }
 
     public void clickToAllEarringsButton2() {
@@ -104,6 +115,10 @@ public class Filters extends Base {
     public void clickToAllNecklacesButton() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].click();", driver.findElement(allNecklacesButton));
+    }
+
+    public void clickToAllNecklacesComButton() {
+        click(allNecklacesComButton);
     }
 
     public void clickToAllBraceletsButton() {
@@ -234,7 +249,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=1 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 147 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -243,6 +258,35 @@ public class Filters extends Base {
                 name = resultSet.getString("name");
 //                System.out.println(name);
                 text.add(name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return text;
+    }
+
+    public List<String> getEarringNamesForFiltersFromCom() {
+        String name;
+        List<String> text = new ArrayList<>();
+        String query = "SELECT item_translations.name from item_translations " +
+                "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
+                "JOIN designer ON item.designer_id = designer.id " +
+                "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
+                "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
+                "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
+                "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
+                "and catalog_id=1 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 147 " +
+                "and storage_id = 1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
+                "group by item_catalog_position.position";
+        try {
+            Statement statement = worker.getCon().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                name = resultSet.getString("name");
+//                System.out.println(name);
+                text.add(name.substring(0,10));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -263,7 +307,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=5 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 149 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -272,6 +316,35 @@ public class Filters extends Base {
                 name = resultSet.getString("name");
 //                System.out.println(name);
                 text.add(name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return text;
+    }
+
+    public List<String> getRingNamesForFiltersFromCom() {
+        String name;
+        List<String> text = new ArrayList<>();
+        String query = "SELECT item_translations.name from item_translations " +
+                "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
+                "JOIN designer ON item.designer_id = designer.id " +
+                "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
+                "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
+                "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
+                "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
+                "and catalog_id=5 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 149 " +
+                "and storage_id = 1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
+                "group by item_catalog_position.position";
+        try {
+            Statement statement = worker.getCon().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                name = resultSet.getString("name");
+//                System.out.println(name);
+                text.add(name.substring(0,10));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -292,7 +365,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=2 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 150 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -301,6 +374,35 @@ public class Filters extends Base {
                 name = resultSet.getString("name");
 //                System.out.println(name);
                 text.add(name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return text;
+    }
+
+    public List<String> getNecklacesNamesForFiltersFromCom() {
+        String name;
+        List<String> text = new ArrayList<>();
+        String query = "SELECT item_translations.name from item_translations " +
+                "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
+                "JOIN designer ON item.designer_id = designer.id " +
+                "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
+                "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
+                "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
+                "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
+                "and catalog_id=2 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 150 " +
+                "and storage_id = 1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
+                "group by item_catalog_position.position";
+        try {
+            Statement statement = worker.getCon().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                name = resultSet.getString("name");
+//                System.out.println(name);
+                text.add(name.substring(0,10));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -321,7 +423,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=3 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 148 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -351,7 +453,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=4 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 151 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -380,7 +482,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and storage_stock.storage_id != 1006 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and discount > 0 " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and discount > 0 " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -409,7 +511,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and discount >= 30 " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and discount >= 30 " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -438,7 +540,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and discount >= 50 " +
+                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and discount >= 50 " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();

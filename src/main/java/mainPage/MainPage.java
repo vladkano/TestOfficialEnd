@@ -2,11 +2,9 @@ package mainPage;
 
 import base.Base;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -132,6 +130,13 @@ public class MainPage extends Base {
         this.typeLoginWithPhone(phone);
         this.clickOnGetPasswordButton();
         return new MainPage(driver);
+    }
+
+    public void sigInToComWithPhone(String phone) {
+        clickOnSigInButton();
+        driver.findElement(loginWithPhone).clear();
+        type(phone, loginWithPhone);
+        clickOnGetPasswordButton();
     }
 
     public void sigInWithEmail(String email) {
