@@ -29,7 +29,7 @@ public class OrderTest extends TestBase {
 
     /**
      * Вспомогательные методы для тестов: <p>
-     * Запрос кода подтверждения при оплате онлайн и переход на экран ввода реквизитов карты + проверка заголовка на странице ввода реквизитов.
+     * Запрос кода подтверждения при оплате онлайн и переход на экран ввода реквизитов карты + проверка заголовка и стоимости заказа на странице ввода реквизитов.
      */
     public void payConfirmAndHeaderCheck() {
         int cartPrice = parseInt(order.getFinalPrice().replaceAll("[^A-Za-z0-9]", ""));
@@ -40,7 +40,6 @@ public class OrderTest extends TestBase {
         Assertions.assertAll(
                 () -> assertEquals("Оплата заказа", header.substring(0, 13)),
                 () -> assertEquals(cartPrice, cloudPrice));
-        ;
     }
 
     /**
@@ -82,7 +81,7 @@ public class OrderTest extends TestBase {
     public void courierDeliveryAndPhone() {
         putItemInBasket();
         order.orderWithAllStrings(phoneForOrder, email, testNameForOrder,
-                "Нижний Новгород", "ул Ефремова, д 10", "2", "2", "2",
+                "Нижний", "ул Ефремова, д 10", "2", "2", "2",
                 "2", "Test Comment", "Test");
         payConfirmAndHeaderCheck();
     }
@@ -95,7 +94,7 @@ public class OrderTest extends TestBase {
     public void courierDeliveryAndWA() {
         putItemInBasket();
         order.orderWithWhatsApp(phoneForOrder, email, testNameForOrder,
-                "Санкт-Петербург", "пр-кт Просвещения, д 10", "2", "2", "2", "2", "Test Comment", "Test");
+                "Санкт", "пр-кт Просвещения, д 10", "2", "2", "2", "2", "Test Comment", "Test");
         payConfirmAndHeaderCheck();
     }
 
@@ -110,7 +109,7 @@ public class OrderTest extends TestBase {
         int price = parseInt(order.getFirstPrice().replaceAll("[^A-Za-z0-9]", ""));
         int finalPrice = parseInt(order.getFinalPrice().replaceAll("[^A-Za-z0-9]", ""));
         order.orderWithAllStrings(phoneForOrder, email, testNameForOrder,
-                "Нижний Новгород", "ул Ефремова, д 10", "2", "2", "2",
+                "Нижний", "ул Ефремова, д 10", "2", "2", "2",
                 "2", "Test Comment", "Test");
         assertTrue(finalPrice > price);
         payConfirmAndHeaderCheck();
@@ -124,7 +123,7 @@ public class OrderTest extends TestBase {
     public void courierDeliveryAndWALessThan5000() {
         putItemLessThan5000InBasket();
         order.orderWithWhatsApp(phoneForOrder, email, testNameForOrder,
-                "Санкт-Петербург", "пр-кт Просвещения, д 10", "2", "2", "2", "2", "Test Comment", "Test");
+                "Санкт", "пр-кт Просвещения, д 10", "2", "2", "2", "2", "Test Comment", "Test");
         payConfirmAndHeaderCheck();
     }
 
@@ -355,14 +354,14 @@ public class OrderTest extends TestBase {
     }
 
     /**
-     * Проверяем, что доставка в Италию невозможна и появляется соответствующая надпись
+     * Проверяем, что при оформлении доставки в Италию пользователя переносит на сайт https://poisondrop.com/cart/
      */
     @Test()
     public void internationalDeliveryIsNotPossible() {
         putItemInBasket();
         order.deliveryIsNotPossible(phoneForOrder, email, testNameForOrder, "Рим");
-        String interHeader = order.getInterHeader();
-        assertEquals("Международная доставка временно недоступна", interHeader);
+        String comUrl = driver.getCurrentUrl();
+        assertEquals("https://poisondrop.com/cart", comUrl);
     }
 
     /**

@@ -54,7 +54,7 @@ public class WishListTest extends TestBase {
         String header = wishlist.getWishListHeader();
         Assertions.assertAll(
                 () -> assertEquals(getUrl + "wishlist/", url),
-                () -> assertEquals("Избранное", header));
+                () -> assertEquals("избранное", header));
     }
 
     /**

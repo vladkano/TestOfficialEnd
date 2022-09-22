@@ -61,18 +61,18 @@ public class PersonalAreaTest extends TestBase {
 
         Assertions.assertAll(
                 () -> assertEquals("Личные данные", personalDataHeader),
-                () -> assertEquals("О вас", aboutYouHeader),
-                () -> assertEquals("Имя, можно с фамилией", nameHeader),
-                () -> assertEquals("Дата рождения", birthdayHeader),
-                () -> assertEquals("Вход на сайт", signInHeader),
-                () -> assertEquals("Телефон", phoneHeader),
-                () -> assertEquals("Email", emailHeader),
-                () -> assertEquals("Адрес доставки", addressHeader),
-                () -> assertEquals("Адрес", deliveryAddressHeader),
-                () -> assertEquals("Квартира, офис", apartmentsHeader),
-                () -> assertEquals("Подъезд", entranceHeader),
-                () -> assertEquals("Этаж", floorHeader),
-                () -> assertEquals("Домофон", intercomHeader));
+                () -> assertEquals("о вас", aboutYouHeader),
+                () -> assertEquals("имя, можно с фамилией", nameHeader),
+                () -> assertEquals("дата рождения", birthdayHeader),
+                () -> assertEquals("вход на сайт", signInHeader),
+                () -> assertEquals("телефон", phoneHeader),
+                () -> assertEquals("email", emailHeader),
+                () -> assertEquals("адрес доставки", addressHeader),
+                () -> assertEquals("адрес", deliveryAddressHeader),
+                () -> assertEquals("квартира, офис", apartmentsHeader),
+                () -> assertEquals("подъезд", entranceHeader),
+                () -> assertEquals("этаж", floorHeader),
+                () -> assertEquals("домофон", intercomHeader));
     }
 
     /**
@@ -246,11 +246,11 @@ public class PersonalAreaTest extends TestBase {
         String orderRecipientHeader = personalData.getOrderRecipientHeader();
         String orderYouOrderedHeader = personalData.getOrderYouOrderedHeader();
         Assertions.assertAll(
-                () -> assertEquals("Не обработан", orderStatus),
-                () -> assertEquals("Дата заказа", orderDataHeader),
-                () -> assertEquals("Адрес доставки", orderAddressHeader),
-                () -> assertEquals("Получатель", orderRecipientHeader),
-                () -> assertEquals("Вы заказали", orderYouOrderedHeader));
+                () -> assertEquals("не обработан", orderStatus),
+                () -> assertEquals("дата заказа", orderDataHeader),
+                () -> assertEquals("адрес доставки", orderAddressHeader),
+                () -> assertEquals("получатель", orderRecipientHeader),
+                () -> assertEquals("вы заказали", orderYouOrderedHeader));
     }
 
     /**

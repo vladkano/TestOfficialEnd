@@ -453,19 +453,18 @@ public class FiltersTest extends TestBase {
     }
 
     /**
-     * Розовое золото
+     * золото
      */
     @Test
-    @Description("Проверяем работу фильтров: По покрытию(Розовое золото)")
-    public void getPinkGold() {
+    @Description("Проверяем работу фильтров: По покрытию(золото)")
+    public void getCoveringGold() {
         getCoveringFilter();
-        colorsAndCoverage.clickToPinkGoldButton();
+        colorsAndCoverage.clickToGoldButton();
         filters.clickToShowProductsButton();
-        List<String> sqlList = colorsAndCoverage.getListOfPinkGold();
+        List<String> sqlList = colorsAndCoverage.getListGold();
         getProductsListFromPage();
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
-        //Сравниваем 2 элемента и размеры списков. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         Assertions.assertAll(
                 () -> assertEquals(sqlList.size(), numberOnly),
                 () -> assertEquals(sqlList.get(0), siteList.get(0)));

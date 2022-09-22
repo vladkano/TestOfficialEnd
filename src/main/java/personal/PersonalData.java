@@ -38,7 +38,7 @@ public class PersonalData extends Base {
     private final By profileBirthdayHeader = By.xpath("(//div[@class='text-input text-input_halfwidth']/label)[1]");
     private final By signInHeader = By.xpath("(//legend[@class='profile-form__section-title'])[2]");
     private final By profilePhoneHeader = By.xpath("(//div[@class='text-input text-input_halfwidth']/label)[2]");
-    private final By profileEmailHeader = By.xpath("//label[text()='Email']");
+    private final By profileEmailHeader = By.xpath("//label[text()='email']");
     private final By deliveryAddressHeader = By.xpath("(//legend[@class='profile-form__section-title'])[3]");
     private final By profileDeliveryAddressHeader = By.xpath("(//div[@class='text-input']/label)[3]");
     private final By apartmentsHeader = By.xpath("(//div[@class='text-input text-input_halfwidth']/label)[3]");

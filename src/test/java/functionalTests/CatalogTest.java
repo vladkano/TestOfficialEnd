@@ -300,7 +300,7 @@ public class CatalogTest extends TestBase {
             siteList.add(s.substring(0, 18));
         }
         //Сравниваем первые 9 символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
-        assertEquals(sqlList.subList(0, siteList.size()), siteList.subList(0, siteList.size()));
+        assertEquals(sqlList.subList(0, sqlList.size()), siteList.subList(0, siteList.size()));
     }
 
     /**

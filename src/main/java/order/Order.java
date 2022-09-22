@@ -17,7 +17,7 @@ public class Order extends Base {
 
     private final By changeCityButton = By.xpath("//span[@class='order-delivery__location-city-output']");
     private final By locationSearch = By.id("locationSearch");
-    private final By locationButton = By.xpath("//li[@class='location-choose__variant']/p");
+    private final By locationButton = By.xpath("//p[@class='location-choose__variant-city']");
 
     private final By deliveryButton = By.xpath("//b[@class='order-delivery__tab-title']");
 
@@ -26,7 +26,7 @@ public class Order extends Base {
     private final By orderFio = By.xpath("//input[@id='orderName']");
     private final By orderAddressButton = By.xpath("//textarea[@id='deliveryAddress']");
     private final By orderAddress = By.xpath("//input[@id='addressAutocomplete']");
-    private final By orderAddressCloseButton = By.xpath("//button[text()='Закрыть']");
+    private final By orderAddressCloseButton = By.xpath("//button[contains(text(), 'закрыть')]");
     private final By chooseAddressButton = By.xpath("//li[@class='address-autocomplete__variant']/b");
     private final By orderApartment = By.xpath("//input[@id='deliveryApartment']");
     private final By orderFrontDoor = By.xpath("//input[@id='deliveryFrontDoor']");
@@ -37,7 +37,7 @@ public class Order extends Base {
 
     private final By payButton = By.xpath("//button[@class='submit-block__button button-fill']/span");
     private final By orderButton = By.xpath("//span[text()='Оформить заказ']");
-    private final By addAddressButton = By.xpath("//span[text()='Добавить этаж, домофон, комментарий для курьера']");
+    private final By addAddressButton = By.xpath("//span[text()='добавить этаж, домофон, комментарий для курьера']");
     private final By searchBox = By.xpath("//input[@id='searchbox']");
     private final By countrySearchBox = By.xpath("//input[@class='reg']");
     private final By citySearchBox = By.xpath("(//input[@class='reg'])[2]");
@@ -46,7 +46,7 @@ public class Order extends Base {
     private final By authPassword = By.xpath("//input[@id='verificationCode']");
     private final By whatsAppButton = By.xpath("//label[@for='communicationWhatsapp']/span");
     private final By smsButton = By.xpath("//span[text()=' СМС о статусе заказа ']");
-    private final By companyStoreButton = By.xpath("//span[text()='Забрать в фирменном магазине']");
+    private final By companyStoreButton = By.xpath("//span[text()='забрать в фирменном магазине']");
     private final By metropolisStoreButton = By.xpath("//span[text()='Poison Drop в ТЦ «Метрополис»']");
     private final By redBridgeStoreButton = By.xpath("//span[text()='Poison Drop в Универмаге «Au Pont Rouge. У Красного моста»']");
     private final By atriumStoreButton = By.xpath("//span[text()='Poison Drop в ТЦ «Атриум»']");
@@ -55,8 +55,8 @@ public class Order extends Base {
     private final By galleryKrasnodarStoreButton = By.xpath("//span[text()='Poison Drop в ТРЦ «Галерея Краснодар»']");
     private final By kazanMallStoreButton = By.xpath("//span[text()='Poison Drop в ТЦ «KazanMall»']");
     private final By noPayButton = By.xpath("//label[@for='offlinePayment']/span");
-    private final By pickPointButton = By.xpath("//b[text()='Постамат']");
-    private final By selectPostomatButton = By.xpath("//span[text()='Выбрать постамат']");
+    private final By pickPointButton = By.xpath("//b[text()='постамат']");
+    private final By selectPostomatButton = By.xpath("//span[text()='выбрать постамат']");
     private final By searchboxButton = By.xpath("//div[@class='combobox searchbox']/span");
     private final By rodonitButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"6601-054\"); return false;']");
     private final By belarusButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"9001-009\"); return false;']");
@@ -65,6 +65,7 @@ public class Order extends Base {
     private final By firstPrice = By.xpath("//b[@class='cart-price__total']");
     private final By finalPrice = By.xpath("//div[@class='order-summary__row order-summary__row_total']/span[2]");
     private final By cloudPrice = By.xpath("//div[@class='header-component__cost']");
+    private final By checkoutPrice = By.xpath("//h1[@class='Summarystyles__TotalPrice-vv6evz-2 iTuHTB']");
     private final By frame = By.xpath("//iframe[@src='https://pickpoint.ru/select/?&ikn=9990653812']");
     private final By payFrame = By.xpath("//iframe[@class=' with-appled']");
     private final By ordinaryDeliveryButton = By.xpath("//label[@for='ordinaryDelivery']/span[@class='order-delivery__courier-type-variant']");
@@ -77,7 +78,7 @@ public class Order extends Base {
     private final By payHeader = By.xpath("//span[contains(text(), 'Оплата заказа')]");
     private final By orderHeader = By.xpath("//span[text()='Мы приняли ваш заказ']");
     private final By interHeader = By.xpath("//p[@class='order-delivery__tab-text']");
-
+    private final By payComHeader = By.id("payment-methods");
 
     public Order(WebDriver driver) {
         super(driver);
@@ -98,6 +99,12 @@ public class Order extends Base {
     public void clickOnLocationButton() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].click();", driver.findElement(locationButton));
+//        click(locationButton);
+    }
+
+    public void clickOnLocationButtonNY() {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", driver.findElement(catalogLocationButtonNY));
 //        click(locationButton);
     }
 
@@ -128,11 +135,19 @@ public class Order extends Base {
         return driver.findElement(payHeader).getText();
     }
 
+    public String getPayComHeader() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(payComHeader));
+        return driver.findElement(payComHeader).getText();
+    }
+
     public String getCloudPrice() {
         return driver.findElement(cloudPrice).getText();
     }
 
-
+    public String getCheckoutPrice() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(checkoutPrice));
+        return driver.findElement(checkoutPrice).getText();
+    }
 
     public String getOrderHeader() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -141,6 +156,7 @@ public class Order extends Base {
     }
 
     public String getInterHeader() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(interHeader));
         return driver.findElement(interHeader).getText();
     }
 
@@ -673,7 +689,7 @@ public class Order extends Base {
         this.typeLocationSearch(city);
         sleep(1000);
         this.clickOnLocationButton();
-        this.clickOnDeliveryButton();
+//        this.clickOnDeliveryButton();
         type(internationalCity, orderAddressButton);
         this.clickOnAddCommentButton();
         this.typeComment(comment);
@@ -687,6 +703,31 @@ public class Order extends Base {
         this.typeLocationSearch(city);
         sleep(1000);
         this.clickOnLocationButton();
+        sleep(1000);
+    }
+
+    //Доставить в другую страну(Dubai):
+    public void deliveryFromDubai(String phone, String email, String fio, String city, String comment) {
+        driver.findElement(orderPhone).clear();
+        basicParameters(phone, email, fio);
+        clickOnChangeCityButton();
+        typeLocationSearch(city);
+        clickOnLocationButton();
+        clickOnAddCommentButton();
+        typeComment(comment);
+        clickOnPayButton();
+    }
+
+    //Доставить в другую страну(Dubai):
+    public void deliveryFromDubaiToNY(String phone, String email, String fio, String city, String comment) {
+        driver.findElement(orderPhone).clear();
+        basicParameters(phone, email, fio);
+        clickOnChangeCityButton();
+        typeLocationSearch(city);
+        clickOnLocationButtonNY();
+        clickOnAddCommentButton();
+        typeComment(comment);
+        clickOnPayButton();
     }
 
 

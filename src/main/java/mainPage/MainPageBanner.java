@@ -22,7 +22,7 @@ public class MainPageBanner extends Base {
     private final By designerButtonHeader = By.xpath("//div[@class='catalog-card__designer']/a");
     private final By nameButtonHeader = By.xpath("//h3[@class='catalog-card__name']/a");
     private final By designerHeader = By.xpath("//a[@class='product-main-info__designer-link']");
-    private final By firstCatalogHeader = By.xpath("//span[text()='фильтр']");
+    private final By firstCatalogHeader = By.xpath("//span[@class='filters__label-text']");
     private final By mainCatalogHeader = By.xpath("//h1[text()='Самой сверкающей']");
     private final By bestsellerNameHeader = By.xpath("//h1[@class='product-main-info__product-name']");
 
@@ -112,6 +112,7 @@ public class MainPageBanner extends Base {
         List<String> list = new ArrayList<>();
         String query = "SELECT name from item_sku " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
+                "where locale = 'ru' " +
                 "group by bestsellers.id ";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -133,10 +134,12 @@ public class MainPageBanner extends Base {
     public List<String> listOfDesigners() {
         String name;
         List<String> list = new ArrayList<>();
-        String query = "SELECT designer.name from designer " +
+        String query = "SELECT designer_translation.name from designer_translation " +
+                "JOIN designer ON designer_translation.designer_id = designer.id " +
                 "JOIN item ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item_sku.item_id = item.id " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
+                "where bestsellers.locale = 'ru' and designer_translation.locale = 'ru' " +
                 "order by bestsellers.id";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -162,6 +165,7 @@ public class MainPageBanner extends Base {
         String query = "SELECT item_sku_price.price, (item_sku_price.price * discount/100) as discount from item_sku_price " +
                 "JOIN item_sku ON item_sku_price.item_sku_id = item_sku.id " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
+                "where locale = 'ru' " +
                 "group by bestsellers.id";
         try {
             Statement statement = worker.getCon().createStatement();
