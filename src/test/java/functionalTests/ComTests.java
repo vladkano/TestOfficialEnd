@@ -4,6 +4,7 @@ import base.Base;
 import baseForTests.TestBase;
 import basket.Basket;
 import catalog.Bracelets;
+import catalog.Earrings;
 import filters.Filters;
 import filters.Size;
 import io.qameta.allure.Description;
@@ -45,6 +46,7 @@ public class ComTests extends TestBase {
         designers = new Designers(driver);
         sale = new Sale(driver);
         wishlist = new Wishlist(driver);
+        earrings = new Earrings(driver);
     }
 
     /**
@@ -62,7 +64,7 @@ public class ComTests extends TestBase {
         double finalCloudPrice = Double.parseDouble(order.getCheckoutPrice().replaceAll("[^\\d.]", ""));
 //        System.out.println(finalCloudPrice);
         Assertions.assertAll(
-                () -> assertEquals("Payment methods", header),
+                () -> assertEquals("Pay Poison Drop LLC", header.substring(0,19)),
                 () -> assertEquals(cartPrice, finalCloudPrice));
     }
 
@@ -70,7 +72,7 @@ public class ComTests extends TestBase {
      * Положить в корзину товар.
      */
     public void putItemInBasket() {
-        basket.clickOnImageLink();
+        basket.clickOnSecondImageLink();
         basket.clickToItemInBasketButton();
         basket.clickToBasketButton();
     }
@@ -79,6 +81,7 @@ public class ComTests extends TestBase {
      * Получить список изделий с сайта
      */
     public void getProductsListFromPage() {
+        sleep(1000);
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getAttribute("textContent");
@@ -144,7 +147,7 @@ public class ComTests extends TestBase {
      */
     @Test
     @Description("Весь каталог(проверка по наименованию изделия)")
-    public void productNamesInCatalog() {
+    public void productNamesInCatalogCom() {
         String countHeader = filters.getCountHeader();
         int numberOnly = Integer.valueOf(countHeader.replaceAll("\\D", ""));
         List<String> sqlList = base.getComNames();
@@ -287,7 +290,7 @@ public class ComTests extends TestBase {
     @Description("Проверяем отображение 5 блоков(delivery, materials and features, jewelry care, " +
             "payments and returns, 6 months guarantee). Проверка по разделам: Серьги")
     public void checkingBlocksSergiCom() {
-        driver.get(getComUrl + "catalog/sergi/");
+        driver.get(getComUrl + "catalog/earrings/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
         String receivingCity = productCard.getReceivingCity();
@@ -329,14 +332,14 @@ public class ComTests extends TestBase {
     }
 
     /**
-     * fine jewelry
+     * earrings
      */
     @Test()
-    @Description("Проверка кнопок разделов на главной странице. fine jewelry.")
-    public void jewelryComButton() {
-        jewelry.clickToJewelryButton();
+    @Description("Проверка кнопок разделов на главной странице. earrings.")
+    public void earringsComButton() {
+        earrings.clickToEarringsButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getComUrl + "jewelry/", url);
+        assertEquals(getComUrl + "catalog/earrings/", url);
     }
 
     /**
@@ -425,7 +428,7 @@ public class ComTests extends TestBase {
      */
     @Test()
     @Description("Блок тестов по переносу товара из избранного в корзину. Добавление в избранное из каталога: Товар без размера.")
-    public void favoritesToBasket() {
+    public void favoritesToBasketCom() {
         String itemName = wishlist.getItemName();
         wishlist.clickToAddToWishlistFromCatalogButton();
         wishlist.clickToWishListButton();
@@ -436,11 +439,6 @@ public class ComTests extends TestBase {
         Assertions.assertAll(
                 () -> assertEquals(itemName, itemNameFromWishlist),
                 () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20)));
-    }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
     }
 
 }

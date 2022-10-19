@@ -174,6 +174,7 @@ public class WishListTest extends TestBase {
     }
 
     //выбор размера в избранном отключен
+
     /**
      * Товар с размером.
      */
@@ -198,10 +199,10 @@ public class WishListTest extends TestBase {
         wishlist.clickToMoveToBasketButton();
         String basketProductName = wishlist.getBasketProductName();
         Assertions.assertAll(
-                () -> assertEquals(itemName, itemNameFromWishlist),
+                () -> assertEquals(itemName.substring(0, 30), itemNameFromWishlist.substring(0, 30)),
                 () -> assertEquals(itemNameFromWishlist.substring(0, 30), basketProductName.substring(0, 30))
 //                () -> assertEquals(itemNameFromWishlist + "\n" + "Размер: " + wishListProductSize, basketProductName)
-    );
+        );
     }
 
     /**
@@ -227,6 +228,7 @@ public class WishListTest extends TestBase {
 
 
     //выбор размера в избранном отключен
+
     /**
      * Добавление в избранное из карточки товара:<p>
      * Товар из коллекции с размером.
@@ -241,7 +243,7 @@ public class WishListTest extends TestBase {
         filters.clickToOkButton();
         filters.clickToFilterButton();
         size.clickToSizeButton();
-        size.clickToThirdSizeButton();
+        size.clickToSecondSizeButton();
         filters.clickToShowProductsButton();
         collection.clickOnFirstHref();
         String itemName = wishlist.getHeader();
@@ -260,8 +262,4 @@ public class WishListTest extends TestBase {
         );
     }
 
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

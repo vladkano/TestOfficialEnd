@@ -33,6 +33,7 @@ public class CatalogNavigationTest extends TestBase {
         navigation.clickOnShowMoreButton();
         sleep(2000);
         List<WebElement> numbers = driver.findElements(numberOfItem);
+        navigation.clickOnNameLink();
         assertEquals(96, numbers.size());
     }
 
@@ -118,8 +119,4 @@ public class CatalogNavigationTest extends TestBase {
         assertEquals(numberOfFoto, numbers.size());
     }
 
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

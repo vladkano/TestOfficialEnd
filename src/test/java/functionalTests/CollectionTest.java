@@ -23,6 +23,7 @@ public class CollectionTest extends TestBase {
     public void setUp() {
         mainSetUp();
         collection = new Collection(driver);
+        navigation = new CatalogNavigation(driver);
     }
 
     /**
@@ -111,6 +112,9 @@ public class CollectionTest extends TestBase {
     public void firstLinkOfNecklaces() {
         necklaces = new Necklaces(driver);
         driver.get(getUrl + "catalog/kole");
+        navigation.clickOnShowMoreButton();
+        navigation.clickOnShowMoreButton();
+        sleep(2000);
         String href = collection.getHref();
         collection.clickOnFirstHref();
         String url = driver.getCurrentUrl();
@@ -192,8 +196,4 @@ public class CollectionTest extends TestBase {
         checkDouble();
     }
 
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

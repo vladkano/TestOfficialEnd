@@ -107,9 +107,7 @@ public class SaleTest extends TestBase {
     //Проверка отображения размера скидки.
     @Test
     public void saleCheckingDisplayOfDiscountAmount() {
-        //sql:
         List<Integer> sqlList = sale.getSale();
-        //site:
         List<WebElement> elements = driver.findElements(By.xpath("//span[@class='price-block__discount']"));
         for (WebElement text : elements) {
             String s = text.getText();
@@ -120,10 +118,5 @@ public class SaleTest extends TestBase {
         }
         //сравниваем содержание списков
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
-    }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
     }
 }

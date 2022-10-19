@@ -479,9 +479,4 @@ public class CatalogTest extends TestBase {
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
     }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

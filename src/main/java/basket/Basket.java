@@ -47,9 +47,13 @@ public class Basket extends Base {
 
     public void clickToItemButton() {
         String firstItem = findFirstItemMoreThan5000();
+//        ((JavascriptExecutor) driver).executeScript(
+//                "arguments[0].click();", driver.findElement(By.xpath("//a[text()=" + "'" + firstItem + "']")));
+
         ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();", driver.findElement(By.xpath("//a[text()=" + "'" + firstItem + "']")));
+                "arguments[0].click();", driver.findElement(By.xpath("//a[contains(text()," + "'" + firstItem.substring(0,20) + "')]")));
     }
+
 
     public void clickToRingButton() {
         String firstRing = findFirstRing();
@@ -75,6 +79,7 @@ public class Basket extends Base {
     public void clickToPlusBasketButton() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].click();", driver.findElement(plusBasketButton));
+        sleep(1000);
 //        click(plusBasketButton);
     }
 
@@ -83,9 +88,10 @@ public class Basket extends Base {
     }
 
     public void clickToMinusBasketButton() {
-//        ((JavascriptExecutor) driver).executeScript(
-//                "arguments[0].click();", driver.findElement(minusBasketButton));
-        click(minusBasketButton);
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", driver.findElement(minusBasketButton));
+//        sleep(2000);
+//        click(minusBasketButton);
     }
 
     public Integer getDataMax() {
@@ -137,7 +143,7 @@ public class Basket extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price > 5000 and filter_id = 155 " +
-                "and storage_id !=1006 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and designer.show = 1 and item_translations.locale = 'ru' and currency_id = 1 " +
                 "group by item_catalog_position.position " +
                 "HAVING count > 1";
         try {
@@ -191,15 +197,19 @@ public class Basket extends Base {
     public static String findFirstItemLessThan5000() {
         String name;
         List<String> list = new ArrayList<>();
-        String query = "SELECT item.name, SUM(balance) from item " +
+        String query = "SELECT item_translations.name, sum(storage_stock.balance) AS count from item " +
+                "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
+                "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price < 5000 and price > 0 and filter_id = 155 " +
-                "and item_sku.url is not null " +
-                "group by item_catalog_position.position having SUM(balance) > 1";
+                "and is_archive = 0 and item_sku_price.price < 5000 and item_sku_price.price > 0 and filter_id = 155 " +
+                "and storage_id !=1006 and designer.show = 1 and item_translations.locale = 'ru' and currency_id = 1 " +
+                "group by item_catalog_position.position " +
+                "HAVING count > 1";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -289,7 +299,9 @@ public class Basket extends Base {
         String name3;
         String name4;
         List<String> list = new ArrayList<>();
-        String query = "SELECT catalog.url, item_collection.url, item_collection_characteristic.url, item_collection_characteristic_value.url, SUM(balance) from catalog " +
+        String query = "SELECT catalog_translation.url, item_collection_translation.url, item_collection_characteristic_translation.url," +
+                " item_collection_characteristic_value_translation.url, SUM(balance) from catalog " +
+                "JOIN catalog_translation ON catalog.id = catalog_translation.catalog_id " +
                 "JOIN item ON catalog.id = item.catalog_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN item_sku ON item_sku.item_id = item.id " +
@@ -297,12 +309,16 @@ public class Basket extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN item_collection_consist ON item.id = item_collection_consist.item_id " +
                 "JOIN item_collection_characteristic_value ON item_collection_consist.item_collection_characteristic_value_id = item_collection_characteristic_value.id " +
+                "JOIN item_collection_characteristic_value_translation ON item_collection_characteristic_value_translation.item_collection_characteristic_value_id = item_collection_characteristic_value.id " +
                 "JOIN item_collection_characteristic ON item_collection_consist.item_collection_characteristic_id = item_collection_characteristic.id " +
+                "JOIN item_collection_characteristic_translation ON item_collection_characteristic_translation.item_collection_characteristic_id = item_collection_characteristic.id " +
                 "JOIN item_collection ON item_collection_consist.item_collection_id = item_collection.id " +
+                "JOIN item_collection_translation ON item_collection_translation.item_collection_id = item_collection.id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 " and item_sku.url is not null and filter_id = 149" +
-                " and item_collection_consist.item_collection_characteristic_id!=0 and item_collection_consist.item_collection_characteristic_value_id != 0" +
-                " and item_collection_consist.item_collection_id != 0" +
+                " and item_collection_consist.item_collection_characteristic_id!=0 and item_collection_consist.item_collection_characteristic_value_id != 0 " +
+                " and item_collection_consist.item_collection_id != 0 and catalog_translation.locale = 'ru' and item_collection_translation.locale = 'ru' " +
+                " and item_collection_characteristic_translation.locale = 'ru' and item_collection_characteristic_value_translation.locale = 'ru' " +
                 " group by item_catalog_position.position having SUM(balance) > 1";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -310,9 +326,9 @@ public class Basket extends Base {
 
             while (resultSet.next()) {
                 name = resultSet.getString("url");
-                name2 = resultSet.getString("item_collection.url");
-                name3 = resultSet.getString("item_collection_characteristic.url");
-                name4 = resultSet.getString("item_collection_characteristic_value.url");
+                name2 = resultSet.getString("item_collection_translation.url");
+                name3 = resultSet.getString("item_collection_characteristic_translation.url");
+                name4 = resultSet.getString("item_collection_characteristic_value_translation.url");
 
                 list.add(getUrl + name + "/" + name2 + "/?" + name3 + "=" + name4);
 //                System.out.println(name + name2 + name3 + name4);
@@ -320,6 +336,7 @@ public class Basket extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+//        System.out.println(list);
         return list.get(0);
     }
 
@@ -330,20 +347,26 @@ public class Basket extends Base {
         String name3;
         String name4;
         List<String> list = new ArrayList<>();
-        String query = "SELECT item.name, catalog.url, item_collection.url, item_collection_characteristic.url, item_collection_characteristic_value.url, SUM(balance) from catalog " +
+        String query = "SELECT catalog_translation.url, item_collection_translation.url, item_collection_characteristic_translation.url," +
+                " item_collection_characteristic_value_translation.url, SUM(balance) from catalog " +
+                "JOIN catalog_translation ON catalog.id = catalog_translation.catalog_id " +
                 "JOIN item ON catalog.id = item.catalog_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN item_sku ON item_sku.item_id = item.id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
-                "JOIN sku_picture_list ON item_sku.id = sku_picture_list.sku_id " +
+                "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN item_collection_consist ON item.id = item_collection_consist.item_id " +
                 "JOIN item_collection_characteristic_value ON item_collection_consist.item_collection_characteristic_value_id = item_collection_characteristic_value.id " +
+                "JOIN item_collection_characteristic_value_translation ON item_collection_characteristic_value_translation.item_collection_characteristic_value_id = item_collection_characteristic_value.id " +
                 "JOIN item_collection_characteristic ON item_collection_consist.item_collection_characteristic_id = item_collection_characteristic.id " +
+                "JOIN item_collection_characteristic_translation ON item_collection_characteristic_translation.item_collection_characteristic_id = item_collection_characteristic.id " +
                 "JOIN item_collection ON item_collection_consist.item_collection_id = item_collection.id " +
-                "where EXISTS (SELECT * FROM item_sku WHERE item_sku.id = sku_picture_list.sku_id and (tag_id = 1 or tag_id = 4)) " +
-                " and item_sku.url is not null and filter_id = 148" +
-                " and item_collection_consist.item_collection_characteristic_id!=0 and item_collection_consist.item_collection_characteristic_value_id != 0" +
-                " and item_collection_consist.item_collection_id != 0" +
+                "JOIN item_collection_translation ON item_collection_translation.item_collection_id = item_collection.id " +
+                "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
+                " and item_sku.url is not null and filter_id = 149" +
+                " and item_collection_consist.item_collection_characteristic_id!=0 and item_collection_consist.item_collection_characteristic_value_id != 0 " +
+                " and item_collection_consist.item_collection_id != 0 and catalog_translation.locale = 'ru' and item_collection_translation.locale = 'ru' " +
+                " and item_collection_characteristic_translation.locale = 'ru' and item_collection_characteristic_value_translation.locale = 'ru' " +
                 " group by item_catalog_position.position having SUM(balance) > 1";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -351,9 +374,9 @@ public class Basket extends Base {
 
             while (resultSet.next()) {
                 name = resultSet.getString("url");
-                name2 = resultSet.getString("item_collection.url");
-                name3 = resultSet.getString("item_collection_characteristic.url");
-                name4 = resultSet.getString("item_collection_characteristic_value.url");
+                name2 = resultSet.getString("item_collection_translation.url");
+                name3 = resultSet.getString("item_collection_characteristic_translation.url");
+                name4 = resultSet.getString("item_collection_characteristic_value_translation.url");
 
                 list.add(getUrl + name + "/" + name2 + "/?" + name3 + "=" + name4);
 //                System.out.println(name + name2 + name3 + name4);
@@ -361,7 +384,7 @@ public class Basket extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list.get(1);
+        return list.get(0);
     }
 
 

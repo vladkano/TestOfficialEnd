@@ -10,6 +10,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import mainPage.MainPage;
 import mainPage.MainPageBanner;
 import order.Order;
+import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -75,7 +76,8 @@ public class TestBase {
 
 
     protected By numberOfItem = By.xpath("//h3[@class='catalog-card__name']");
-    protected By numberOfPictures = By.xpath("//span[@class='picture catalog-card__image _hovered']");
+    protected By numberOfPictures = By.xpath("//span[@class='picture catalog-card__image']");
+    //span[contains(@class, 'picture catalog-card__image')]
     protected By linkOfCollection = By.xpath("//ul[@class='product-modification__variants']//a");
     protected By countOfBanners = By.xpath("//div[@class='banner index-page__banner']/a");
     protected By namesOfTrends = By.xpath("//h4");
@@ -84,9 +86,7 @@ public class TestBase {
     protected By nameLink = By.xpath("//h3[@class='catalog-card__name']/a");
     protected By showMore = By.xpath("//span[text()='Показать ещё']");
     protected By designerName = By.xpath("//div[@class='catalog-card__designer']/a");
-
     protected By price = By.xpath("//div[@class='price-block__main']/span[1]");
-
     protected String phoneForAuthorization = "9501978905";
     protected String phoneForOrder = "9126459328";
     protected String testNameForOrder = "Александр Тест";
@@ -126,6 +126,11 @@ public class TestBase {
         }
     }
 
+    @AfterEach
+    public void tearDownEach() {
+        driver.quit();
+    }
+
     public void mainSetUp() {
         ChromeOptions options = new ChromeOptions();
 //        EdgeOptions options = new EdgeOptions();
@@ -143,6 +148,7 @@ public class TestBase {
 //        driver = new EdgeDriver(options);
         driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        Base.setDriver(driver);
     }
 
 
@@ -155,6 +161,7 @@ public class TestBase {
 
     //Тест(Севастополь)
 //    protected String getUrl = "https://ru.sevastopol.poisontestdrop.ru/";
+//    protected String getComUrl = "https://en.sevastopol.poisontestdrop.ru/";
 
     //Тест(Курск)
 //    protected String getUrl = "https://ru.kursk.poisontestdrop.ru/";
@@ -162,5 +169,6 @@ public class TestBase {
 
     //Тест(Тула)
 //    protected static String getUrl = "https://ru.tula.poisontestdrop.ru/";
+//    protected String getComUrl = "https://en.tula.poisontestdrop.ru/";
 
 }

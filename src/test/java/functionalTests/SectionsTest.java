@@ -215,8 +215,7 @@ public class SectionsTest extends TestBase {
         String header = footer.getSoglashenieHeader();
         Assertions.assertAll(
                 () -> assertEquals(getUrl + "promotion/", url),
-                () -> assertEquals("Правила проведения и участия в акции «-20% на второе украшение, " +
-                        "-30% на третье и следующие украшения».", header));
+                () -> assertEquals("Правила проведения и участия в Акции «при покупке от 20 000 рублей скидка 20%».", header));
     }
 
     /**
@@ -318,8 +317,8 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getTelegaHeader();
         Assertions.assertAll(
-                () -> assertEquals("https://t.me/impoisoned", url),
-                () -> assertEquals("Poison Drop", header));
+                () -> assertEquals("https://t.me/poisondrop_life", url),
+                () -> assertEquals("@poisondrop_life", header));
     }
 
     /**
@@ -776,8 +775,4 @@ public class SectionsTest extends TestBase {
                 () -> assertEquals(sqlList.subList(0, sqlSize), siteList.subList(0, numberOnly)));
     }
 
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

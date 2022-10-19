@@ -361,7 +361,7 @@ public class OrderTest extends TestBase {
         putItemInBasket();
         order.deliveryIsNotPossible(phoneForOrder, email, testNameForOrder, "Рим");
         String comUrl = driver.getCurrentUrl();
-        assertEquals("https://poisondrop.com/cart", comUrl);
+        assertEquals(getComUrl + "cart", comUrl);
     }
 
     /**
@@ -673,8 +673,4 @@ public class OrderTest extends TestBase {
 //        noPayConfirmAndHeaderCheck();
 //    }
 
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

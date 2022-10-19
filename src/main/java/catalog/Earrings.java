@@ -1,6 +1,8 @@
 package catalog;
 
 import base.Base;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.sql.ResultSet;
@@ -11,8 +13,17 @@ import java.util.List;
 
 public class Earrings extends Base {
 
+    private final By earringsButton = By.xpath("//a[@href='/catalog/earrings/']");
+
     public Earrings(WebDriver driver) {
         super(driver);
+    }
+
+
+    public void clickToEarringsButton() {
+//        ((JavascriptExecutor) driver).executeScript(
+//                "arguments[0].click();", driver.findElement(jewelryButton));
+        click(earringsButton);
     }
 
 

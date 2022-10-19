@@ -65,7 +65,7 @@ public class Order extends Base {
     private final By firstPrice = By.xpath("//b[@class='cart-price__total']");
     private final By finalPrice = By.xpath("//div[@class='order-summary__row order-summary__row_total']/span[2]");
     private final By cloudPrice = By.xpath("//div[@class='header-component__cost']");
-    private final By checkoutPrice = By.xpath("//h1[@class='Summarystyles__TotalPrice-vv6evz-2 iTuHTB']");
+    private final By checkoutPrice = By.xpath("//span[@class='PaymentMethodsstyle__TitleAmount-sc-2fx2mh-2 hQTIfy']");
     private final By frame = By.xpath("//iframe[@src='https://pickpoint.ru/select/?&ikn=9990653812']");
     private final By payFrame = By.xpath("//iframe[@class=' with-appled']");
     private final By ordinaryDeliveryButton = By.xpath("//label[@for='ordinaryDelivery']/span[@class='order-delivery__courier-type-variant']");
@@ -130,6 +130,7 @@ public class Order extends Base {
     }
 
     public String getPayHeader() {
+        waitForVisibilityOf(payFrame, 10);
         WebElement payWindow = wait.until(ExpectedConditions.presenceOfElementLocated(payFrame));
         driver.switchTo().frame(payWindow);
         return driver.findElement(payHeader).getText();

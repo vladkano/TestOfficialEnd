@@ -962,9 +962,4 @@ public class ProductCardsTest extends TestBase {
         assertEquals(20, productList.size());
     }
 
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

@@ -759,9 +759,4 @@ public class FiltersTest extends TestBase {
                 () -> assertEquals(sqlList.get(2).substring(0,20), siteList.get(2).substring(0,20)));
     }
 
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

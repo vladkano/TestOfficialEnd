@@ -35,7 +35,7 @@ public class Footer extends Base {
     private final By garantiiHeader = By.xpath("//main[@class='service-page warranties-page']/h1");
     private final By ofertaHeader = By.xpath("//main[@class='service-page offer-page']/h1");
     private final By personalnyeDannyeHeader = By.xpath("//h1[@class='service-page__title']");
-    private final By telegaHeader = By.xpath("//span[text()='Poison Drop']");
+    private final By telegaHeader = By.xpath("//a[text()='@poisondrop_life']");
     private final By youtubeHeader = By.xpath("//yt-formatted-string[text()='Poison Drop']");
     private final By whatsAppHeader = By.xpath("//h3[text()='Poison Drop by ООО \"ПойзонДроп\"']");
 

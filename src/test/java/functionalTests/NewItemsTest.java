@@ -25,7 +25,6 @@ public class NewItemsTest extends TestBase {
         driver.get(getUrl + "catalog/new/");
         newItems = new NewItems(driver);
         filters = new Filters(driver);
-        newItems.clickToOkButton();
     }
 
     /**
@@ -102,9 +101,4 @@ public class NewItemsTest extends TestBase {
         assertEquals(numberOfFoto, siteSize);
     }
 
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

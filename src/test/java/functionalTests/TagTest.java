@@ -97,8 +97,4 @@ public class TagTest extends TestBase {
         assertEquals(tagsFromSql, output);
     }
 
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
 }

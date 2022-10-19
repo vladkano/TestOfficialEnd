@@ -105,7 +105,7 @@ public class LinkTest extends TestBase {
         String header = base.getImageHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
-        assertEquals(header.substring(0,30), heading.substring(0,30));
+        assertEquals(header.substring(0, 26), heading.substring(0, 26));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class LinkTest extends TestBase {
         String header = base.getNameHeader();
         base.clickOnNameLink();
         String heading = base.getHeader();
-        assertEquals(header.substring(0,30), heading.substring(0,30));
+        assertEquals(header.substring(0, 26), heading.substring(0, 26));
     }
 
     @Test
@@ -215,7 +215,7 @@ public class LinkTest extends TestBase {
         String header = base.getImageHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
-        assertEquals(header, heading);
+        assertEquals(header.substring(0,20), heading.substring(0,20));
     }
 
     @Test
@@ -226,7 +226,7 @@ public class LinkTest extends TestBase {
         String header = base.getNameHeader();
         base.clickOnNameLink();
         String heading = base.getHeader();
-        assertEquals(header, heading);
+        assertEquals(header.substring(0,20), heading.substring(0,20));
     }
 
     @Test
@@ -238,10 +238,5 @@ public class LinkTest extends TestBase {
         base.clickOnDesignerLink();
         String heading = base.getNextDesignerHeader();
         assertEquals(header, heading);
-    }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
     }
 }

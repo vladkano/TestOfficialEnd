@@ -28,8 +28,9 @@ public class BasketTest extends TestBase {
         mainSetUp();
         driver.navigate().to(getUrl + "catalog");
         basket = new Basket(driver);
+        filters = new Filters(driver);
+        size = new Size(driver);
         basket.clickToOkButton();
-//        sleep(3000);
         this.testMethodName = testInfo.getTestMethod().get().getName();
     }
 
@@ -143,8 +144,6 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Проверка кнопки 'плюс', увеличение количества товаров при добавлении в корзину обычного товара с размером")
     public void plusButtonWithSize() {
-        filters = new Filters(driver);
-        size = new Size(driver);
         filters.clickToFilterButton();
         size.clickToUniversalSizeButton();
         filters.clickToShowProductsButton();
@@ -159,8 +158,6 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Проверка кнопки 'минус', уменьшение количества товаров при добавлении в корзину обычного товара с размером")
     public void minusButtonWithSize() {
-        filters = new Filters(driver);
-        size = new Size(driver);
         filters.clickToFilterButton();
         size.clickToUniversalSizeButton();
         filters.clickToShowProductsButton();
@@ -332,11 +329,6 @@ public class BasketTest extends TestBase {
         basket.clickToCart();
         String url = driver.getCurrentUrl();
         assertEquals(getUrl + "cart/", url);
-    }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
     }
 
 }

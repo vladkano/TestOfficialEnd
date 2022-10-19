@@ -55,7 +55,6 @@ public class MainPageTest extends TestBase {
         mainPage = new MainPage(driver);
         basket = new Basket(driver);
         basket.clickToOkButton();
-        sleep(1000);
     }
 
 
@@ -244,12 +243,6 @@ public class MainPageTest extends TestBase {
         mainPage.clickOnSigInButton();
         String heading = mainPage.getSigOutHeader();
         assertEquals("вход или регистрация", heading);
-    }
-
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
     }
 
 

@@ -18,7 +18,7 @@ public class ColorsAndCoverage extends Base {
     private final By blueButton = By.xpath("//div[contains(text(), 'Синий')]");
     private final By mixButton = By.xpath("//div[contains(text(), 'Мульти')]");
     private final By coveringButton = By.xpath("//div[text()='покрытие']");
-    private final By rodiiButton = By.xpath("(//div[contains(text(), 'родий')])[3]");
+    private final By rodiiButton = By.xpath("(//div[contains(text(), 'родий')])[2]");
     private final By goldButton = By.xpath("//div[contains(text(), 'золото')]");
     private final By whiteButton = By.xpath("//div[contains(text(), 'Белый')]");
 

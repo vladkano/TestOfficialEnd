@@ -85,8 +85,9 @@ public class Trends extends Base {
     //SQL
     public Integer listOfBanners() {
         int count = 0;
-        String query = "SELECT count(url) as countURL from trend " +
-                "where `show` = 1";
+        String query = "SELECT count(url) as countURL from trend_translations " +
+                "JOIN trend ON trend.id = trend_translations.trend_id " +
+                "where `show` = 1 and locale ='ru'";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);

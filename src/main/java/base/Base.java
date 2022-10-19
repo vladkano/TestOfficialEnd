@@ -19,8 +19,6 @@ public class Base {
     //Бой
     protected static String mainPageUrl = "https://poisondrop.ru/";
 
-    protected static String mainPageComUrl = "https://poisondrop.com/";
-
     //Тест(Сталинград)
 //    protected static String mainPageUrl = "https://ru.stalingrad.poisontestdrop.ru/";
     //Тест(Севастополь)
@@ -53,6 +51,10 @@ public class Base {
         wait = new WebDriverWait(driver, 5);
     }
 
+//    public static void setDriver (WebDriver webDriver) {
+//        driver = webDriver;
+//    }
+
     public WebDriverWait wait;
 
     protected WebElement find(By locator) {
@@ -75,7 +77,7 @@ public class Base {
         wait.until(conditions);
     }
 
-    private void waitForVisibilityOf(By locator, Integer... timeOutInSeconds) {
+    protected void waitForVisibilityOf(By locator, Integer... timeOutInSeconds) {
         int attempts = 0;
         while (attempts < 2) {
             try {

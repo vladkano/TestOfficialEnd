@@ -152,8 +152,7 @@ public class CertificateTest extends TestBase {
     }
 
 
-
-     // Пока третий раздел отключен на сайте(https://poisondrop.atlassian.net/browse/PD-1535)
+    // Пока третий раздел отключен на сайте(https://poisondrop.atlassian.net/browse/PD-1535)
 
 //    /**
 //     * Третий раздел<p>
@@ -485,9 +484,5 @@ public class CertificateTest extends TestBase {
 //        order.certificateWithNoPayRedBridgeAndWA(phoneForOrder, email, testNameForOrder, "Тест");
 //        getCodeAndCheckOrderWithNoPay();
 //    }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
+    
 }

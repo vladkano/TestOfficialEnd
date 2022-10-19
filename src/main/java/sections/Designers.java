@@ -164,8 +164,9 @@ public class Designers extends Base {
     public static List<String> getUrls() {
         String url;
         List<String> text = new ArrayList<>();
-        String query = "select url from designer " +
-                "where `show` = 1 " +
+        String query = "select designer_translation.url from designer " +
+                "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
+                "where designer.show = 1 and designer_translation.locale = 'ru' " +
                 "group by created_at desc limit 3";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -263,9 +264,10 @@ public class Designers extends Base {
     public static List<String> getPopularUrls() {
         String url;
         List<String> text = new ArrayList<>();
-        String query = "select url from designer " +
-                "where `show` = 1 and is_popular = 1 " +
-                "group by id ";
+        String query = "select designer_translation.url from designer " +
+                "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
+                "where designer.show = 1 and designer_translation.locale = 'ru' and is_popular = 1 " +
+                "group by designer_translation.id ";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -464,7 +466,7 @@ public class Designers extends Base {
     public static List<String> getDesignerUrlForList() {
         String name;
         List<String> text = new ArrayList<>();
-        String query = "select designer.url from designer " +
+        String query = "select designer_translation.url from designer " +
                 "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
                 "JOIN item ON item.designer_id = designer.id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
@@ -566,7 +568,7 @@ public class Designers extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and price != 0 and filter_id = " + "'" + getFirstFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name, catalog.url " +
+                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
                 "order by item_catalog_position.position ";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -597,7 +599,7 @@ public class Designers extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and price != 0 and filter_id = " + "'" + getTenFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name, catalog.url " +
+                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
                 "order by item_catalog_position.position ";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -628,7 +630,7 @@ public class Designers extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and price != 0 and filter_id = " + "'" + getTwentyFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name, catalog.url " +
+                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
                 "order by item_catalog_position.position ";
         try {
             Statement statement = worker.getCon().createStatement();

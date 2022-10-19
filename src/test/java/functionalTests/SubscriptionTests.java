@@ -159,9 +159,5 @@ public class SubscriptionTests extends TestBase {
         String failedSubscriptionText = subscription.getSubscriptionText();
         assertEquals("подписчики нашей рассылки выбирают самые классные украшения.", failedSubscriptionText);
     }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
-    }
+    
 }

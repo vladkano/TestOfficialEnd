@@ -86,7 +86,9 @@ public class Filters extends Base {
     }
 
     public void clickToShowProductsButton() {
+        sleep(2000);
         click(showProductsButton);
+
     }
 
     public void clickToAllRingsButton() {

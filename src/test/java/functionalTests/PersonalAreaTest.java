@@ -29,8 +29,8 @@ public class PersonalAreaTest extends TestBase {
         mainPage = new MainPage(driver);
         personalData = new PersonalData(driver);
         driver.get(getUrl);
-        basket.clickToOkButton();
-        sleep(2000);
+//        basket.clickToOkButton();
+//        sleep(2000);
         mainPage.sigInWithPhone(phoneForAuthorization);
         String codeToLogin = mainPage.getPhonePasswordForLC();
         mainPage.sigInWithPassword(codeToLogin);
@@ -246,7 +246,7 @@ public class PersonalAreaTest extends TestBase {
         String orderRecipientHeader = personalData.getOrderRecipientHeader();
         String orderYouOrderedHeader = personalData.getOrderYouOrderedHeader();
         Assertions.assertAll(
-                () -> assertEquals("не обработан", orderStatus),
+                () -> assertEquals("тестовый заказ", orderStatus),
                 () -> assertEquals("дата заказа", orderDataHeader),
                 () -> assertEquals("адрес доставки", orderAddressHeader),
                 () -> assertEquals("получатель", orderRecipientHeader),
@@ -279,7 +279,7 @@ public class PersonalAreaTest extends TestBase {
         String lastOrderPrice = String.valueOf(personalData.getLastOrderPrice());
         String lastOrderFinalSum = String.valueOf(personalData.getLastOrderFinalPrice());
         Assertions.assertAll(
-                () -> assertEquals("Заказ №" + lastOrderNumber, orderNumber),
+                () -> assertEquals("заказ №" + lastOrderNumber, orderNumber),
                 () -> assertEquals(lastOrderData, orderData),
                 () -> assertEquals(lastOrderAddress, orderAddress),
                 () -> assertEquals(lastOrderRecipient, orderRecipient),
@@ -298,11 +298,6 @@ public class PersonalAreaTest extends TestBase {
         Integer numberOfOrders = personalData.clickOnOrdersButton()
                 .getNumberOfOrders();
         assertEquals(numberOfOrdersSql, numberOfOrders);
-    }
-
-    @AfterEach
-    public void tearDownEach() {
-        driver.quit();
     }
 
 }
