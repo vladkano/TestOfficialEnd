@@ -15,11 +15,11 @@ public class Size extends Base {
 
 
     private final By sizeButton = By.xpath("(//div[@class='filters__list-tab'])[4]");
-    private final By firstSizeButton = By.xpath("//div[@class='filters__item-left']/div[contains(text(), '14')]");
-    private final By secondSizeButton = By.xpath("//div[@class='filters__item-left']/div[contains(text(), '15.5')]");
-    private final By thirdSizeButton = By.xpath("//div[@class='filters__item-left']/div[contains(text(), '16')]");
+    private final By firstSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '14')])[3]");
+    private final By secondSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '15.5')])[2]");
+    private final By thirdSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '16')])[3]");
     private final By universalSizeButton = By.xpath("//div[contains(text(), 'Universal')]");
-    private final By currentSize = By.xpath("//div[@class='product-modification__header']/span[2]");
+    private final By currentSize = By.xpath("//li[@class='product-variant product-variant_size product-variant_active']/span");
     private final By firstCurrentSizeButton = By.xpath("(//span[@class='product-variant__variant product-variant__variant_size'])[2]");
     private final By secondCurrentSizeButton = By.xpath("//ul/li[3]/label/span[@class='product-variant__variant product-variant__variant_size']");
     private final By sizeHeader = By.xpath("//span[@class='cart-item__additional-params']");
@@ -212,7 +212,7 @@ public class Size extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 and storage_id !=1006 and storage_id !=1007 " +
                 "and sku_characteristic_list.characteristic_id =1 and sku_characteristic_value.characteristic_value = '14' " +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position ";
@@ -234,10 +234,10 @@ public class Size extends Base {
     public List<String> getListOfSecondSize() {
         String name;
         List<String> text = new ArrayList<>();
-        String query = "SELECT item_translations.name from item_sku " +
-                "JOIN item ON item_sku.item_id = item.id " +
-                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
+        String query = "SELECT item_translations.name from item " +
                 "JOIN item_translations ON item.id = item_translations.item_id " +
+                "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN sku_characteristic_list ON item_sku.id = sku_characteristic_list.sku_id " +
@@ -245,7 +245,7 @@ public class Size extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 and storage_id !=1006 and storage_id !=1007 " +
                 "and sku_characteristic_list.characteristic_id =1 and sku_characteristic_value.characteristic_value = '15.5' " +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position ";

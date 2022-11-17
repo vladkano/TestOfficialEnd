@@ -86,6 +86,7 @@ public class TestBase {
     protected By nameLink = By.xpath("//h3[@class='catalog-card__name']/a");
     protected By showMore = By.xpath("//span[text()='Показать ещё']");
     protected By designerName = By.xpath("//div[@class='catalog-card__designer']/a");
+
     protected By price = By.xpath("//div[@class='price-block__main']/span[1]");
     protected String phoneForAuthorization = "9501978905";
     protected String phoneForOrder = "9126459328";

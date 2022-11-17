@@ -5,7 +5,6 @@ import catalog.CatalogNavigation;
 import filters.Filters;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +28,8 @@ public class SectionsTest extends TestBase {
         trends = new Trends(driver);
         designers = new Designers(driver);
         filters = new Filters(driver);
+        jewelry = new Jewelry(driver);
+        certificate = new Certificate(driver);
     }
 
     /**
@@ -96,7 +97,6 @@ public class SectionsTest extends TestBase {
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Сертификаты.")
     public void certificatesButton() {
-        certificate = new Certificate(driver);
         certificate.clickToCertificateButton();
         String url = driver.getCurrentUrl();
         assertEquals(getUrl + "certificate", url);
@@ -396,7 +396,6 @@ public class SectionsTest extends TestBase {
     @Description("Золото и серебро(проверка по наименованию дизайнера)")
     public void jewelryDesigners() {
         driver.get(getUrl + "jewelry/");
-        jewelry = new Jewelry(driver);
         List<String> sqlList = jewelry.getDesigners();
         List<WebElement> elements = driver.findElements(designerName);
         for (WebElement text : elements) {
@@ -414,7 +413,6 @@ public class SectionsTest extends TestBase {
     public void priceOfJewelry() {
         List<Integer> priceList = new ArrayList<>();
         driver.get(getUrl + "jewelry/");
-        jewelry = new Jewelry(driver);
         List<Integer> sqlList = jewelry.getPrice();
         List<WebElement> elements = driver.findElements(price);
         for (WebElement text : elements) {
@@ -465,6 +463,7 @@ public class SectionsTest extends TestBase {
                 () -> assertEquals(sqlList.subList(0, trends.listOfBanners() - 1), siteList.subList(0, trends.listOfBanners() - 1)));
     }
 
+    //на время ЧП отключено описание трендов, закомментирована часть кода
     /**
      * Ссылки: переход на верную страницу
      */
@@ -479,8 +478,9 @@ public class SectionsTest extends TestBase {
         String description = trends.listOfDescription().get(0);
         String s = description.replaceAll("<[^>]*>", "");
         Assertions.assertAll(
-                () -> assertEquals(href, url),
-                () -> assertEquals(s, header));
+                () -> assertEquals(href, url))
+//                () -> assertEquals(s, header))
+        ;
     }
 
     /**
@@ -496,8 +496,9 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(1);
         Assertions.assertAll(
-                () -> assertEquals(href, url),
-                () -> assertEquals(description, header));
+                () -> assertEquals(href, url))
+//                () -> assertEquals(description, header))
+        ;
     }
 
     /**
@@ -513,8 +514,9 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(2);
         Assertions.assertAll(
-                () -> assertEquals(href, url),
-                () -> assertEquals(description, header));
+                () -> assertEquals(href, url))
+//                () -> assertEquals(description, header))
+        ;
     }
 
     /**
@@ -530,8 +532,9 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(9);
         Assertions.assertAll(
-                () -> assertEquals(href, url),
-                () -> assertEquals(description, header));
+                () -> assertEquals(href, url)
+//                () -> assertEquals(description, header)
+        );
     }
 
     /**
@@ -547,8 +550,9 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(4);
         Assertions.assertAll(
-                () -> assertEquals(href, url),
-                () -> assertEquals(description, header));
+                () -> assertEquals(href, url)
+//                () -> assertEquals(description, header)
+        );
     }
 
 

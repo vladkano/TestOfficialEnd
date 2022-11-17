@@ -38,7 +38,7 @@ public class ProductCard extends Base {
 
     private final By guaranteeButton = By.xpath("//div[@class='accordion-vue product-info__warranty']/h3");
     private final By guaranteeText = By.xpath("//div[@id='warranty-accordion']/p[@class='product-info__text']");
-    private final By code = By.xpath("//p[@class='product-main-info__code hidden_mobile-tablet']");
+    private final By code = By.xpath("//p[@class='product-main-info__code']");
 
     private final By receivingText = By.xpath("//span[@class='delivery-accordion__title-text']");
     private final By receivingCity = By.xpath("//h3[@class='delivery-accordion__title']/span[2]");

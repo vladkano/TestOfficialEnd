@@ -5,7 +5,6 @@ import basket.Basket;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import mainPage.MainPage;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,13 +28,10 @@ public class PersonalAreaTest extends TestBase {
         mainPage = new MainPage(driver);
         personalData = new PersonalData(driver);
         driver.get(getUrl);
-//        basket.clickToOkButton();
-//        sleep(2000);
         mainPage.sigInWithPhone(phoneForAuthorization);
         String codeToLogin = mainPage.getPhonePasswordForLC();
         mainPage.sigInWithPassword(codeToLogin);
         personalData.clickOnPersonalDataButton();
-
     }
 
     /**
@@ -60,7 +56,7 @@ public class PersonalAreaTest extends TestBase {
         String intercomHeader = personalData.getIntercomHeader();
 
         Assertions.assertAll(
-                () -> assertEquals("Личные данные", personalDataHeader),
+                () -> assertEquals("личные данные", personalDataHeader),
                 () -> assertEquals("о вас", aboutYouHeader),
                 () -> assertEquals("имя, можно с фамилией", nameHeader),
                 () -> assertEquals("дата рождения", birthdayHeader),

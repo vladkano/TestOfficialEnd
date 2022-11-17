@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Brooches extends Base {
 
+    List<String> text = new ArrayList<>();
 
     public Brooches(WebDriver driver) {
         super(driver);
@@ -20,9 +21,9 @@ public class Brooches extends Base {
 
     public List<String> getNames() {
         String name;
-        List<String> text = new ArrayList<>();
         String query = "SELECT item_translations.name from item_translations " +
                 "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN catalog_translation ON catalog_translation.catalog_id = item.catalog_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
@@ -30,8 +31,8 @@ public class Brooches extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and catalog_id=4 and is_archive = 0 and filter_id = 151 " +
-                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_sku_price.price != 0 and item_translations.locale = 'ru' " +
+                "and catalog_translation.catalog_id in (4,16) and catalog_translation.locale = 'ru' and is_archive = 0 and filter_id = 151 " +
+                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_sku_price.price != 0 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -39,7 +40,7 @@ public class Brooches extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name.substring(0, 9));
+                text.add(name.substring(0, 9).toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,9 +50,9 @@ public class Brooches extends Base {
 
     public List<String> getDesigners() {
         String designer;
-        List<String> text = new ArrayList<>();
         String query = "SELECT designer_translation.name from item_translations " +
                 "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN catalog_translation ON catalog_translation.catalog_id = item.catalog_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
@@ -60,8 +61,9 @@ public class Brooches extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and catalog_id=4 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 151 " +
-                "and storage_id !=1006 and balance > 0 and designer.show = 1 and designer_translation.locale = 'ru' " +
+                "and catalog_translation.locale = 'ru' and is_archive = 0 " +
+                "and item_sku_price.price != 0 and filter_id in (151,154) " +
+                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_sku_price.price != 0 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -90,7 +92,7 @@ public class Brooches extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=4 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 151 " +
-                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_sku_price.price != 0 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -108,7 +110,6 @@ public class Brooches extends Base {
         return text;
     }
 
-    //Вытаскиваем все браслеты, которые входят в коллекции.
     //Вытаскиваем ссылку
     public String getFirstLinkOfCollection() {
         DBWorker worker = new DBWorker();
@@ -156,26 +157,28 @@ public class Brooches extends Base {
     }
 
     public static void main(String[] args) {
-        String designer;
+        String name;
         List<String> text = new ArrayList<>();
-        String query = "SELECT designer.name from item " +
-                "JOIN item_translations ON item.id = item_translations.item_id " +
+        String query = "SELECT item_translations.name from item_translations " +
+                "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN catalog_translation ON catalog_translation.catalog_id = item.catalog_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and catalog_id=4 and is_archive = 0 and price != 0 and filter_id = 151 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and catalog_translation.catalog_id in (4,16) and catalog_translation.locale = 'ru' and is_archive = 0 and filter_id = 151 " +
+                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_sku_price.price != 0 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                designer = resultSet.getString("name");
-                System.out.println(designer);
-                text.add(designer);
+                name = resultSet.getString("name");
+                System.out.println(name);
+                text.add(name);
             }
         } catch (SQLException e) {
             e.printStackTrace();

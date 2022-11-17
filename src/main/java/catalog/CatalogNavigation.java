@@ -38,6 +38,7 @@ public class CatalogNavigation extends Base {
         int id = 0;
         String query = "SELECT COUNT(distinct item_translations.item_id) as count from item_translations " +
                 "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN catalog_translation ON catalog_translation.catalog_id = item.catalog_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
@@ -46,8 +47,9 @@ public class CatalogNavigation extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and catalog_id=5 and is_archive = 0 and item_sku_price.price != 0 and balance > 0 " +
-                "and filter_id = 155 and designer.show = 1 and item_translations.locale = 'ru'";
+                "and catalog_translation.locale = 'ru' and is_archive = 0 " +
+                "and storage_id !=1006 and storage_id !=1007 and item_sku_price.price != 0 and balance > 0 " +
+                "and filter_id in (149, 343, 348) and designer.show = 1 and item_translations.locale = 'ru'";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);

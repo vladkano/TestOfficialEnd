@@ -40,6 +40,14 @@ public class ProductCardsTest extends TestBase {
         size = new Size(driver);
         basket = new Basket(driver);
         picture = new Picture(driver);
+        productCard = new ProductCard(driver);
+        earrings = new Earrings(driver);
+        bracelets = new Bracelets(driver);
+        necklaces = new Necklaces(driver);
+        rings = new Rings(driver);
+        collection = new Collection(driver);
+        set = new Set(driver);
+        designers = new Designers(driver);
     }
 
     /**
@@ -212,7 +220,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Серьги")
     public void checkCartButtonSergi() {
-        earrings = new Earrings(driver);
         String s = earrings.getItemsIsOutOfStock().get(0);
         driver.get(getUrl + "catalog/sergi/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
@@ -222,7 +229,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Браслеты")
     public void checkCartButtonBraslety() {
-        bracelets = new Bracelets(driver);
         String s = bracelets.getItemsIsOutOfStock().get(0);
         driver.get(getUrl + "catalog/braslety/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
@@ -232,7 +238,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Колье")
     public void checkCartButtonKole() {
-        necklaces = new Necklaces(driver);
         String s = necklaces.getItemsIsOutOfStock().get(0);
         driver.get(getUrl + "catalog/kole/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
@@ -242,7 +247,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Кольца")
     public void checkCartButtonKoltsa() {
-        rings = new Rings(driver);
         String s = rings.getItemsIsOutOfStock().get(0);
         driver.get(getUrl + "catalog/koltsa/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
@@ -259,8 +263,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Если товар входит в коллекцию, то должен отображаться блок 'Украшения из образа' " +
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Серьги")
     public void checkSetWindowSergi() {
-        set = new Set(driver);
-        earrings = new Earrings(driver);
         String s = earrings.getItemsFromSet().get(0);
         driver.get(getUrl + "catalog/sergi/" + s);
         set.getSetWindow();
@@ -278,8 +280,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Если товар входит в коллекцию, то должен отображаться блок 'Украшения из образа' " +
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Браслеты")
     public void checkSetWindowBraslety() {
-        set = new Set(driver);
-        bracelets = new Bracelets(driver);
         String s = bracelets.getItemsFromSet().get(0);
         driver.get(getUrl + "catalog/braslety/" + s);
         set.getSetWindow();
@@ -297,8 +297,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Если товар входит в коллекцию, то должен отображаться блок 'Украшения из образа' " +
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Колье")
     public void checkSetWindowKole() {
-        set = new Set(driver);
-        necklaces = new Necklaces(driver);
         String s = necklaces.getItemsFromSet().get(0);
         driver.get(getUrl + "catalog/kole/" + s);
         set.getSetWindow();
@@ -316,8 +314,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Если товар входит в коллекцию, то должен отображаться блок 'Украшения из образа' " +
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Кольца")
     public void checkSetWindowKoltsa() {
-        set = new Set(driver);
-        rings = new Rings(driver);
         String s = rings.getItemsFromSet().get(0);
         driver.get(getUrl + "catalog/koltsa/" + s);
         set.getSetWindow();
@@ -395,7 +391,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Серьги")
     public void checkingDesignersBlockSergi() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/sergi/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
@@ -413,7 +408,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Браслеты")
     public void checkingDesignersBlockBraslety() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/braslety/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
@@ -430,7 +424,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Колье")
     public void checkingDesignersBlockKole() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/kole/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
@@ -448,7 +441,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Кольца")
     public void checkingDesignersBlockKoltsa() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/koltsa/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
@@ -469,7 +461,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Серьги")
     public void buttonForNavigatingToDesignerProductsSergi() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/sergi/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
@@ -481,7 +472,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Браслеты")
     public void buttonForNavigatingToDesignerProductsBraslety() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/braslety/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
@@ -493,7 +483,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Колье")
     public void buttonForNavigatingToDesignerProductsKole() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/kole/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
@@ -505,7 +494,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Кольца")
     public void buttonForNavigatingToDesignerProductsKoltsa() {
-        designers = new Designers(driver);
         driver.get(getUrl + "catalog/koltsa/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
@@ -584,7 +572,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Серьги")
     public void checkingBlocksSergi() {
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/sergi/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
@@ -622,7 +609,7 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("APR Санкт-Петербург", redBridge),
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
-                () -> assertEquals(receivingCity, location),
+                () -> assertEquals("Россия", location),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
@@ -635,7 +622,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Браслеты")
     public void checkingBlocksBraslety() {
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/braslety/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
@@ -673,7 +659,7 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("APR Санкт-Петербург", redBridge),
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
-                () -> assertEquals(receivingCity, location),
+                () -> assertEquals("Россия", location),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
@@ -686,7 +672,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Колье")
     public void checkingBlocksKole() {
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/kole/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
@@ -724,7 +709,7 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("APR Санкт-Петербург", redBridge),
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
-                () -> assertEquals(receivingCity, location),
+                () -> assertEquals("Россия", location),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
@@ -737,7 +722,6 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Кольца")
     public void checkingBlocksKoltsa() {
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/koltsa/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
@@ -775,7 +759,7 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("APR Санкт-Петербург", redBridge),
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
-                () -> assertEquals(receivingCity, location),
+                () -> assertEquals("Россия", location),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
@@ -791,8 +775,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Серьги")
     public void checkingCodeSergi() {
-        earrings = new Earrings(driver);
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/sergi/");
         earrings.clickOnNameLink();
         String codeFromBase = earrings.getCodes().get(0);
@@ -803,8 +785,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Браслеты")
     public void checkingCodeBraslety() {
-        bracelets = new Bracelets(driver);
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/braslety/");
         bracelets.clickOnNameLink();
         String codeFromBase = bracelets.getCodes().get(0);
@@ -815,8 +795,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Колье")
     public void checkingCodeKole() {
-        necklaces = new Necklaces(driver);
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/kole/");
         necklaces.clickOnNameLink();
         String codeFromBase = necklaces.getCodes().get(0);
@@ -827,8 +805,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Кольца")
     public void checkingCodeKoltsa() {
-        rings = new Rings(driver);
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog/koltsa/");
         rings.clickOnNameLink();
         String codeFromBase = rings.getCodes().get(0);
@@ -844,7 +820,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Серьги")
     public void constructorSergi() {
-        collection = new Collection(driver);
         driver.get(getUrl + "catalog/sergi/");
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
@@ -856,7 +831,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Браслеты")
     public void constructorBraslety() {
-        collection = new Collection(driver);
         driver.get(getUrl + "catalog/braslety/");
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
@@ -868,7 +842,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Колье")
     public void constructorKole() {
-        collection = new Collection(driver);
         driver.get(getUrl + "catalog/kole/");
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
@@ -880,7 +853,6 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Кольца")
     public void constructorKoltsa() {
-        collection = new Collection(driver);
         driver.get(getUrl + "catalog/koltsa/");
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
@@ -900,7 +872,6 @@ public class ProductCardsTest extends TestBase {
     public void checkRecentlyViewedProductsDesignerName() {
         List<String> productList = new ArrayList<>();
         List<String> viewedProductList = new ArrayList<>();
-        productCard = new ProductCard(driver);
         driver.get(getUrl + "catalog");
         for (int i = 0; i <= 4; i++) {
             List<WebElement> elements = driver.findElements(nameLink);
@@ -930,7 +901,6 @@ public class ProductCardsTest extends TestBase {
         List<String> listOfPrices = new ArrayList<>();
         List<String> viewedListOfPrices = new ArrayList<>();
         driver.get(getUrl + "catalog");
-        productCard = new ProductCard(driver);
         for (int i = 0; i <= 4; i++) {
             List<WebElement> elements = driver.findElements(nameLink);
             ((JavascriptExecutor) driver).executeScript(

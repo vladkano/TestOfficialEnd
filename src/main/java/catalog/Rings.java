@@ -11,15 +11,17 @@ import java.util.List;
 
 public class Rings extends Base {
 
+    private final List<String> text = new ArrayList<>();
+
     public Rings(WebDriver driver) {
         super(driver);
     }
 
     public List<String> getNames() {
         String name;
-        List<String> text = new ArrayList<>();
         String query = "SELECT item_translations.name from item_translations " +
                 "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN catalog_translation ON catalog_translation.catalog_id = item.catalog_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
@@ -27,8 +29,8 @@ public class Rings extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and catalog_id=5 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 149 " +
-                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 149 " +
+                "and storage_id !=1006 and storage_id !=1007 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -37,7 +39,7 @@ public class Rings extends Base {
                 name = resultSet.getString("name");
 //                System.out.println(name);
 //                text.add(name);
-                text.add(name.substring(0, 12));
+                text.add(name.substring(0, 12).toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,7 +49,6 @@ public class Rings extends Base {
 
     public List<String> getDesigners() {
         String designer;
-        List<String> text = new ArrayList<>();
         String query = "SELECT designer_translation.name from item_translations " +
                 "JOIN item ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
@@ -59,7 +60,7 @@ public class Rings extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=5 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 149 " +
-                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -88,7 +89,7 @@ public class Rings extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=5 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 149 " +
-                "and storage_id !=1006 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -210,7 +211,6 @@ public class Rings extends Base {
     //Достаем коды товаров
     public List<String> getCodes() {
         String code;
-        List<String> text = new ArrayList<>();
         String query = "SELECT code from item " +
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +

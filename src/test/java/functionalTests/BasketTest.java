@@ -129,8 +129,6 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Добавление в корзину обычного товара с размером")
     public void inBasketButtonWithSize() {
-        filters = new Filters(driver);
-        size = new Size(driver);
         filters.clickToFilterButton();
         size.clickToUniversalSizeButton();
         filters.clickToShowProductsButton();

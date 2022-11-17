@@ -388,7 +388,7 @@ public class FiltersTest extends TestBase {
         Assertions.assertAll(
                 () -> assertEquals(sqlList.size(), numberOnly),
                 () -> assertEquals(sqlList.get(0).substring(0,20), siteList.get(0).substring(0,20)),
-                () -> assertEquals(sqlList.get(2), siteList.get(2)));
+                () -> assertEquals(sqlList.get(2).substring(0,20), siteList.get(2).substring(0,20)));
     }
 
     /**
@@ -407,7 +407,7 @@ public class FiltersTest extends TestBase {
         //Сравниваем 2 элемента и размеры списков. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         Assertions.assertAll(
                 () -> assertEquals(sqlList.size(), numberOnly),
-                () -> assertEquals(sqlList.get(0), siteList.get(0)),
+                () -> assertEquals(sqlList.get(0).substring(0,20), siteList.get(0).substring(0,20)),
                 () -> assertEquals(sqlList.get(2), siteList.get(2)));
     }
 
@@ -448,7 +448,7 @@ public class FiltersTest extends TestBase {
         //Сравниваем 2 элемента и размеры списков. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         Assertions.assertAll(
                 () -> assertEquals(sqlList.size(), numberOnly),
-                () -> assertEquals(sqlList.get(0).substring(0, 20), siteList.get(0).substring(0, 20)),
+                () -> assertEquals(sqlList.get(0).substring(0, 17), siteList.get(0).substring(0, 17)),
                 () -> assertEquals(sqlList.get(2), siteList.get(2)));
     }
 
@@ -546,10 +546,10 @@ public class FiltersTest extends TestBase {
         getProductsListFromPage();
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
-        //сравниваем размеры и содержание списков
         Assertions.assertAll(
                 () -> assertEquals(sqlList.size(), numberOnly),
-                () -> assertEquals(sqlList.subList(0, sqlList.size()), siteList.subList(0, siteSize)));
+                () -> assertEquals(sqlList.get(0), siteList.get(0)),
+                () -> assertEquals(sqlList.get(10).substring(0,20), siteList.get(10).substring(0,20)));
     }
 
     /**
