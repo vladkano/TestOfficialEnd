@@ -122,7 +122,7 @@ public class MainPageBannerTest extends TestBase {
     public void mainBannerLink() {
         String href = banner.getMainCatalogHref();
         banner.clickToMainCatalogHref();
-        String header = banner.getFirstCatalogHeader();
+        String header = banner.getFirstCatalogHeader().replaceAll("\\s+","");
         String url = driver.getCurrentUrl();
         Assertions.assertAll(
                 () -> assertEquals(href, url),
@@ -138,7 +138,7 @@ public class MainPageBannerTest extends TestBase {
         String href = banner.getCatalogHref();
         banner.clickToCatalogHref();
         String url = driver.getCurrentUrl();
-        String header = banner.getFirstCatalogHeader();
+        String header = banner.getFirstCatalogHeader().replaceAll("\\s+","");
         Assertions.assertAll(
                 () -> assertEquals(href, url),
                 () -> assertEquals("фильтр", header.substring(0, 6)));
@@ -153,10 +153,10 @@ public class MainPageBannerTest extends TestBase {
         String href = banner.getSixCatalogHref();
         banner.clickToSixCatalogHref();
         String url = driver.getCurrentUrl();
-        String header = banner.getFirstCatalogHeader();
+        String header = banner.getFirstCatalogHeader().replaceAll("\\s+","");
         Assertions.assertAll(
                 () -> assertEquals(href, url),
-                () -> assertEquals("фильтр", header));
+                () -> assertEquals("фильтр", header.substring(0,6)));
     }
 
     /**

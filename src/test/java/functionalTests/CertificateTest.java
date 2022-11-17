@@ -5,15 +5,12 @@ import basket.Basket;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import order.Order;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sections.Certificate;
 
-import static java.lang.Integer.parseInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Epic("Тесты раздела Сертификаты")
 public class CertificateTest extends TestBase {
@@ -34,8 +31,10 @@ public class CertificateTest extends TestBase {
      * Кладём сертификат в корзину
      */
     public void putCertificateInBasket() {
+        certificate.typeEmail(email);
+        certificate.clickToFirstSectionOrderButton();
+        basket.clickToCart();
         number = certificate.getBasketNumber();
-        basket.clickToBasketButton();
     }
 
     /**
@@ -63,91 +62,95 @@ public class CertificateTest extends TestBase {
     }
 
     /**
-     * Проверяем отображение секций на странице сертификатов
+     * Проверяем отображение заголовка и текста на странице сертификатов
      */
     @Test
-    @Description("Проверяем отображение секций на странице сертификатов")
-    public void checkSections() {
-        String perfectGiftSection = certificate.getPerfectGiftSection();
-        String registrationSection = certificate.getRegistrationSection();
+    @Description("Проверяем отображение заголовка и текста на странице сертификатов")
+    public void checkHeaderAndText() {
+        String mainHeader = certificate.getMainCertHeader();
+        String certAmount = certificate.getCertificateAmount();
+        String certText = certificate.getCertificateText();
         String applicationSection = certificate.getApplicationSection();
         String mailSection = certificate.getMailSection();
-//        String personallySection = certificate.getPersonallySection();
-        assertEquals("Идеальный подарок", perfectGiftSection);
-        assertEquals("Как оформлен сертификат?", registrationSection);
-        assertEquals("Как применить сертификат?", applicationSection);
-        assertEquals("Подарите сертификат по почте", mailSection);
-//        assertEquals("Или подарите лично", personallySection);
+        assertEquals("электронный сертификат", mainHeader);
+        assertEquals("на 10 000 ₽", certAmount);
+        assertEquals("Подарите то, что точно понравится, без долгих поисков. " +
+                "Сертификат можно купить в любом нашем магазине или оформить онлайн, не выходя из дома.", certText);
+        assertEquals("как применить сертификат", applicationSection);
+        assertEquals("Отправим на почту получателю с вашими пожеланиями", mailSection);
     }
 
 
     /**
      * Проверяем работают ли кнопки +- и заказать:<p>
-     * Первый раздел <p>
+     * Отправка сертификата себе <p>
      * Кнопка '+'
      */
 
     @Test
-    @Description("Проверяем работу кнопки '+' в первом разделе")
+    @Description("Проверяем работу кнопки '+' Отправка сертификата себе")
     public void firstSectionPlus() {
         certificate.clickToFirstSectionPlusButton();
-        String value = certificate.getPerfectGiftValue();
-        assertEquals("7000 \u20BD", value);
+        String value = certificate.getCertificateAmount();
+        assertEquals("на " + "15 000 ₽", value);
     }
 
     /**
      * Кнопка '-'
      */
     @Test
-    @Description("Проверяем работу кнопки '-' в первом разделе")
+    @Description("Проверяем работу кнопки '-' Отправка сертификата себе")
     public void firstSectionMinus() {
         certificate.clickToFirstSectionMinusButton();
-        String value = certificate.getPerfectGiftValue();
-        assertEquals("5000 \u20BD", value);
+        String value = certificate.getCertificateAmount();
+        assertEquals("на " + "9 000 ₽", value);
     }
 
     /**
      * Кнопка 'заказать'
      */
     @Test
-    @Description("Проверяем работу кнопки 'заказать' в первом разделе")
+    @Description("Проверяем работу кнопки 'заказать' Отправка сертификата себе")
     public void firstSectionOrder() {
-        certificate.clickToFirstSectionOrderButton();
-        String number = certificate.getBasketNumber();
+        putCertificateInBasket();
         assertEquals("1", number);
     }
 
     /**
-     * Второй раздел<p>
+     * Отправка сертификата другу<p>
      * Кнопка '+'
      */
     @Test
-    @Description("Проверяем работу кнопки '+' во втором разделе")
+    @Description("Проверяем работу кнопки '+' Отправка сертификата другу")
     public void secondSectionPlus() {
-        certificate.clickToSecondSectionPlusButton();
-        String value = certificate.getSecondSectionValue();
-        assertEquals("7000 \u20BD", value);
+        certificate.clickToFriendButton();
+        certificate.clickToFirstSectionPlusButton();
+        String value = certificate.getCertificateAmount();
+        assertEquals("на " + "15 000 ₽", value);
     }
 
     /**
      * Кнопка '-'
      */
     @Test
-    @Description("Проверяем работу кнопки '-' во втором разделе")
+    @Description("Проверяем работу кнопки '-' Отправка сертификата другу")
     public void secondSectionMinus() {
-        certificate.clickToSecondSectionMinusButton();
-        String value = certificate.getSecondSectionValue();
-        assertEquals("5000 \u20BD", value);
+        certificate.clickToFriendButton();
+        certificate.clickToFirstSectionMinusButton();
+        String value = certificate.getCertificateAmount();
+        assertEquals("на " + "9 000 ₽", value);
     }
 
     /**
      * Кнопка 'заказать'
      */
     @Test
-    @Description("Проверяем работу кнопки 'заказать' во втором разделе")
+    @Description("Проверяем работу кнопки 'заказать' Отправка сертификата другу")
     public void secondSectionOrder() {
+        certificate.clickToFriendButton();
         certificate.secondSectionOrder("Вася", "Петя", email, "Всего всего!");
-        String number = certificate.getBasketNumber();
+        basket.clickToCart();
+        number = certificate.getBasketNumber();
         assertEquals("1", number);
     }
 
@@ -190,22 +193,20 @@ public class CertificateTest extends TestBase {
 
 
     /**
-     * Проверка перехода к оплате заказа на сайте, сертификат тип 1 <p>
-     * Электронный сертификат
+     * Проверка перехода к оплате заказа на сайте <p>
+     * Электронный сертификат себе
      */
     @Test()
-    @Description("Проверка перехода к оплате заказа на сайте, электронный сертификат тип 1, способ связи: телефон")
+    @Description("Проверка перехода к оплате заказа на сайте, электронный сертификат себе, способ связи: телефон")
     public void orderWithElCertificateAndPhone() {
-        certificate.clickToFirstSectionOrderButton();
         putCertificateInBasket();
         order.elCertificateWithPhone(phoneForOrder, email, testNameForOrder, "TEST");
         getCodeAndCheckOrder();
     }
 
     @Test()
-    @Description("Проверка перехода к оплате заказа на сайте, электронный сертификат тип 1, способ связи: WA")
+    @Description("Проверка перехода к оплате заказа на сайте, электронный сертификат себе, способ связи: WA")
     public void orderWithElCertificateAndWA() {
-        certificate.clickToFirstSectionOrderButton();
         putCertificateInBasket();
         order.elCertificateWithWA(phoneForOrder, email, testNameForOrder, "TEST");
         getCodeAndCheckOrder();
@@ -341,25 +342,29 @@ public class CertificateTest extends TestBase {
 
 
     /**
-     * Проверка перехода к оплате заказа на сайте, сертификат тип 2 <p>
-     * Электронный сертификат
+     * Проверка перехода к оплате заказа на сайте, сертификат другу <p>
+     * Электронный сертификат другу
      */
     @Test()
     @Description("Проверка перехода к оплате заказа на сайте. Заполняем поля: кому, от кого и эл почту на которую отправится сертификат. " +
-            "Электронный сертификат тип 2, способ связи: телефон")
+            "Электронный сертификат другу, способ связи: телефон")
     public void orderWithElCertificateEmailAndPhone() {
+        certificate.clickToFriendButton();
         certificate.secondSectionOrder("Вася", "Петя", email, "Всего всего!");
-        putCertificateInBasket();
+        basket.clickToCart();
+        number = certificate.getBasketNumber();
         order.elCertificateWithPhone(phoneForOrder, email, testNameForOrder, "TEST");
         getCodeAndCheckOrder();
     }
 
     @Test()
     @Description("Проверка перехода к оплате заказа на сайте. Заполняем поля: кому, от кого и эл почту на которую отправится сертификат. " +
-            "Электронный сертификат тип 2, способ связи: WA")
+            "Электронный сертификат другу, способ связи: WA")
     public void orderWithElCertificateEmailAndWA() {
+        certificate.clickToFriendButton();
         certificate.secondSectionOrder("Вася", "Петя", email, "Всего всего!");
-        putCertificateInBasket();
+        basket.clickToCart();
+        number = certificate.getBasketNumber();
         order.elCertificateWithWA(phoneForOrder, email, testNameForOrder, "TEST");
         getCodeAndCheckOrder();
     }
@@ -484,5 +489,5 @@ public class CertificateTest extends TestBase {
 //        order.certificateWithNoPayRedBridgeAndWA(phoneForOrder, email, testNameForOrder, "Тест");
 //        getCodeAndCheckOrderWithNoPay();
 //    }
-    
+
 }

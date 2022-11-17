@@ -24,6 +24,7 @@ public class CollectionTest extends TestBase {
         mainSetUp();
         collection = new Collection(driver);
         navigation = new CatalogNavigation(driver);
+        rings = new Rings(driver);
     }
 
     /**
@@ -127,7 +128,6 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Кольца)")
     public void firstLinkOfRings() {
-        rings = new Rings(driver);
         driver.get(getUrl + "catalog/koltsa");
         String href = collection.getHref();
         collection.clickOnFirstHref();

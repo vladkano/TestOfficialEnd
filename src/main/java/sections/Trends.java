@@ -21,7 +21,8 @@ public class Trends extends Base {
     private final By thirdHref = By.xpath("//div[@class='trends-page__grid js-trends-grid']/a[10]");
     private final By fourthFineHref = By.xpath("//div[@class='trends-page__grid js-trends-grid']/a[5]");
 
-    private final By linkHeader = By.xpath("//div[@class='trend-page__content']");
+//    private final By linkHeader = By.xpath("//div[@class='trend-page__content']");
+    private final By linkHeader = By.xpath("//div[@class='catalog-banner__image']");
 
     public Trends(WebDriver driver) {
         super(driver);
@@ -107,7 +108,7 @@ public class Trends extends Base {
         String query = "SELECT trend_translations.name from trend_translations " +
                 "JOIN trend ON trend.id = trend_translations.trend_id " +
                 "where `show` = 1 and locale = 'ru' " +
-                "group by position";
+                "group by position, trend.id";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -119,7 +120,8 @@ public class Trends extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        System.out.println("метод getNames: " + text);
+        System.out.println("метод getNames: " + text);
+        System.out.println(text.size());
         return text;
     }
 

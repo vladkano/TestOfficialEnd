@@ -24,6 +24,13 @@ public class CatalogTest extends TestBase {
     public void setUp() {
         mainSetUp();
         filters = new Filters(driver);
+        bracelets = new Bracelets(driver);
+        earrings = new Earrings(driver);
+        necklaces = new Necklaces(driver);
+        rings = new Rings(driver);
+        brooches = new Brooches(driver);
+        pirsing = new Pirsing(driver);
+        man = new Man(driver);
     }
 
     /**
@@ -74,7 +81,6 @@ public class CatalogTest extends TestBase {
     @Description("Браслеты(проверка по наименованию дизайнера)")
     public void braceletDesigners() {
         driver.get(getUrl + "catalog/braslety");
-        bracelets = new Bracelets(driver);
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = bracelets.getDesigners();
@@ -92,7 +98,6 @@ public class CatalogTest extends TestBase {
     @Description("Серьги(проверка по наименованию дизайнера)")
     public void earringDesigners() {
         driver.get(getUrl + "catalog/sergi");
-        earrings = new Earrings(driver);
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = earrings.getDesigners();
@@ -111,7 +116,6 @@ public class CatalogTest extends TestBase {
     @Description("Колье(проверка по наименованию дизайнера)")
     public void necklacesDesigners() {
         driver.get(getUrl + "catalog/kole");
-        necklaces = new Necklaces(driver);
         String countHeader = filters.getCountHeader();
         int numberOnly = Integer.parseInt(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = necklaces.getDesigners();
@@ -129,7 +133,6 @@ public class CatalogTest extends TestBase {
     @Description("Кольца(проверка по наименованию дизайнера)")
     public void ringDesigners() {
         driver.get(getUrl + "catalog/koltsa");
-        rings = new Rings(driver);
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = rings.getDesigners();
@@ -147,7 +150,6 @@ public class CatalogTest extends TestBase {
     @Description("Броши(проверка по наименованию дизайнера)")
     public void broochDesigners() {
         driver.get(getUrl + "catalog/broshi");
-        brooches = new Brooches(driver);
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = brooches.getDesigners();
@@ -165,7 +167,6 @@ public class CatalogTest extends TestBase {
     @Description("Пирсинг(проверка по наименованию дизайнера)")
     public void piercingDesigners() {
         driver.get(getUrl + "catalog/pirsing");
-        pirsing = new Pirsing(driver);
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = pirsing.getDesigners();
@@ -183,7 +184,6 @@ public class CatalogTest extends TestBase {
     @Description("Раздел для мужчин(проверка по наименованию дизайнера)")
     public void menItemDesigners() {
         driver.get(getUrl + "catalog/men");
-        man = new Man(driver);
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = man.getDesigners();
@@ -202,14 +202,12 @@ public class CatalogTest extends TestBase {
     @Description("Браслеты(проверка по наименованию изделия)")
     public void braceletNames() {
         driver.get(getUrl + "catalog/braslety");
-        bracelets = new Bracelets(driver);
         List<String> sqlList = bracelets.getNames();
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
             siteList.add(s.substring(0, 6));
         }
-        //Сравниваем первые 9 символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
     }
 
@@ -220,14 +218,12 @@ public class CatalogTest extends TestBase {
     @Description("Серьги(проверка по наименованию изделия)")
     public void earringNames() {
         driver.get(getUrl + "catalog/sergi");
-        earrings = new Earrings(driver);
         List<String> sqlList = earrings.getNames();
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
             siteList.add(s.substring(0, 8));
         }
-        //Сравниваем первые 9 символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
     }
 
@@ -238,14 +234,12 @@ public class CatalogTest extends TestBase {
     @Description("Колье(проверка по наименованию изделия)")
     public void necklaceNames() {
         driver.get(getUrl + "catalog/kole");
-        necklaces = new Necklaces(driver);
         List<String> sqlList = necklaces.getNames();
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
             siteList.add(s.substring(0, 8));
         }
-        //Сравниваем первые 9 символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         assertEquals(sqlList.subList(0, 48), siteList.subList(0, 48));
     }
 
@@ -256,14 +250,12 @@ public class CatalogTest extends TestBase {
     @Description("Кольца(проверка по наименованию изделия)")
     public void ringNames() {
         driver.get(getUrl + "catalog/koltsa");
-        rings = new Rings(driver);
         List<String> sqlList = rings.getNames();
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
             siteList.add(s.substring(0, 12));
         }
-        //Сравниваем первые несколько символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
     }
 
@@ -274,14 +266,12 @@ public class CatalogTest extends TestBase {
     @Description("Броши(проверка по наименованию изделия)")
     public void broochesNames() {
         driver.get(getUrl + "catalog/broshi");
-        brooches = new Brooches(driver);
         List<String> sqlList = brooches.getNames();
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
             siteList.add(s.substring(0, 9));
         }
-        //Сравниваем первые 9 символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
     }
 
@@ -292,14 +282,12 @@ public class CatalogTest extends TestBase {
     @Description("Пирсинг(проверка по наименованию изделия)")
     public void piercingNames() {
         driver.get(getUrl + "catalog/pirsing");
-        pirsing = new Pirsing(driver);
         List<String> sqlList = pirsing.getNames();
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
             siteList.add(s.substring(0, 18));
         }
-        //Сравниваем первые 9 символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         assertEquals(sqlList.subList(0, sqlList.size()), siteList.subList(0, siteList.size()));
     }
 
@@ -309,8 +297,6 @@ public class CatalogTest extends TestBase {
     @Test
     @Description("Раздел для мужчин(проверка по наименованию изделия)")
     public void menItemsNames() {
-        navigation = new CatalogNavigation(driver);
-        man = new Man(driver);
         driver.get(getUrl + "catalog/men/");
         List<String> sqlList = man.getNames();
         List<WebElement> elements = driver.findElements(numberOfItem);
@@ -318,7 +304,6 @@ public class CatalogTest extends TestBase {
             String s = text.getText();
             siteList.add(s.substring(0, 9));
         }
-        //Сравниваем первые 9 символов в названии. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         assertEquals(sqlList.subList(0, siteList.size()), siteList.subList(0, siteList.size()));
     }
 
@@ -379,7 +364,6 @@ public class CatalogTest extends TestBase {
     @Test
     @Description("Пирсинг(картинки)")
     public void picturesOfPiercing() {
-        pirsing = new Pirsing(driver);
         driver.get(getUrl + "catalog/pirsing");
         List<WebElement> elements = driver.findElements(numberOfPictures);
         List<Integer> sqlList = pirsing.getPrice();
@@ -409,7 +393,6 @@ public class CatalogTest extends TestBase {
     @Description("Браслеты(проверка по цене)")
     public void braceletsPrice() {
         driver.get(getUrl + "catalog/braslety");
-        bracelets = new Bracelets(driver);
         List<Integer> sqlList = bracelets.getPrice();
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
@@ -422,7 +405,6 @@ public class CatalogTest extends TestBase {
     @Description("Серьги(проверка по цене)")
     public void earringsPrice() {
         driver.get(getUrl + "catalog/sergi");
-        earrings = new Earrings(driver);
         List<Integer> sqlList = earrings.getPrice();
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
@@ -435,7 +417,6 @@ public class CatalogTest extends TestBase {
     @Description("Колье(проверка по цене)")
     public void necklacesPrice() {
         driver.get(getUrl + "catalog/kole");
-        necklaces = new Necklaces(driver);
         List<Integer> sqlList = necklaces.getPrice();
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
@@ -448,7 +429,6 @@ public class CatalogTest extends TestBase {
     @Description("Кольца(проверка по цене)")
     public void ringsPrice() {
         driver.get(getUrl + "catalog/koltsa");
-        rings = new Rings(driver);
         List<Integer> sqlList = rings.getPrice();
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
@@ -461,7 +441,6 @@ public class CatalogTest extends TestBase {
     @Description("Броши(проверка по цене)")
     public void broochesPrice() {
         driver.get(getUrl + "catalog/broshi");
-        brooches = new Brooches(driver);
         List<Integer> sqlList = brooches.getPrice();
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
@@ -474,7 +453,6 @@ public class CatalogTest extends TestBase {
     @Description("Раздел для мужчин(проверка по цене)")
     public void menItemsPrice() {
         driver.get(getUrl + "catalog/men");
-        man = new Man(driver);
         List<Integer> sqlList = man.getPrice();
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));

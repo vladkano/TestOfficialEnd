@@ -37,7 +37,7 @@ public class Order extends Base {
 
     private final By payButton = By.xpath("//button[@class='submit-block__button button-fill']/span");
     private final By orderButton = By.xpath("//span[text()='Оформить заказ']");
-    private final By addAddressButton = By.xpath("//span[text()='добавить этаж, домофон, комментарий для курьера']");
+    private final By addAddressButton = By.xpath("//span[contains(text(), 'добавить этаж, домофон, комментарий для курьера')]");
     private final By searchBox = By.xpath("//input[@id='searchbox']");
     private final By countrySearchBox = By.xpath("//input[@class='reg']");
     private final By citySearchBox = By.xpath("(//input[@class='reg'])[2]");
@@ -45,8 +45,8 @@ public class Order extends Base {
 
     private final By authPassword = By.xpath("//input[@id='verificationCode']");
     private final By whatsAppButton = By.xpath("//label[@for='communicationWhatsapp']/span");
-    private final By smsButton = By.xpath("//span[text()=' СМС о статусе заказа ']");
-    private final By companyStoreButton = By.xpath("//span[text()='забрать в фирменном магазине']");
+    private final By smsButton = By.xpath("//span[contains(text(), 'СМС о статусе заказа')]");
+    private final By companyStoreButton = By.xpath("//span[contains(text(), 'забрать в фирменном магазине')]");
     private final By metropolisStoreButton = By.xpath("//span[text()='Poison Drop в ТЦ «Метрополис»']");
     private final By redBridgeStoreButton = By.xpath("//span[text()='Poison Drop в Универмаге «Au Pont Rouge. У Красного моста»']");
     private final By atriumStoreButton = By.xpath("//span[text()='Poison Drop в ТЦ «Атриум»']");
@@ -55,8 +55,8 @@ public class Order extends Base {
     private final By galleryKrasnodarStoreButton = By.xpath("//span[text()='Poison Drop в ТРЦ «Галерея Краснодар»']");
     private final By kazanMallStoreButton = By.xpath("//span[text()='Poison Drop в ТЦ «KazanMall»']");
     private final By noPayButton = By.xpath("//label[@for='offlinePayment']/span");
-    private final By pickPointButton = By.xpath("//b[text()='постамат']");
-    private final By selectPostomatButton = By.xpath("//span[text()='выбрать постамат']");
+    private final By pickPointButton = By.xpath("//b[contains(text(), 'постамат')]");
+    private final By selectPostomatButton = By.xpath("//span[contains(text(), 'выбрать постамат')]");
     private final By searchboxButton = By.xpath("//div[@class='combobox searchbox']/span");
     private final By rodonitButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"6601-054\"); return false;']");
     private final By belarusButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"9001-009\"); return false;']");
@@ -104,8 +104,7 @@ public class Order extends Base {
 
     public void clickOnLocationButtonNY() {
         ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();", driver.findElement(catalogLocationButtonNY));
-//        click(locationButton);
+                "arguments[0].click();", driver.findElement(cartLocationButtonNY));
     }
 
     public void clickOnDeliveryButton() {

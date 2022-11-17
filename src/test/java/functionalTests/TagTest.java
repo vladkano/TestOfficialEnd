@@ -53,6 +53,9 @@ public class TagTest extends TestBase {
     public void tagIsVisibleRings() {
         driver.get(getUrl + "catalog/koltsa");
         navigation.clickOnShowMoreButton();
+        navigation.clickOnShowMoreButton();
+        navigation.clickOnShowMoreButton();
+        navigation.clickOnShowMoreButton();
         String firstTag = tag.getTag();
         String sqlTag = tag.nameOfRingTags();
         assertEquals(sqlTag.toUpperCase(), firstTag);
@@ -90,6 +93,9 @@ public class TagTest extends TestBase {
     @Description("Отображение всех тегов по товару: Кольца")
     public void tagIsCorrectRings() {
         driver.get(getUrl + "catalog/koltsa");
+        navigation.clickOnShowMoreButton();
+        navigation.clickOnShowMoreButton();
+        navigation.clickOnShowMoreButton();
         navigation.clickOnShowMoreButton();
         String firstTag = tag.getRingsTag();
         String output = Character.toUpperCase(firstTag.charAt(0)) + firstTag.substring(1);

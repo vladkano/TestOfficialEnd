@@ -70,6 +70,7 @@ public class Jewelry extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and price != 0 and (base_metal_group_id = 2 or base_metal_group_id = 11) " +
                 "and balance > 0 and designer_translation.locale = 'ru' and filter_id = 337 and designer.show = 1 " +
+                "and storage_id !=1006 and storage_id !=1007 " +
                 "group by item.id " +
                 "order by item_catalog_position.position ";
         try {
@@ -100,7 +101,7 @@ public class Jewelry extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and (base_metal_group_id = 2 or base_metal_group_id = 11) " +
-                "and balance > 0 and filter_id = 337 and designer.show = 1 " +
+                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and filter_id = 337 and designer.show = 1 " +
                 "group by item.id " +
                 "order by item_catalog_position.position ";
         try {
