@@ -30,6 +30,12 @@ public class SectionsTest extends TestBase {
         filters = new Filters(driver);
         jewelry = new Jewelry(driver);
         certificate = new Certificate(driver);
+        navigation = new CatalogNavigation(driver);
+        newItems = new NewItems(driver);
+        man = new Man(driver);
+        sale = new Sale(driver);
+        shops = new Shops(driver);
+        wishlist = new Wishlist(driver);
     }
 
     /**
@@ -39,7 +45,6 @@ public class SectionsTest extends TestBase {
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Новинки.")
     public void newItemsButton() {
-        newItems = new NewItems(driver);
         newItems.clickToNewItemsButton();
         String url = driver.getCurrentUrl();
         assertEquals(getUrl + "catalog/new/", url);
@@ -51,7 +56,6 @@ public class SectionsTest extends TestBase {
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Золото и серебро.")
     public void jewelryButton() {
-        jewelry = new Jewelry(driver);
         jewelry.clickToJewelryButton();
         String url = driver.getCurrentUrl();
         assertEquals(getUrl + "jewelry/", url);
@@ -63,7 +67,6 @@ public class SectionsTest extends TestBase {
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Для мужчин.")
     public void forManButton() {
-        man = new Man(driver);
         man.clickToManButton();
         String url = driver.getCurrentUrl();
         assertEquals(getUrl + "catalog/men/", url);
@@ -108,7 +111,6 @@ public class SectionsTest extends TestBase {
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Sale.")
     public void saleButton() {
-        sale = new Sale(driver);
         sale.clickToSaleButton();
         String url = driver.getCurrentUrl();
         assertEquals(getUrl + "catalog/sale/", url);
@@ -120,7 +122,6 @@ public class SectionsTest extends TestBase {
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Магазины.")
     public void shopsButton() {
-        shops = new Shops(driver);
         shops.clickToShopsButton();
         String url = driver.getCurrentUrl();
         String shopsHeader = shops.getShopsHeader();
@@ -135,7 +136,6 @@ public class SectionsTest extends TestBase {
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Избранное.")
     public void wishListButton() {
-        wishlist = new Wishlist(driver);
         wishlist.clickToWishListButton();
         String url = driver.getCurrentUrl();
         String header = wishlist.getWishListHeader();
@@ -375,7 +375,6 @@ public class SectionsTest extends TestBase {
     @Description("Золото и серебро(проверка по наименованию изделия)")
     public void jewelryNames() {
         driver.get(getUrl + "jewelry/");
-        jewelry = new Jewelry(driver);
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = jewelry.getNames();
@@ -449,7 +448,6 @@ public class SectionsTest extends TestBase {
     @Description("Тренды(отображение баннеров, работа кнопки 'Показать еще', наименование и порядок их отображения)")
     public void bannersIsVisible() {
         driver.get(getUrl + "trend/");
-        navigation = new CatalogNavigation(driver);
         navigation.clickOnShowMoreTrendsButton();
         List<WebElement> banners = driver.findElements(trendBanners);
         List<String> sqlList = trends.getNames();
@@ -463,7 +461,6 @@ public class SectionsTest extends TestBase {
                 () -> assertEquals(sqlList.subList(0, trends.listOfBanners() - 1), siteList.subList(0, trends.listOfBanners() - 1)));
     }
 
-    //на время ЧП отключено описание трендов, закомментирована часть кода
     /**
      * Ссылки: переход на верную страницу
      */
@@ -478,9 +475,8 @@ public class SectionsTest extends TestBase {
         String description = trends.listOfDescription().get(0);
         String s = description.replaceAll("<[^>]*>", "");
         Assertions.assertAll(
-                () -> assertEquals(href, url))
-//                () -> assertEquals(s, header))
-        ;
+                () -> assertEquals(href, url),
+                () -> assertEquals(s, header));
     }
 
     /**
@@ -488,7 +484,7 @@ public class SectionsTest extends TestBase {
      */
     @Test
     @Description("Тренды(проверка перехода по первому баннеру)")
-    public void firstBannerLink() {
+    public void firstBannerLinkTrends() {
         driver.get(getUrl + "trend/");
         String href = trends.getFirstHref();
         trends.clickToFirstHref();
@@ -496,9 +492,8 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(1);
         Assertions.assertAll(
-                () -> assertEquals(href, url))
-//                () -> assertEquals(description, header))
-        ;
+                () -> assertEquals(href, url),
+                () -> assertEquals(description, header));
     }
 
     /**
@@ -514,9 +509,8 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(2);
         Assertions.assertAll(
-                () -> assertEquals(href, url))
-//                () -> assertEquals(description, header))
-        ;
+                () -> assertEquals(href, url),
+                () -> assertEquals(description, header));
     }
 
     /**
@@ -532,9 +526,8 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(9);
         Assertions.assertAll(
-                () -> assertEquals(href, url)
-//                () -> assertEquals(description, header)
-        );
+                () -> assertEquals(href, url),
+                () -> assertEquals(description, header));
     }
 
     /**
@@ -550,9 +543,8 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String description = trends.listOfDescription().get(4);
         Assertions.assertAll(
-                () -> assertEquals(href, url)
-//                () -> assertEquals(description, header)
-        );
+                () -> assertEquals(href, url),
+                () -> assertEquals(description, header));
     }
 
 

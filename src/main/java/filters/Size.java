@@ -17,7 +17,7 @@ public class Size extends Base {
     private final By sizeButton = By.xpath("(//div[@class='filters__list-tab'])[4]");
     private final By firstSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '14')])[3]");
     private final By secondSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '15.5')])[2]");
-    private final By thirdSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '16')])[3]");
+    private final By thirdSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '16')])[2]");
     private final By universalSizeButton = By.xpath("//div[contains(text(), 'Universal')]");
     private final By currentSize = By.xpath("//li[@class='product-variant product-variant_size product-variant_active']/span");
     private final By firstCurrentSizeButton = By.xpath("(//span[@class='product-variant__variant product-variant__variant_size'])[2]");

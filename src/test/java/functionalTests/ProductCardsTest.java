@@ -66,7 +66,7 @@ public class ProductCardsTest extends TestBase {
         size.clickToSizeButton();
         size.clickToFirstSizeButton();
         filters.clickToShowProductsButton();
-        size.clickOnImageLink();
+        size.clickOnSecondImageLink();
         String firstCurrentSize = size.getCurrentSize();
         size.clickToFirstCurrentSizeButton();
         String secondCurrentSize = size.getCurrentSize();
@@ -95,7 +95,7 @@ public class ProductCardsTest extends TestBase {
         size.clickToSizeButton();
         size.clickToSecondSizeButton();
         filters.clickToShowProductsButton();
-        size.clickOnImageLink();
+        size.clickOnSecondImageLink();
         String firstCurrentSize = size.getCurrentSize();
         size.clickToFirstCurrentSizeButton();
         String secondCurrentSize = size.getCurrentSize();

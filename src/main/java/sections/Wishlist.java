@@ -22,6 +22,8 @@ public class Wishlist extends Base {
     private final By moveToBasketButton = By.xpath("//span[@class='icon-with-counter__counter _with-offset']");
     private final By wishListHeader = By.xpath("//h2[@class='favorites__title']");
     private final By basketProductName = By.xpath("//h4[@class='cart-item__product-name']");
+
+    private final By basketProductSize = By.xpath("//span[@class='cart-item__additional-params']");
     private final By wishListProductSize = By.xpath("//div[@class='ring-size-popup__size ring-size-popup__size_current']");
 
     protected By favoriteName = By.xpath("//h3[@class='favorites-card__name']/a");
@@ -33,6 +35,10 @@ public class Wishlist extends Base {
 
     public String getBasketProductName() {
         return driver.findElement(basketProductName).getText();
+    }
+
+    public String getBasketProductSize() {
+        return driver.findElement(basketProductSize).getText();
     }
 
     public String getWishListProductSize() {

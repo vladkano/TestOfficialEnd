@@ -31,6 +31,10 @@ public class Basket extends Base {
 
     private final By inBasket = By.xpath("//span[text()='в корзине']");
     private final By noBasketHeader = By.xpath("//p[@class='product-actions__notification']");
+    private final By basketError = By.xpath("//p[@class='submit-block__message message message_error']");
+    private final By dataError = By.xpath("//p[@class='text-input__message message message_error']");
+
+
 
     public Basket(WebDriver driver) {
         super(driver);
@@ -39,6 +43,14 @@ public class Basket extends Base {
 
     public String getNoBasketHeader() {
         return driver.findElement(noBasketHeader).getText();
+    }
+
+    public String getBasketError() {
+        return driver.findElement(basketError).getText();
+    }
+
+    public String getDataError() {
+        return driver.findElement(dataError).getText();
     }
 
     public String getGoToBasketButtonHeader() {
