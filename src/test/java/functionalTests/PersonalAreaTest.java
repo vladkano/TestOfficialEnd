@@ -216,16 +216,18 @@ public class PersonalAreaTest extends TestBase {
         assertEquals("Повторное изменение дня рождения из личного кабинета невозможно. Свяжитесь с оператором.", birthdayError);
     }
 
-    /**
-     * Некорректно заполнено поле "Адрес"
-     */
-    @Test
-    @Description("Некорректно заполнено поле 'Адрес'")
-    public void incorrectAddressField() {
-        personalData.addIncorrectAddress("Тестовая аллея");
-        String profileDeliveryAddressError = personalData.getProfileDeliveryAddressError();
-        assertEquals("Адрес указан не полностью", profileDeliveryAddressError);
-    }
+
+   //валидация поля отключена в таске: https://tracker.yandex.ru/PD-2568
+//    /**
+//     * Некорректно заполнено поле "Адрес"
+//     */
+//    @Test
+//    @Description("Некорректно заполнено поле 'Адрес'")
+//    public void incorrectAddressField() {
+//        personalData.addIncorrectAddress("Тестовая аллея");
+//        String profileDeliveryAddressError = personalData.getProfileDeliveryAddressError();
+//        assertEquals("Адрес указан не полностью", profileDeliveryAddressError);
+//    }
 
 
     /**

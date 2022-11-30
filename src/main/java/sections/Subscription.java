@@ -2,6 +2,7 @@ package sections;
 
 import base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class Subscription extends Base {
@@ -31,7 +32,9 @@ public class Subscription extends Base {
     }
 
     public void clickOnSubscriptionButton() {
-        click(subscriptionButton);
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", driver.findElement(subscriptionButton));
+//        click(subscriptionButton);
     }
 
     public String getSuccessfulSubscriptionText() {

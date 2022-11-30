@@ -751,24 +751,10 @@ public class Order extends Base {
         this.clickOnPayButton();
     }
 
-    public void orderWithPickPointSMS(String phone, String email, String fio, String country, String city, String search) {
-        String oldWindowsSet = driver.getWindowHandle();
+    public void orderWithPostamatCheck(String phone, String email, String fio) {
         basicParameters(phone, email, fio);
-        this.clickOnPickPointButton();
-        this.clickOnSelectPostomatButton();
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        WebElement postomatFrame = wait.until(ExpectedConditions.presenceOfElementLocated(frame));
-        driver.switchTo().frame(postomatFrame);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder='Россия']")));
-        this.typeCountrySearchBox(country);
-        this.typeCitySearchBox(city);
-        this.typeSearchBox(search);
-        this.clickOnSearchboxButton();
-        this.clickOnBelarusButton();
-        this.clickOnSelectButton();
-        driver.switchTo().window(oldWindowsSet);
-        this.clickOnSmsButton();
-        this.clickOnPayButton();
+        clickOnPickPointButton();
+        clickOnPayButton();
     }
 
 

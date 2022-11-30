@@ -6,15 +6,19 @@ import filters.Filters;
 import filters.Size;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
+import order.Order;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BasketTest extends TestBase {
 
     String testMethodName;
+    private final By postamatErrorHeader = By.xpath("//p[@class='submit-block__message message message_error']");
 
     @BeforeEach
     public void setUp(TestInfo testInfo) {
@@ -31,8 +36,20 @@ public class BasketTest extends TestBase {
         filters = new Filters(driver);
         size = new Size(driver);
         basket.clickToOkButton();
+        order = new Order(driver);
         this.testMethodName = testInfo.getTestMethod().get().getName();
     }
+
+    /**
+     * Вспомогательные методы для тестов:<p>
+     * Переходим в карточку товара, кладем товар в корзину и переходим в корзину
+     */
+    public void goToCart() {
+        basket.clickToItemButton();
+        basket.clickToItemInBasketButton();
+        basket.clickToGoToBasketButton();
+    }
+
 
     protected void takeScreenshot(String fileName) {
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -93,9 +110,7 @@ public class BasketTest extends TestBase {
             "Обычный товар без размера")
     @DisplayName("inBasketButton")
     public void inBasketButton() {
-        basket.clickToItemButton();
-        basket.clickToItemInBasketButton();
-        basket.clickToGoToBasketButton();
+        goToCart();
         String number = basket.getBasketNumber();
         assertEquals("1", number);
     }
@@ -103,9 +118,7 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Проверка кнопки 'плюс', увеличение количества товаров при добавлении в корзину обычного товара без размера")
     public void plusButton() {
-        basket.clickToItemButton();
-        basket.clickToItemInBasketButton();
-        basket.clickToGoToBasketButton();
+        goToCart();
         basket.clickToPlusBasketButton();
         String number = basket.getBasketNumber();
         assertEquals("2", number, "Ошибка увеличения количества товара при добавлении в корзину");
@@ -114,9 +127,7 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Проверка кнопки 'минус', уменьшение количества товаров при добавлении в корзину обычного товара без размера")
     public void minusButton() {
-        basket.clickToItemButton();
-        basket.clickToItemInBasketButton();
-        basket.clickToGoToBasketButton();
+        goToCart();
         basket.clickToPlusBasketButton();
         basket.clickToMinusBasketButton();
         String number = basket.getBasketNumber();
@@ -251,9 +262,7 @@ public class BasketTest extends TestBase {
     public void checkBalanceItem() {
 //        takeScreenshot("Open catalog");
         Integer balance = basket.getBalance();
-        basket.clickToItemButton();
-        basket.clickToItemInBasketButton();
-        basket.clickToGoToBasketButton();
+        goToCart();
         Integer dataMax = basket.getDataMax();
         assertEquals(balance, dataMax, "Неверный data-max в счётчике товаров");
         for (int i = 0; i < balance - 1; i++) {
@@ -297,9 +306,7 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Кладем в корзину 2 разных товара, переходим на страницу каталога и проверяем число на иконке корзины")
     public void checkNumber() {
-        basket.clickToItemButton();
-        basket.clickToItemInBasketButton();
-        basket.clickToBasketButton();
+        goToCart();
         basket.clickToCatalogButton();
         basket.clickToAnotherItemButton();
         basket.clickToItemInBasketButton();
@@ -327,6 +334,68 @@ public class BasketTest extends TestBase {
         basket.clickToCart();
         String url = driver.getCurrentUrl();
         assertEquals(getUrl + "cart/", url);
+    }
+
+    /**
+     * Блок тестов по валидации в корзине:<p>
+     * Для доставки в постамат нужно выбрать постамат
+     */
+    @Test
+    @Description("Валидации в корзине(постамат)")
+    public void postamatCheck() {
+        goToCart();
+        order.orderWithPostamatCheck(phoneForOrder, email, testNameForOrder);
+        String code2 = order.getPhonePassword();
+        order.confirmWithPassword(code2);
+        waitForVisibilityOf(postamatErrorHeader, 5);
+        String postamatHeader = basket.getBasketError();
+        assertEquals("Для доставки в постамат нужно выбрать постамат", postamatHeader);
+    }
+
+    /**
+     * При оформлении заказа необходимо указать имя
+     */
+    @Test
+    @Description("Валидации в корзине(При оформлении заказа необходимо указать имя)")
+    public void nameCheck() {
+        goToCart();
+        order.orderWithPostamatCheck(phoneForOrder, email, "");
+        String nameError = basket.getDataError();
+        String basketError = basket.getBasketError();
+        Assertions.assertAll(
+                () -> assertEquals("необходимо указать имя", basketError),
+                () -> assertEquals("необходимо указать имя", nameError));
+    }
+
+    /**
+     * При оформлении заказа необходимо указать электронную почту
+     */
+    @Test
+    @Description("Валидации в корзине(При оформлении заказа необходимо указать электронную почту)")
+    public void emailCheck() {
+        goToCart();
+        order.orderWithPostamatCheck(phoneForOrder, "", testNameForOrder);
+        String emailError = basket.getDataError();
+        String basketError = basket.getBasketError();
+        Assertions.assertAll(
+                () -> assertEquals("необходимо указать электронную почту", basketError),
+                () -> assertEquals("необходимо указать электронную почту", emailError));
+    }
+
+    /**
+     * При оформлении заказа необходимо указать телефон
+     */
+    @Test
+    @Description("Валидации в корзине(При оформлении заказа необходимо указать телефон)")
+    public void phoneCheck() {
+        goToCart();
+        driver.findElement(By.xpath("//input[@id='orderPhone']")).clear();
+        order.orderWithPostamatCheck("", email, testNameForOrder);
+        String phoneError = basket.getDataError();
+        String basketError = basket.getBasketError();
+        Assertions.assertAll(
+                () -> assertEquals("необходимо указать телефон", basketError),
+                () -> assertEquals("необходимо указать телефон", phoneError));
     }
 
 }

@@ -361,7 +361,7 @@ public class OrderTest extends TestBase {
         putItemInBasket();
         order.deliveryIsNotPossible(phoneForOrder, email, testNameForOrder, "Рим");
         String comUrl = driver.getCurrentUrl();
-        assertEquals(getUrl + "cart", comUrl);
+        assertEquals(getComUrl + "cart", comUrl);
     }
 
     /**

@@ -27,6 +27,7 @@ public class WishListTest extends TestBase {
         filters = new Filters(driver);
         size = new Size(driver);
         collection = new Collection(driver);
+        basket = new Basket(driver);
     }
 
     /**
@@ -163,7 +164,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по переносу товара из избранного в корзину. Добавление в избранное из каталога: Товар без размера.")
     public void favoritesToBasket() {
-        driver.get(getUrl + "catalog/");
+        driver.get(getUrl + "catalog/sergi/");
         String itemName = wishlist.getItemName();
         wishlist.clickToAddToWishlistFromCatalogButton();
         wishlist.clickToWishListButton();
@@ -195,15 +196,17 @@ public class WishListTest extends TestBase {
         wishlist.clickToWishListButton();
         String itemNameFromWishlist = wishlist.getItemNameFromFavorites().toLowerCase();
         wishlist.clickToTransferToBasketButton();
-//        String wishListProductSize = wishlist.getWishListProductSize();
-//        wishlist.clickToTransferToBasketWithSizeButton();
+        String wishListProductSize = wishlist.getWishListProductSize();
+        System.out.println(wishListProductSize);
+        wishlist.clickToTransferToBasketWithSizeButton();
         wishlist.clickToMoveToBasketButton();
         String basketProductName = wishlist.getBasketProductName().toLowerCase();
+        String basketProductSize = wishlist.getBasketProductSize();
         Assertions.assertAll(
                 () -> assertEquals(itemName.substring(0, 20), itemNameFromWishlist.substring(0, 20)),
-                () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20))
-//                () -> assertEquals(itemNameFromWishlist + "\n" + "Размер: " + wishListProductSize, basketProductName)
-        );
+                () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20)),
+                () -> assertEquals(itemNameFromWishlist.substring(0,30) + "\n" + "Размер: " + wishListProductSize,
+                        basketProductName.substring(0,30) +  "\n" + basketProductSize));
     }
 
     /**
@@ -213,7 +216,6 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по переносу товара из избранного в корзину. Добавление в избранное из карточки товара: Товар из коллекции без размера.")
     public void favoritesToBasketWithCollection() {
-        basket = new Basket(driver);
         driver.navigate().to(basket.getSecondLinkOfCollection());
         String itemName = wishlist.getHeader();
         wishlist.clickToWishListInCardListButton();
@@ -250,15 +252,16 @@ public class WishListTest extends TestBase {
         wishlist.clickToWishListButton();
         String itemNameFromWishlist = wishlist.getItemNameFromFavorites();
         wishlist.clickToTransferToBasketButton();
-//        String wishListProductSize = wishlist.getWishListProductSize();
-//        wishlist.clickToTransferToBasketWithSizeButton();
+        String wishListProductSize = wishlist.getWishListProductSize();
+        wishlist.clickToTransferToBasketWithSizeButton();
         wishlist.clickToMoveToBasketButton();
         String basketProductName = wishlist.getBasketProductName();
+        String basketProductSize = wishlist.getBasketProductSize();
         Assertions.assertAll(
                 () -> assertEquals(itemName.substring(0, 20), itemNameFromWishlist.substring(0, 20)),
-                () -> assertEquals(itemNameFromWishlist.substring(0, 30), basketProductName.substring(0, 30))
-//                () -> assertEquals(itemNameFromWishlist + "\n" + "Размер: " + wishListProductSize, basketProductName)
-        );
+                () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20)),
+                () -> assertEquals(itemNameFromWishlist.substring(0,30) + "\n" + "Размер: " + wishListProductSize,
+                        basketProductName.substring(0,30) +  "\n" + basketProductSize));
     }
 
 }

@@ -21,8 +21,8 @@ public class Trends extends Base {
     private final By thirdHref = By.xpath("//div[@class='trends-page__grid js-trends-grid']/a[10]");
     private final By fourthFineHref = By.xpath("//div[@class='trends-page__grid js-trends-grid']/a[5]");
 
-//    private final By linkHeader = By.xpath("//div[@class='trend-page__content']");
-    private final By linkHeader = By.xpath("//div[@class='catalog-banner__image']");
+    private final By linkHeader = By.xpath("//div[@class='trend-page__content']");
+//    private final By linkHeader = By.xpath("//div[@class='catalog-banner__image']");
 
     public Trends(WebDriver driver) {
         super(driver);
