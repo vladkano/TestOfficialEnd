@@ -196,6 +196,7 @@ public class WishListTest extends TestBase {
         wishlist.clickToWishListButton();
         String itemNameFromWishlist = wishlist.getItemNameFromFavorites().toLowerCase();
         wishlist.clickToTransferToBasketButton();
+        sleep(1000);
         String wishListProductSize = wishlist.getWishListProductSize();
         System.out.println(wishListProductSize);
         wishlist.clickToTransferToBasketWithSizeButton();

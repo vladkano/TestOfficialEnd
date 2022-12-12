@@ -64,7 +64,7 @@ public class ComTests extends TestBase {
         double finalCloudPrice = Double.parseDouble(order.getCheckoutPrice().replaceAll("[^\\d.]", ""));
 //        System.out.println(finalCloudPrice);
         Assertions.assertAll(
-                () -> assertEquals("Pay Poison Drop LLC", header.substring(0,19)),
+                () -> assertEquals("Pay Poison Drop LLC", header.substring(0, 19)),
                 () -> assertEquals(cartPrice, finalCloudPrice));
     }
 
@@ -437,7 +437,7 @@ public class ComTests extends TestBase {
         wishlist.clickToMoveToBasketButton();
         String basketProductName = wishlist.getBasketProductName().toLowerCase();
         Assertions.assertAll(
-                () -> assertEquals(itemName.substring(0,20), itemNameFromWishlist.substring(0,20)),
+                () -> assertEquals(itemName.substring(0, 20), itemNameFromWishlist.substring(0, 20)),
                 () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20)));
     }
 

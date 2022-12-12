@@ -27,6 +27,10 @@ public class FiltersTest extends TestBase {
         mainSetUp();
         driver.get(getUrl + "catalog/");
         filters = new Filters(driver);
+        material = new Material(driver);
+        colorsAndCoverage = new ColorsAndCoverage(driver);
+        size = new Size(driver);
+        designersFilter = new DesignersFilter(driver);
         filters.clickToOkButton();
     }
 
@@ -35,8 +39,6 @@ public class FiltersTest extends TestBase {
      * Получить список изделий с сайта
      */
     public void getProductsListFromPage() {
-        sleep(2000);
-//        waitForVisibilityOf(numberOfItem, 5);
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getAttribute("textContent");
@@ -49,7 +51,6 @@ public class FiltersTest extends TestBase {
      * Фильтр по вставкам
      */
     public void getFilterByInserts() {
-        material = new Material(driver);
         filters.clickToFilterButton();
         material.clickToInsertButton();
     }
@@ -58,7 +59,6 @@ public class FiltersTest extends TestBase {
      * Фильтр по материалам
      */
     public void getFilterByMaterials() {
-        material = new Material(driver);
         filters.clickToFilterButton();
         material.clickToMaterialButton();
     }
@@ -67,7 +67,6 @@ public class FiltersTest extends TestBase {
      * Фильтр по цвету изделия
      */
     public void getColorFilter() {
-        colorsAndCoverage = new ColorsAndCoverage(driver);
         filters.clickToFilterButton();
         colorsAndCoverage.clickToColorButton();
     }
@@ -76,7 +75,6 @@ public class FiltersTest extends TestBase {
      * Фильтр по покрытию
      */
     public void getCoveringFilter() {
-        colorsAndCoverage = new ColorsAndCoverage(driver);
         filters.clickToFilterButton();
         colorsAndCoverage.clickToCoveringButton();
     }
@@ -85,7 +83,6 @@ public class FiltersTest extends TestBase {
      * Фильтр по размеру кольца
      */
     public void getSizeFilter() {
-        size = new Size(driver);
         filters.clickToFilterButton();
         size.clickToSizeButton();
     }
@@ -94,7 +91,6 @@ public class FiltersTest extends TestBase {
      * Фильтр по дизайнеру
      */
     public void getDesignersFilter() {
-        designersFilter = new DesignersFilter(driver);
         filters.clickToFilterButton();
         designersFilter.clickToDesignersButton();
     }
@@ -487,7 +483,7 @@ public class FiltersTest extends TestBase {
         //Сравниваем 2 элемента и размеры списков. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
         Assertions.assertAll(
                 () -> assertEquals(sqlList.size(), numberOnly),
-                () -> assertEquals(sqlList.get(0), siteList.get(0)),
+                () -> assertEquals(sqlList.get(0).substring(0,20), siteList.get(0).substring(0,20)),
                 () -> assertEquals(sqlList.get(2), siteList.get(2)));
     }
 
@@ -632,32 +628,30 @@ public class FiltersTest extends TestBase {
     @Test
     @Description("Сброс фильтров по категориям(Последовательно выбираем фильтры: Серьги, Ювелирный сплав, белый)")
     public void resetFiltersByCategory() {
-        material = new Material(driver);
-        colorsAndCoverage = new ColorsAndCoverage(driver);
         filters.clickToFilterButton();
-        sleep(3000);
+        sleep(1000);
         String numberOfProducts1 = filters.getNumberOfProducts();
         filters.clickToAllEarringsButton();
-        sleep(3000);
+        sleep(1000);
         String numberOfProducts2 = filters.getNumberOfProducts();
         material.clickToMaterialButton();
-        sleep(3000);
+        sleep(1000);
         material.clickToJewelryAlloyButton();
-        sleep(3000);
+        sleep(1000);
         String numberOfProducts3 = filters.getNumberOfProducts();
         colorsAndCoverage.clickToColorButton();
-        sleep(3000);
+        sleep(1000);
         colorsAndCoverage.clickToWhiteButton();
-        sleep(3000);
+        sleep(1000);
         String numberOfProducts4 = filters.getNumberOfProducts();
         colorsAndCoverage.clickToWhiteButton();
-        sleep(3000);
+        sleep(1000);
         String numberOfProducts5 = filters.getNumberOfProducts();
         material.clickToJewelryAlloyButton();
-        sleep(3000);
+        sleep(1000);
         String numberOfProducts6 = filters.getNumberOfProducts();
         filters.clickToAllEarringsButton2();
-        sleep(3000);
+        sleep(1000);
         String numberOfProducts7 = filters.getNumberOfProducts();
         Assertions.assertAll(
                 () -> assertNotEquals(numberOfProducts1, numberOfProducts2),

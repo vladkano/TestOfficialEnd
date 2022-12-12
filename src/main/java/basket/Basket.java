@@ -59,9 +59,6 @@ public class Basket extends Base {
 
     public void clickToItemButton() {
         String firstItem = findFirstItemMoreThan5000();
-//        ((JavascriptExecutor) driver).executeScript(
-//                "arguments[0].click();", driver.findElement(By.xpath("//a[text()=" + "'" + firstItem + "']")));
-
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].click();", driver.findElement(By.xpath("//a[contains(text()," + "'" + firstItem.substring(0,20) + "')]")));
     }

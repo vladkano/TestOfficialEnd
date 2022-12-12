@@ -39,9 +39,9 @@ public class NewItems extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and item_translations.locale = 'ru' and catalog_translation.locale = 'ru' and filter_id = 155 and is_archive = 0 " +
-                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_sku_price.price != 0 " +
+                "and storage_id not in (1006, 1007) and balance > 0 and designer.show = 1 and item_sku_price.price != 0 " +
 //                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name, catalog.url " +
-                "group by item_catalog_position.position " +
+//                "group by item_catalog_position.position " +
                 "order by item.created_at desc";
         try {
             Statement statement = worker.getCon().createStatement();

@@ -21,7 +21,7 @@ public class Material extends Base {
     private final By stekloButton = By.xpath("//div[text()='Стекло']");
     private final By bronzeButton = By.xpath("//div[contains(text(), 'бронза')]");
     private final By silverButton = By.xpath("//div[contains(text(), 'Серебро')]");
-    private final By jewelryAlloyButton = By.xpath("//div[contains(text(), 'ювелирный сплав')]");
+    private final By jewelryAlloyButton = By.xpath("//div[@class='filters__section filters__section_material']//div[contains(text(), 'ювелирный сплав')]");
 
     public Material(WebDriver driver) {
         super(driver);

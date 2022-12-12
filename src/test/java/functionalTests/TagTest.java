@@ -41,6 +41,9 @@ public class TagTest extends TestBase {
     @Description("Отображение тегов в каталогах: Браслеты")
     public void tagIsVisibleBracelets() {
         driver.get(getUrl + "catalog/braslety");
+        for (int i = 0; i < 2; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String firstTag = tag.getTag();
         assertEquals("EXCLUSIVE", firstTag);
     }
@@ -52,10 +55,9 @@ public class TagTest extends TestBase {
     @Description("Отображение тегов в каталогах: Кольца")
     public void tagIsVisibleRings() {
         driver.get(getUrl + "catalog/koltsa");
-        navigation.clickOnShowMoreButton();
-        navigation.clickOnShowMoreButton();
-        navigation.clickOnShowMoreButton();
-        navigation.clickOnShowMoreButton();
+        for (int i = 0; i < 4; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String firstTag = tag.getTag();
         String sqlTag = tag.nameOfRingTags();
         assertEquals(sqlTag.toUpperCase(), firstTag);
@@ -93,10 +95,9 @@ public class TagTest extends TestBase {
     @Description("Отображение всех тегов по товару: Кольца")
     public void tagIsCorrectRings() {
         driver.get(getUrl + "catalog/koltsa");
-        navigation.clickOnShowMoreButton();
-        navigation.clickOnShowMoreButton();
-        navigation.clickOnShowMoreButton();
-        navigation.clickOnShowMoreButton();
+        for (int i = 0; i < 4; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String firstTag = tag.getRingsTag();
         String output = Character.toUpperCase(firstTag.charAt(0)) + firstTag.substring(1);
         String tagsFromSql = tag.nameOfRingTags();

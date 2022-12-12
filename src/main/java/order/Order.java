@@ -383,6 +383,11 @@ public class Order extends Base {
         clickOnPayButton();
     }
 
+    public void orderWithSignIn() {
+        clickOnCompanyStoreButton();
+        clickOnPayButton();
+    }
+
     //Заказы без оплаты
     public void orderWithNoPayAndPhone(String phone, String email, String fio, String city, String address, String apartment,
                                        String frontDoor, String floor, String houseCode, String commentForCourier) {

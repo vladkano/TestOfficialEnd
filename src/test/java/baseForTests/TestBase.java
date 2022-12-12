@@ -127,6 +127,16 @@ public class TestBase {
         }
     }
 
+    /**
+     * Положить в корзину товар стоимостью более 5000 рублей.
+     */
+    protected void putItemInBasket() {
+        basket = new Basket(driver);
+        basket.clickToItemButton();
+        basket.clickToItemInBasketButton();
+        basket.clickToBasketButton();
+    }
+
     @AfterEach
     public void tearDownEach() {
         driver.quit();
