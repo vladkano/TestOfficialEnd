@@ -1,25 +1,22 @@
 package functionalTests;
 
 import baseForTests.TestBase;
-import basket.Basket;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import mainPage.MainPage;
-import org.junit.jupiter.api.AfterEach;
+import order.Order;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.ResourceLock;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
-import personal.PersonalData;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Integer.parseInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -34,9 +31,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Epic("Тесты регистрации и авторизации")
 @ResourceLock("Code")
 public class MainPageTest extends TestBase {
-
-    int a = 0; // Начальное значение диапазона - "от"
-    int b = 9999; // Конечное значение диапазона - "до"
 
     @BeforeEach
     public void setUp() {
@@ -53,10 +47,10 @@ public class MainPageTest extends TestBase {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         mainPage = new MainPage(driver);
-        basket = new Basket(driver);
-        basket.clickToOkButton();
+        order = new Order(driver);
+//        basket = new Basket(driver);
+//        basket.clickToOkButton();
     }
-
 
     /**
      * Позитивные Тесты <p>
@@ -221,7 +215,7 @@ public class MainPageTest extends TestBase {
      */
     @Test
     @Description("Проверяем, что кнопка 'получить код' неактивна, если некорректно введена электронная почта")
-    public void sigInWithIncorrectEmail() {
+    public void signInWithIncorrectEmail() {
         mainPage.sigInWithEmail("owenkvist1@outlook");
         Boolean registerButtonAttribute = mainPage.getRegisterButtonAttribute();
         assertEquals(false, registerButtonAttribute);
@@ -243,6 +237,28 @@ public class MainPageTest extends TestBase {
         mainPage.clickOnSigInButton();
         String heading = mainPage.getSigOutHeader();
         assertEquals("вход или регистрация", heading);
+    }
+
+    /**
+     * Оформление заказа через авторизацию в ЛК <p>
+     * Проверяем, что при оформлении заказа через авторизацию в ЛК заказ успешно оформляется и осуществляется переход к оплате
+     */
+    @Test
+    @Description("Проверяем, что при оформлении заказа через авторизацию в ЛК заказ успешно оформляется и осуществляется переход к оплате")
+    public void signInWithOrder() {
+        mainPage.sigInWithPhone(phoneForAuthorization);
+        String code2 = mainPage.getPhonePassword();
+        mainPage.sigInWithPassword(code2);
+        sleep(1000);
+        mainPage.clickOnCatalogButton();
+        putItemInBasket();
+        order.orderWithSignIn();
+        int cartPrice = parseInt(order.getFinalPrice().replaceAll("[^A-Za-z0-9]", ""));
+        String header = order.getPayHeader();
+        int cloudPrice = parseInt(order.getCloudPrice().replaceAll("[^A-Za-z0-9]", ""));
+        Assertions.assertAll(
+                () -> assertEquals("Оплата заказа", header.substring(0, 13)),
+                () -> assertEquals(cartPrice, cloudPrice));
     }
 
 

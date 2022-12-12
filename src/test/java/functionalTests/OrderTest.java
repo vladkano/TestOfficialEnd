@@ -54,15 +54,6 @@ public class OrderTest extends TestBase {
     }
 
     /**
-     * Положить в корзину товар стоимостью более 5000 рублей.
-     */
-    public void putItemInBasket() {
-        basket.clickToItemButton();
-        basket.clickToItemInBasketButton();
-        basket.clickToBasketButton();
-    }
-
-    /**
      * Положить в корзину товар стоимостью менее 5000 рублей.
      */
     public void putItemLessThan5000InBasket() {

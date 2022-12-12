@@ -192,7 +192,7 @@ public class Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
-                "and storage_id in (1006,1007) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
+                "and storage_id in (1006) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();

@@ -107,13 +107,15 @@ public class DesignersFilter extends Base {
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
+                "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
                 "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 8 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and designer.name = 'Avgvst' " +
+                "and storage_id not in (1006, 1007) and designer_translation.locale = 'ru' " +
+                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and designer_translation.name = 'Avgvst' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();

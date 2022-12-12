@@ -24,7 +24,11 @@ public class CollectionTest extends TestBase {
         mainSetUp();
         collection = new Collection(driver);
         navigation = new CatalogNavigation(driver);
+        bracelets = new Bracelets(driver);
         rings = new Rings(driver);
+        brooches = new Brooches(driver);
+        earrings = new Earrings(driver);
+        necklaces = new Necklaces(driver);
     }
 
     /**
@@ -69,8 +73,10 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Браслеты)")
     public void firstLinkOfBracelets() {
-        bracelets = new Bracelets(driver);
         driver.get(getUrl + "catalog/braslety");
+        for (int i = 0; i < 3; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String href = collection.getHref();
         collection.clickOnFirstHref();
         String url = driver.getCurrentUrl();
@@ -83,7 +89,6 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Броши)")
     public void firstLinkOfBrooches() {
-        brooches = new Brooches(driver);
         driver.get(getUrl + "catalog/broshi");
         String href = collection.getHref();
         collection.clickOnFirstHref();
@@ -97,7 +102,6 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Серьги)")
     public void firstLinkOfEarrings() {
-        earrings = new Earrings(driver);
         driver.get(getUrl + "catalog/sergi");
         String href = collection.getHref();
         collection.clickOnFirstHref();
@@ -111,11 +115,10 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Колье)")
     public void firstLinkOfNecklaces() {
-        necklaces = new Necklaces(driver);
         driver.get(getUrl + "catalog/kole");
-        navigation.clickOnShowMoreButton();
-        navigation.clickOnShowMoreButton();
-        sleep(2000);
+        for (int i = 0; i < 3; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String href = collection.getHref();
         collection.clickOnFirstHref();
         String url = driver.getCurrentUrl();
@@ -129,6 +132,9 @@ public class CollectionTest extends TestBase {
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Кольца)")
     public void firstLinkOfRings() {
         driver.get(getUrl + "catalog/koltsa");
+        for (int i = 0; i < 2; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String href = collection.getHref();
         collection.clickOnFirstHref();
         String url = driver.getCurrentUrl();
