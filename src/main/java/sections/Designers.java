@@ -24,11 +24,9 @@ public class Designers extends Base {
     private final By firstPopularHref = By.xpath("//div[@class='popular-designers__item']/a");
     private final By lastPopularHref = By.xpath("//div[@class='popular-designers__item'][12]/a");
     private final By designer = By.xpath("//li[@class='index-designers__name']/a");
-    private final By designersNames = By.xpath("//div[@class='catalog-card__designer']/a");
-    private final By numberOfItem = By.xpath("//h3[@class='catalog-card__name']/a");
 
     //карточка товара
-    private final By designerPhoto = By.xpath("//picture[@class='picture designer-block__picture']/img");
+    private final By designerPhoto = By.xpath("//span[@class='picture designer-block__picture lazy']/picture/img");
     private final By designerName = By.xpath("//a[@class='designer-block__link']");
     private final By designerText = By.xpath("//p[@class='designer-block__description']");
 
@@ -38,12 +36,12 @@ public class Designers extends Base {
 
 
     public String getDescriptions() {
-        List<WebElement> designersName = driver.findElements(designersNames);
+        List<WebElement> designersName = driver.findElements(designerLink);
         return designersName.get(3).getText();
     }
 
     public void clickOnItemName() {
-        List<WebElement> itemsName = driver.findElements(numberOfItem);
+        List<WebElement> itemsName = driver.findElements(nameLink);
         itemsName.get(3).click();
     }
 
@@ -145,8 +143,9 @@ public class Designers extends Base {
     }
 
     public String getDesignerDescription(String text) {
-        String description = null;
+        String description = "";
         String query = "select description from designer " +
+
                 "where `show` = 1 and name = " + "'" + text + "'";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -471,10 +470,11 @@ public class Designers extends Base {
                 "JOIN item ON item.designer_id = designer.id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 " +
+                "and is_archive = 0 and item_sku_price.price != 0 " +
                 "and balance > 0 and designer.show = 1 and designer_translation.locale = 'ru' " +
                 "group by designer_translation.name";
         try {
@@ -563,10 +563,11 @@ public class Designers extends Base {
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN catalog ON item.catalog_id = catalog.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 and filter_id = " + "'" + getFirstFilterIDForList() + "'" +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getFirstFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
                 "order by item_catalog_position.position ";
@@ -594,10 +595,11 @@ public class Designers extends Base {
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN catalog ON item.catalog_id = catalog.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 and filter_id = " + "'" + getTenFilterIDForList() + "'" +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getTenFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
                 "order by item_catalog_position.position ";
@@ -625,10 +627,11 @@ public class Designers extends Base {
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN catalog ON item.catalog_id = catalog.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 and filter_id = " + "'" + getTwentyFilterIDForList() + "'" +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getTwentyFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
                 "order by item_catalog_position.position ";

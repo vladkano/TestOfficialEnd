@@ -110,10 +110,12 @@ public class MainPageBanner extends Base {
     public List<String> listOfBests() {
         String name;
         List<String> list = new ArrayList<>();
-        String query = "SELECT name from item_sku " +
+        String query = "SELECT item_translations.name from item_translations " +
+                "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN item_sku ON item.id = item_sku.item_id " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
-                "where locale = 'ru' " +
-                "group by bestsellers.id ";
+                "where item_translations.locale = 'ru' " +
+                "group by bestsellers.id  LIMIT 5";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -162,7 +164,7 @@ public class MainPageBanner extends Base {
         int price;
         double discount;
         List<Integer> list = new ArrayList<>();
-        String query = "SELECT item_sku_price.price, (item_sku_price.price * discount/100) as discount from item_sku_price " +
+        String query = "SELECT item_sku_price.price, (item_sku_price.price * item_sku_price.discount/100) as discount from item_sku_price " +
                 "JOIN item_sku ON item_sku_price.item_sku_id = item_sku.id " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
                 "where locale = 'ru' " +

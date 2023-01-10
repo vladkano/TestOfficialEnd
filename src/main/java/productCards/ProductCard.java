@@ -108,7 +108,6 @@ public class ProductCard extends Base {
     public String getKrasnodar() {
         return driver.findElement(krasnodar).getAttribute("textContent");
     }
-
     public String getKazan() {
         return driver.findElement(kazan).getAttribute("textContent");
     }

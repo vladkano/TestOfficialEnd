@@ -58,7 +58,7 @@ public class Order extends Base {
     private final By pickPointButton = By.xpath("//b[contains(text(), 'постамат')]");
     private final By selectPostomatButton = By.xpath("//span[contains(text(), 'выбрать постамат')]");
     private final By searchboxButton = By.xpath("//div[@class='combobox searchbox']/span");
-    private final By rodonitButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"6601-054\"); return false;']");
+    private final By rodonitButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"6605-238\"); return false;']");
     private final By belarusButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"9001-009\"); return false;']");
     private final By selectButton = By.xpath("//div[text()='ВЫБРАТЬ']");
     private final By paperButton = By.xpath("//span[text()='Бумажный']");
@@ -136,7 +136,8 @@ public class Order extends Base {
     }
 
     public String getPayComHeader() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(payComHeader));
+//        wait.until(ExpectedConditions.presenceOfElementLocated(payComHeader));
+        waitForVisibilityOf(payComHeader,10);
         return driver.findElement(payComHeader).getText();
     }
 

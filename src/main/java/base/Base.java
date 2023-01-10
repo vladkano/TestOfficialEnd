@@ -33,8 +33,8 @@ public class Base {
 
     private By imageLink = By.xpath("//picture/img");
     protected By secondImageLink = By.xpath("(//picture/img)[3]");
-    protected By nameLink = By.xpath("//h3[@class='catalog-card__name']/a");
-    protected By designerLink = By.xpath("//div[@class='catalog-card__designer']/a");
+    protected By nameLink = By.xpath("//p[@class='catalog-card__name']/a");
+    protected By designerLink = By.xpath("//p[@class='catalog-card__designer']/a");
     protected By catalogButton = By.xpath("//a[@href='/catalog/']");
 
     protected By nameHeader = By.xpath("//h1[@class='product-main-info__product-name']");
@@ -47,6 +47,9 @@ public class Base {
 
     protected By cartLocationButtonNY = By.xpath("//p[text()='New York']");
     protected By catalogLocationButtonUSA = By.xpath("//p[text()='United States']");
+
+    protected static String unavailableStorages = "(1006,1007)";
+
 
     public Base(WebDriver driver) {
         this.driver = driver;

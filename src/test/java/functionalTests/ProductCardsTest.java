@@ -2,10 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import basket.Basket;
-import catalog.Bracelets;
-import catalog.Earrings;
-import catalog.Necklaces;
-import catalog.Rings;
+import catalog.*;
 import collectionAndSet.Collection;
 import collectionAndSet.Set;
 import filters.Filters;
@@ -48,6 +45,7 @@ public class ProductCardsTest extends TestBase {
         collection = new Collection(driver);
         set = new Set(driver);
         designers = new Designers(driver);
+        navigation = new CatalogNavigation(driver);
     }
 
     /**
@@ -248,6 +246,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Кольца")
     public void checkCartButtonKoltsa() {
         String s = rings.getItemsIsOutOfStock().get(0);
+        System.out.println(getUrl + "catalog/koltsa/" + s);
         driver.get(getUrl + "catalog/koltsa/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
         assertEquals("этого украшения сейчас нет в наличии", noBasketHeader);
@@ -832,6 +831,9 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Браслеты")
     public void constructorBraslety() {
         driver.get(getUrl + "catalog/braslety/");
+        for (int i = 0; i < 3; i++){
+            navigation.clickOnShowMoreButton();
+        }
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
         collection.clickOnSecondItem();
@@ -843,6 +845,9 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Колье")
     public void constructorKole() {
         driver.get(getUrl + "catalog/kole/");
+        for (int i = 0; i < 3; i++){
+            navigation.clickOnShowMoreButton();
+        }
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
         collection.clickOnSecondItem();
@@ -854,6 +859,9 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Кольца")
     public void constructorKoltsa() {
         driver.get(getUrl + "catalog/koltsa/");
+        for (int i = 0; i < 3; i++){
+            navigation.clickOnShowMoreButton();
+        }
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
         collection.clickOnSecondItem();
@@ -880,7 +888,7 @@ public class ProductCardsTest extends TestBase {
             String designerName = basket.getNextDesignerHeader();
             String designerNameFromViewedProducts = productCard.getDesignerNameFromRecentlyViewedProducts();
             productList.add(designerName);
-            System.out.println(designerNameFromViewedProducts);
+//            System.out.println(designerNameFromViewedProducts);
             viewedProductList.add(designerNameFromViewedProducts);
             basket.clickOnCatalogButton();
         }

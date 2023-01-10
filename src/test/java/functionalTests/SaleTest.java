@@ -43,10 +43,7 @@ public class SaleTest extends TestBase {
         for (WebElement text : elements) {
             String s = text.getText();
             siteList.add(s.substring(0, 6));
-//            siteList.add(s);
         }
-        System.out.println(numberOnly);
-        //сравниваем размеры и содержание списков
         Assertions.assertAll(
                 () -> assertEquals(sqlSize, numberOnly),
                 () -> assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47)));

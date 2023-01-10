@@ -210,7 +210,7 @@ public class Material extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "JOIN currency ON item_sku_price.currency_id = currency.id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and storage_id in (1,2,3,4,5,6,7,1001,1002,1003,1004,1005) and filter_id = 155 and is_archive = 0 and item_sku_price.price != 0 " +
+                "and storage_id not in "+ unavailableStorages + " and filter_id = 155 and is_archive = 0 and item_sku_price.price != 0 " +
                 "and currency.code='RUB' and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and item_base_metal_group.id = 63 "
 //                +
 //                "group by item.id"

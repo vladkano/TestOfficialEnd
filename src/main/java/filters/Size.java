@@ -15,7 +15,7 @@ public class Size extends Base {
 
 
     private final By sizeButton = By.xpath("(//div[@class='filters__list-tab'])[4]");
-    private final By firstSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '14')])[3]");
+    private final By firstSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '14')])[2]");
     private final By secondSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '15.5')])[2]");
     private final By thirdSizeButton = By.xpath("(//div[@class='filters__item-left']/div[contains(text(), '16')])[3]");
     private final By universalSizeButton = By.xpath("//div[contains(text(), 'Universal')]");
@@ -212,9 +212,9 @@ public class Size extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 and storage_id !=1006 and storage_id !=1007 " +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
                 "and sku_characteristic_list.characteristic_id =1 and sku_characteristic_value.characteristic_value = '14' " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position ";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -245,9 +245,9 @@ public class Size extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 and storage_id !=1006 and storage_id !=1007 " +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
                 "and sku_characteristic_list.characteristic_id =1 and sku_characteristic_value.characteristic_value = '15.5' " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position ";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -278,7 +278,7 @@ public class Size extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 and balance > 0 " +
+                "and storage_id not in "+ unavailableStorages + " and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 and balance > 0 " +
                 "and designer.show = 1 and item_translations.locale = 'ru' and sku_characteristic_value.characteristic_value = 'Universal' " +
                 " group by item_catalog_position.position";
         try {

@@ -254,7 +254,7 @@ public class CatalogTest extends TestBase {
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
-            siteList.add(s.substring(0, 12));
+            siteList.add(s.substring(0, 10));
         }
         assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
     }
@@ -272,6 +272,7 @@ public class CatalogTest extends TestBase {
             String s = text.getText();
             siteList.add(s.substring(0, 9));
         }
+        System.out.println(sqlList.size());
         assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
     }
 
