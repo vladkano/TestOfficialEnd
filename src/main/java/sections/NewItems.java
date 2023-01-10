@@ -96,7 +96,7 @@ public class NewItems extends Base {
     public List<Integer> getPrice() {
         int price, discount;
         List<Integer> text = new ArrayList<>();
-        String query = "SELECT item_sku_price.price, (item_sku_price.price * discount/100) as discount from item_translations " +
+        String query = "SELECT item_sku_price.price, (item_sku_price.price * item_sku_price.discount/100) as discount from item_translations " +
                 "JOIN item ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +

@@ -82,8 +82,8 @@ public class ColorsAndCoverage extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 and storage_id !=1006 and storage_id !=1007 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "and item_color_value_translation.locale = 'ru' and item_color_value_translation.name = 'Зеленый' " +
                 "group by item_catalog_position.position";
         try {
@@ -116,7 +116,7 @@ public class ColorsAndCoverage extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and storage_id !=1006 and storage_id !=1007 " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "and item_color_value_translation.locale = 'ru' and item_color_value_translation.name = 'Синий' " +
                 "group by item_catalog_position.position";
         try {
@@ -149,7 +149,7 @@ public class ColorsAndCoverage extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and storage_id !=1006 and storage_id !=1007 " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "and item_color_value_translation.locale = 'ru' and item_color_value_translation.name = 'Мультицвет' " +
                 "group by item_catalog_position.position";
         try {

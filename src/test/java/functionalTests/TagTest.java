@@ -41,7 +41,7 @@ public class TagTest extends TestBase {
     @Description("Отображение тегов в каталогах: Браслеты")
     public void tagIsVisibleBracelets() {
         driver.get(getUrl + "catalog/braslety");
-        for (int i = 0; i < 2; i++){
+        for (int i = 0; i < 3; i++){
             navigation.clickOnShowMoreButton();
         }
         String firstTag = tag.getTag();

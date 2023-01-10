@@ -75,17 +75,16 @@ public class TestBase {
     protected Subscription subscription;
 
 
-    protected By numberOfItem = By.xpath("//h3[@class='catalog-card__name']");
-    protected By numberOfPictures = By.xpath("//span[@class='picture catalog-card__image']");
-    //span[contains(@class, 'picture catalog-card__image')]
+    protected By numberOfItem = By.xpath("//p[@class='catalog-card__name']");
+    protected By numberOfPictures = By.xpath("//span[@class='picture catalog-card__image lazy']");
     protected By linkOfCollection = By.xpath("//ul[@class='product-modification__variants']//a");
     protected By countOfBanners = By.xpath("//div[@class='banner index-page__banner']/a");
     protected By namesOfTrends = By.xpath("//h4");
     protected By numberOfDesigners = By.xpath("//li[@class='index-designers__name']/a");
     protected By trendBanners = By.xpath("//span[@class='picture']");
-    protected By nameLink = By.xpath("//h3[@class='catalog-card__name']/a");
+    protected By nameLink = By.xpath("//p[@class='catalog-card__name']/a");
     protected By showMore = By.xpath("//span[text()='Показать ещё']");
-    protected By designerName = By.xpath("//div[@class='catalog-card__designer']/a");
+    protected By designerName = By.xpath("//p[@class='catalog-card__designer']/a");
 
     protected By price = By.xpath("//div[@class='price-block__main']/span[1]");
     protected String phoneForAuthorization = "9501978905";

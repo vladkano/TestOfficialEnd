@@ -29,7 +29,7 @@ public class Pirsing extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 153 " +
-                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -58,7 +58,7 @@ public class Pirsing extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 153 and designer_translation.locale = 'ru' " +
-                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -77,7 +77,7 @@ public class Pirsing extends Base {
     public List<Integer> getPrice() {
         int price, discount;
         List<Integer> text = new ArrayList<>();
-        String query = "SELECT item_sku_price.price, (item_sku_price.price * discount/100) as discount from item_translations " +
+        String query = "SELECT item_sku_price.price, (item_sku_price.price * item_sku_price.discount/100) as discount from item_translations " +
                 "JOIN item ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
@@ -87,7 +87,7 @@ public class Pirsing extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 153 " +
-                "and storage_id !=1006 and storage_id !=1007 and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();

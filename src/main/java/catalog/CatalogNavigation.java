@@ -43,13 +43,12 @@ public class CatalogNavigation extends Base {
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
                 "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
-                "JOIN catalog ON item.catalog_id = catalog.id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and catalog_translation.locale = 'ru' and is_archive = 0 " +
-                "and storage_id !=1006 and storage_id !=1007 and item_sku_price.price != 0 and balance > 0 " +
-                "and filter_id in (149, 343, 348) and designer.show = 1 and item_translations.locale = 'ru'";
+                "and catalog_translation.locale = 'ru' and is_archive = 0 and catalog_translation.catalog_id = 5 " +
+                "and storage_id not in "+ unavailableStorages + " and item_sku_price.price != 0 and balance > 0 " +
+                "and filter_id in (155) and designer.show = 1 and item_translations.locale = 'ru'";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);

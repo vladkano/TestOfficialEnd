@@ -40,7 +40,7 @@ public class Jewelry extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 " +
                 "and balance > 0 and item_translations.locale = 'ru' and filter_id = 337 and designer.show = 1 " +
-                "and storage_id not in (1006, 1007)  " +
+                "and storage_id not in "+ unavailableStorages + " " +
                 "group by item.id " +
                 "order by item_catalog_position.position ";
         try {
@@ -73,7 +73,7 @@ public class Jewelry extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 " +
                 "and balance > 0 and designer_translation.locale = 'ru' and filter_id = 337 and designer.show = 1 " +
-                "and storage_id not in (1006, 1007) " +
+                "and storage_id not in "+ unavailableStorages + " " +
                 "group by item.id " +
                 "order by item_catalog_position.position ";
         try {
@@ -95,7 +95,7 @@ public class Jewelry extends Base {
     public List<Integer> getPrice() {
         int price, discount;
         List<Integer> text = new ArrayList<>();
-        String query = "SELECT item_sku_price.price, (item_sku_price.price * discount/100) as discount from item_sku_price " +
+        String query = "SELECT item_sku_price.price, (item_sku_price.price * item_sku_price.discount/100) as discount from item_sku_price " +
                 "JOIN item_sku ON item_sku_price.item_sku_id = item_sku.id " +
                 "JOIN item ON item.id = item_sku.item_id " +
                 "JOIN item_translations ON item.id = item_translations.item_id " +
@@ -104,7 +104,7 @@ public class Jewelry extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and storage_id not in (1006, 1007) " +
+                "and storage_id not in "+ unavailableStorages + " and is_archive = 0 and item_sku_price.price != 0 " +
                 "and balance > 0 and item_translations.locale = 'ru' and filter_id = 337 and designer.show = 1 " +
                 "group by item.id " +
                 "order by item_catalog_position.position ";

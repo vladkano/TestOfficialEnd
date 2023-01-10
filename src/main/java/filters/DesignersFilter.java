@@ -57,7 +57,7 @@ public class DesignersFilter extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 60 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and designer.name = 'Aleksandr Sinitsyn' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and designer.name = 'Aleksandr Sinitsyn' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -85,7 +85,7 @@ public class DesignersFilter extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 29 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and designer.name = 'Prosto Jewlry' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and designer.name = 'Prosto Jewlry' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -114,7 +114,7 @@ public class DesignersFilter extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 8 " +
-                "and storage_id not in (1006, 1007) and designer_translation.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and designer_translation.locale = 'ru' " +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and designer_translation.name = 'Avgvst' " +
                 "group by item_catalog_position.position";
         try {
