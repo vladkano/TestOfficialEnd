@@ -1,5 +1,6 @@
 package config;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseBuilder;
@@ -32,5 +33,9 @@ public class TestConfig {
         RestAssured.responseSpecification = responseSpecification;
     }
 
+    private static Dotenv dotenv = Dotenv.load();
+
+    public static final String SITE_URL = dotenv.get("SITE_URL");
+    public static final String COM_URL = dotenv.get("COM_URL");
 
 }

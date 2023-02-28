@@ -129,6 +129,7 @@ public class MainPage extends Base {
         this.clickOnSigInButton();
         this.typeLoginWithPhone(phone);
         this.clickOnGetPasswordButton();
+//        sleep(1000);
         return new MainPage(driver);
     }
 
@@ -143,8 +144,9 @@ public class MainPage extends Base {
         this.clickOnSigInButton();
         this.clickOnLoginByMailButton();
         this.typeLoginWithMail(email);
-        sleep(1000);
+//        sleep(1000);
         this.clickOnGetPasswordButton();
+        sleep(1000);
     }
 
 
@@ -194,10 +196,8 @@ public class MainPage extends Base {
 
     //    ------------SQL---------------------
     public String getPhonePassword() {
-        sleep(1000);
-        String code = null;
-        String query = "select code from user_authentication_code where id=(SELECT MAX(id) FROM user_authentication_code)";
-
+        String code = "";
+        String query = "select code from user_authentication_code where phone=" + phoneForRegistration;
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -212,7 +212,7 @@ public class MainPage extends Base {
 
     public String getPhonePasswordForLC() {
         sleep(1000);
-        String code = null;
+        String code = "";
         String query = "select code from user_authentication_code where user_id = 157982 and id=(SELECT MAX(id) FROM user_authentication_code)";
 
         try {

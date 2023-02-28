@@ -5,6 +5,7 @@ import baseForTests.TestBase;
 import basket.Basket;
 import catalog.Bracelets;
 import catalog.Earrings;
+import config.TestConfig;
 import filters.Filters;
 import filters.Size;
 import io.qameta.allure.Description;
@@ -31,7 +32,7 @@ public class ComTests extends TestBase {
     @BeforeEach
     public void setUp() {
         mainSetUp();
-        driver.get(getComUrl + "catalog");
+        driver.get(TestConfig.COM_URL + "catalog");
         basket = new Basket(driver);
         order = new Order(driver);
         filters = new Filters(driver);
@@ -230,8 +231,8 @@ public class ComTests extends TestBase {
         mainPage.sigInToComWithPhone("+7" + phoneForAuthorization);
         String heading = mainPage.getSigOutHeader();
         String code2 = mainPage.getPhonePassword();
-        String sigInHeader = mainPage.getSigInHeader();
         mainPage.sigInWithPassword(code2);
+        String sigInHeader = mainPage.getSigInHeader();
         Assertions.assertAll(
                 () -> assertEquals("sign in or sign up", heading),
                 () -> assertEquals("login", sigInHeader));
@@ -290,7 +291,7 @@ public class ComTests extends TestBase {
     @Description("Проверяем отображение 5 блоков(delivery, materials and features, jewelry care, " +
             "payments and returns, 6 months guarantee). Проверка по разделам: Серьги")
     public void checkingBlocksSergiCom() {
-        driver.get(getComUrl + "catalog/earrings/");
+        driver.get(TestConfig.COM_URL + "catalog/earrings/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
         String receivingCity = productCard.getReceivingCity();
@@ -328,7 +329,7 @@ public class ComTests extends TestBase {
     public void newItemsComButton() {
         newItems.clickToNewItemsButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getComUrl + "catalog/new/", url);
+        assertEquals(TestConfig.COM_URL + "catalog/new/", url);
     }
 
     /**
@@ -339,7 +340,7 @@ public class ComTests extends TestBase {
     public void earringsComButton() {
         earrings.clickToEarringsButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getComUrl + "catalog/earrings/", url);
+        assertEquals(TestConfig.COM_URL + "catalog/earrings/", url);
     }
 
     /**
@@ -350,7 +351,7 @@ public class ComTests extends TestBase {
     public void trendsComButton() {
         trends.clickToTrendsButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getComUrl + "trend/", url);
+        assertEquals(TestConfig.COM_URL + "trend/", url);
     }
 
     /**
@@ -361,7 +362,7 @@ public class ComTests extends TestBase {
     public void designersComButton() {
         designers.clickToDesignersButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getComUrl + "designers/", url);
+        assertEquals(TestConfig.COM_URL + "designers/", url);
     }
 
     /**
@@ -372,7 +373,7 @@ public class ComTests extends TestBase {
     public void saleComButton() {
         sale.clickToSaleButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getComUrl + "catalog/sale/", url);
+        assertEquals(TestConfig.COM_URL + "catalog/sale/", url);
     }
 
     /**
@@ -384,7 +385,7 @@ public class ComTests extends TestBase {
         wishlist.clickToWishListButton();
         String url = driver.getCurrentUrl();
         Assertions.assertAll(
-                () -> assertEquals(getComUrl + "wishlist/", url));
+                () -> assertEquals(TestConfig.COM_URL + "wishlist/", url));
     }
 
 
@@ -403,7 +404,7 @@ public class ComTests extends TestBase {
         String url = driver.getCurrentUrl();
         String header = wishlist.getWishListHeader();
         Assertions.assertAll(
-                () -> assertEquals(getComUrl + "wishlist/", url),
+                () -> assertEquals(TestConfig.COM_URL + "wishlist/", url),
                 () -> assertEquals("favorites", header));
     }
 

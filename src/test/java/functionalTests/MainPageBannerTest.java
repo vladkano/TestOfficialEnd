@@ -1,6 +1,7 @@
 package functionalTests;
 
 import baseForTests.TestBase;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import mainPage.MainPageBanner;
@@ -24,7 +25,7 @@ public class MainPageBannerTest extends TestBase {
     @BeforeEach
     public void setUp() {
         mainSetUp();
-        driver.get(getUrl);
+        driver.get(TestConfig.SITE_URL);
         banner = new MainPageBanner(driver);
     }
 

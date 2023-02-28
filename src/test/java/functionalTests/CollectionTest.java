@@ -3,9 +3,9 @@ package functionalTests;
 import baseForTests.TestBase;
 import catalog.*;
 import collectionAndSet.Collection;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -47,8 +47,11 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверяем первый товар, который входит в коллекцию: БД и сайт")
     public void countOfCollectionItems() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         List<String> namesItems = collection.getNamesItems();
+        for (int i = 0; i < 3; i++){
+            navigation.clickOnShowMoreButton();
+        }
         List<WebElement> site = driver.findElements(By.xpath("//li[@class='product-variant']/ancestor::div[@class='catalog-card__description']/p[@class='catalog-card__name']"));
         assertEquals(namesItems.get(0).substring(0,20), site.get(0).getAttribute("textContent").substring(0,20));
     }
@@ -60,7 +63,10 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(все изделия)")
     public void firstLinkOfItems() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
+        for (int i = 0; i < 3; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String href = collection.getHref();
         collection.clickOnFirstHref();
         String url = driver.getCurrentUrl();
@@ -73,8 +79,8 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Браслеты)")
     public void firstLinkOfBracelets() {
-        driver.get(getUrl + "catalog/braslety");
-        for (int i = 0; i < 3; i++){
+        driver.get(TestConfig.SITE_URL + "catalog/braslety");
+        for (int i = 0; i < 4; i++){
             navigation.clickOnShowMoreButton();
         }
         String href = collection.getHref();
@@ -89,7 +95,10 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Броши)")
     public void firstLinkOfBrooches() {
-        driver.get(getUrl + "catalog/broshi");
+        driver.get(TestConfig.SITE_URL + "catalog/broshi");
+        for (int i = 0; i < 1; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String href = collection.getHref();
         collection.clickOnFirstHref();
         String url = driver.getCurrentUrl();
@@ -102,7 +111,10 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Серьги)")
     public void firstLinkOfEarrings() {
-        driver.get(getUrl + "catalog/sergi");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi");
+        for (int i = 0; i < 2; i++){
+            navigation.clickOnShowMoreButton();
+        }
         String href = collection.getHref();
         collection.clickOnFirstHref();
         String url = driver.getCurrentUrl();
@@ -115,7 +127,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Колье)")
     public void firstLinkOfNecklaces() {
-        driver.get(getUrl + "catalog/kole");
+        driver.get(TestConfig.SITE_URL + "catalog/kole");
         for (int i = 0; i < 3; i++){
             navigation.clickOnShowMoreButton();
         }
@@ -131,7 +143,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Кольца)")
     public void firstLinkOfRings() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         for (int i = 0; i < 2; i++){
             navigation.clickOnShowMoreButton();
         }
@@ -148,7 +160,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка, что под товаром ссылки на другие товары коллекции не дублируются: Каталог(все изделия)")
     public void checkDoubleMain() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         checkDouble();
     }
 
@@ -158,7 +170,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка, что под товаром ссылки на другие товары коллекции не дублируются: Каталог(Браслеты)")
     public void checkDoubleBracelets() {
-        driver.get(getUrl + "catalog/braslety");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety");
         checkDouble();
     }
 
@@ -168,7 +180,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка, что под товаром ссылки на другие товары коллекции не дублируются: Каталог(Броши)")
     public void checkDoubleBrooches() {
-        driver.get(getUrl + "catalog/broshi");
+        driver.get(TestConfig.SITE_URL + "catalog/broshi");
         checkDouble();
     }
 
@@ -178,7 +190,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка, что под товаром ссылки на другие товары коллекции не дублируются: Каталог(Серьги)")
     public void checkDoubleEarrings() {
-        driver.get(getUrl + "catalog/sergi");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi");
         checkDouble();
     }
 
@@ -188,7 +200,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка, что под товаром ссылки на другие товары коллекции не дублируются: Каталог(Колье)")
     public void checkDoubleNecklaces() {
-        driver.get(getUrl + "catalog/kole");
+        driver.get(TestConfig.SITE_URL + "catalog/kole");
         checkDouble();
     }
 
@@ -198,7 +210,7 @@ public class CollectionTest extends TestBase {
     @Test
     @Description("Проверка, что под товаром ссылки на другие товары коллекции не дублируются: Каталог(Кольца)")
     public void checkDoubleRings() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         checkDouble();
     }
 

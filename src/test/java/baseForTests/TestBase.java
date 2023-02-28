@@ -14,11 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,6 +27,7 @@ import tags.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
@@ -89,6 +86,7 @@ public class TestBase {
     protected By price = By.xpath("//div[@class='price-block__main']/span[1]");
     protected String phoneForAuthorization = "9501978905";
     protected String phoneForOrder = "9126459328";
+    protected String phoneForRegistration = "9956766482";
     protected String testNameForOrder = "Александр Тест";
     protected String subscriptionName = "подписаться";
     protected String subscriptionHeader = "подписчики нашей рассылки выбирают самые классные украшения.";
@@ -120,7 +118,7 @@ public class TestBase {
                 waitFor(ExpectedConditions.visibilityOfElementLocated(locator),
                         (timeOutInSeconds.length > 0 ? timeOutInSeconds[0] : null));
                 break;
-            } catch (StaleElementReferenceException e) {
+            } catch (StaleElementReferenceException ignored) {
             }
             attempts++;
         }
@@ -158,16 +156,15 @@ public class TestBase {
 //        driver = new EdgeDriver(options);
         driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        Base.setDriver(driver);
     }
 
-
     //Бой
-    protected String getUrl = "https://poisondrop.ru/";
-    protected String getComUrl = "https://poisondrop.com/";
+//    protected String getUrl = "https://poisondrop.ru/";
+//    protected String getComUrl = "https://poisondrop.com/";
 
     //Тест(Сталинград)
 //    protected String getUrl = "https://ru.stalingrad.poisontestdrop.ru/";
+//    protected String getComUrl = "https://en.stalingrad.poisontestdrop.ru/";
 
     //Тест(Севастополь)
 //    protected String getUrl = "https://ru.sevastopol.poisontestdrop.ru/";

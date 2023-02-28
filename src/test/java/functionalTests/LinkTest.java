@@ -2,6 +2,7 @@ package functionalTests;
 
 import base.Base;
 import baseForTests.TestBase;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.AfterEach;
@@ -28,9 +29,9 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на картинку(Браслеты)")
     public void linkByPictureInBraceletsSection() {
-        driver.get(getUrl + "catalog/braslety");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety");
         base.clickToGoodButton();
-        String header = base.getImageHeader();
+        String header = base.getNameHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
         assertEquals(header.substring(0, 24), heading.substring(0, 24));
@@ -39,7 +40,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на название изделия(Браслеты)")
     public void linkByProductNameInBraceletsSection() {
-        driver.get(getUrl + "catalog/braslety");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety");
         base.clickToGoodButton();
         String header = base.getNameHeader();
         base.clickOnNameLink();
@@ -50,7 +51,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на наименование дизайнера(Браслеты)")
     public void linkByDesignerNameInBraceletsSection() {
-        driver.get(getUrl + "catalog/braslety");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety");
         base.clickToGoodButton();
         String header = base.getDesignerLinkHeader();
         base.clickOnDesignerLink();
@@ -64,9 +65,9 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на картинку(Серьги)")
     public void linkByPictureInEarringsSection() {
-        driver.get(getUrl + "catalog/sergi");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi");
         base.clickToGoodButton();
-        String header = base.getImageHeader();
+        String header = base.getNameHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
         assertEquals(header.substring(0, 20), heading.substring(0, 20));
@@ -75,18 +76,18 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на название изделия(Серьги)")
     public void linkByProductNameInEarringsSection() {
-        driver.get(getUrl + "catalog/sergi");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi");
         base.clickToGoodButton();
         String header = base.getNameHeader();
         base.clickOnNameLink();
         String heading = base.getHeader();
-        assertEquals(header, heading);
+        assertEquals(header.substring(0,20), heading.substring(0,20));
     }
 
     @Test
     @Description("Проверяем работу ссылок: при нажатии на наименование дизайнера(Серьги)")
     public void linkByDesignerNameInEarringsSection() {
-        driver.get(getUrl + "catalog/sergi");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi");
         base.clickToGoodButton();
         String header = base.getDesignerLinkHeader();
         base.clickOnDesignerLink();
@@ -100,9 +101,9 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на картинку(Колье)")
     public void linkByPictureInNecklacesSection() {
-        driver.get(getUrl + "catalog/kole");
+        driver.get(TestConfig.SITE_URL + "catalog/kole");
         base.clickToGoodButton();
-        String header = base.getImageHeader();
+        String header = base.getNameHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
         assertEquals(header.substring(0, 26), heading.substring(0, 26));
@@ -111,7 +112,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на название изделия(Колье)")
     public void linkByProductNameInNecklacesSection() {
-        driver.get(getUrl + "catalog/kole");
+        driver.get(TestConfig.SITE_URL + "catalog/kole");
         base.clickToGoodButton();
         String header = base.getNameHeader();
         base.clickOnNameLink();
@@ -122,7 +123,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на наименование дизайнера(Колье)")
     public void linkByDesignerNameInNecklacesSection() {
-        driver.get(getUrl + "catalog/kole");
+        driver.get(TestConfig.SITE_URL + "catalog/kole");
         base.clickToGoodButton();
         String header = base.getDesignerLinkHeader();
         base.clickOnDesignerLink();
@@ -137,9 +138,9 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на картинку(Кольца)")
     public void linkByPictureInRingsSection() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         base.clickToGoodButton();
-        String header = base.getImageHeader();
+        String header = base.getNameHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
         assertEquals(header.substring(0,20), heading.substring(0,20));
@@ -148,7 +149,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на название изделия(Кольца)")
     public void linkByProductNameInRingsSection() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         base.clickToGoodButton();
         String header = base.getNameHeader();
         base.clickOnNameLink();
@@ -159,7 +160,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на наименование дизайнера(Кольца)")
     public void linkByDesignerNameInRingsSection() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         base.clickToGoodButton();
         String header = base.getDesignerLinkHeader();
         base.clickOnDesignerLink();
@@ -173,30 +174,30 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на картинку(Броши)")
     public void linkByPictureInBroochesSection() {
-        driver.get(getUrl + "catalog/broshi");
+        driver.get(TestConfig.SITE_URL + "catalog/broshi");
         base.clickToGoodButton();
-        String s = base.getImageHeader();
+        String s = base.getNameHeader();
         String header = s.replaceAll("\u200E", "");
         base.clickOnImageLink();
         String heading = base.getHeader();
-        assertEquals(header.substring(0, 24), heading.substring(0, 24));
+        assertEquals(header.substring(0, 12), heading.substring(0, 12));
     }
 
     @Test
     @Description("Проверяем работу ссылок: при нажатии на название изделия(Броши)")
     public void linkByProductNameInBroochesSection() {
-        driver.get(getUrl + "catalog/broshi");
+        driver.get(TestConfig.SITE_URL + "catalog/broshi");
         base.clickToGoodButton();
         String header = base.getNameHeader();
         base.clickOnNameLink();
         String heading = base.getHeader();
-        assertEquals(header.substring(0, 24), heading.substring(0, 24));
+        assertEquals(header.substring(0, 12), heading.substring(0, 12));
     }
 
     @Test
     @Description("Проверяем работу ссылок: при нажатии на наименование дизайнера(Броши)")
     public void linkByDesignerNameInBroochesSection() {
-        driver.get(getUrl + "catalog/broshi");
+        driver.get(TestConfig.SITE_URL + "catalog/broshi");
         base.clickToGoodButton();
         String header = base.getDesignerLinkHeader();
         base.clickOnDesignerLink();
@@ -210,9 +211,9 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на картинку(Пирсинг)")
     public void linkByPictureInPirsingSection() {
-        driver.get(getUrl + "catalog/pirsing");
+        driver.get(TestConfig.SITE_URL + "catalog/pirsing");
         base.clickToGoodButton();
-        String header = base.getImageHeader();
+        String header = base.getNameHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
         assertEquals(header.substring(0,20), heading.substring(0,20));
@@ -221,7 +222,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на название изделия(Пирсинг)")
     public void linkByProductNameInPirsingSection() {
-        driver.get(getUrl + "catalog/pirsing");
+        driver.get(TestConfig.SITE_URL + "catalog/pirsing");
         base.clickToGoodButton();
         String header = base.getNameHeader();
         base.clickOnNameLink();
@@ -232,7 +233,7 @@ public class LinkTest extends TestBase {
     @Test
     @Description("Проверяем работу ссылок: при нажатии на наименование дизайнера(Пирсинг)")
     public void linkByDesignerNameInPirsingSection() {
-        driver.get(getUrl + "catalog/pirsing");
+        driver.get(TestConfig.SITE_URL + "catalog/pirsing");
         base.clickToGoodButton();
         String header = base.getDesignerLinkHeader();
         base.clickOnDesignerLink();

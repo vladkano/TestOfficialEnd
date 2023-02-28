@@ -36,7 +36,7 @@ public class Necklaces extends Base {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 name = resultSet.getString("name");
-//                System.out.println(name);
+                System.out.println(name);
                 text.add(name.substring(0, 8).toLowerCase());
             }
         } catch (SQLException e) {
@@ -219,7 +219,7 @@ public class Necklaces extends Base {
     public List<String> getCodes() {
         String code;
         List<String> text = new ArrayList<>();
-        String query = "SELECT code from item " +
+        String query = "SELECT item.code from item " +
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +

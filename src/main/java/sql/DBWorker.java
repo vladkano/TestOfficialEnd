@@ -52,19 +52,19 @@ public class DBWorker {
 
         //Сталинград
 //        try {
-//        String strSshUser = "poisondrop"; // SSH loging username
+//        String strSshUser = "root"; // SSH loging username
 //        String strSshHost = "77.223.123.139";
 //        String strRemoteHost = "localhost"; // hostname or ip of your database server
 //        int nRemotePort = 3306; // remote port number of your database
 //        String strDbUser = "poisondrop"; // database loging username
-//        String strDbPassword = "KVOqtATBqnHqCHb0q0"; // database login password
+//        String strDbPassword = "vuVU76hjsdjh3297G"; // database login password
 //
 //        final JSch jsch = new JSch();
 //        session = jsch.getSession(strSshUser, strSshHost, 22);
 //        final Properties config = new Properties();
 //        config.put("StrictHostKeyChecking", "no");
 //        config.put("PreferredAuthentications", "password");
-//        session.setPassword("Pr7Lx2XKHTgHCSJSHG");
+//        session.setPassword("P0VJvF3qSNSW");
 //        session.setConfig(config);
 //        session.connect();
 //        int forwardedPort = session.setPortForwardingL(0, strRemoteHost, nRemotePort);

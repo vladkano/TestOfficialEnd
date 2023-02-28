@@ -12,7 +12,7 @@ import java.sql.Statement;
 public class CatalogNavigation extends Base {
 
     By showMoreButton = By.xpath("//div[@class='catalog__more']/button/span");
-    By showMoreTrendsButton = By.xpath("//div[@class='trends-page__more js-more-trend-btn-container']/button/span");
+    By showMoreTrendsButton = By.xpath("//button[contains(text(), 'показать ещё')]");
     By numberOfPages = By.xpath("//button[@class='pagination__link'][6]");
 
 

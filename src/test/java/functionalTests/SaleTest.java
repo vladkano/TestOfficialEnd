@@ -1,6 +1,7 @@
 package functionalTests;
 
 import baseForTests.TestBase;
+import config.TestConfig;
 import filters.Filters;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -23,7 +24,7 @@ public class SaleTest extends TestBase {
     @BeforeEach
     public void setUp() {
         mainSetUp();
-        driver.get(getUrl + "catalog/sale/");
+        driver.get(TestConfig.SITE_URL + "catalog/sale/");
         sale = new Sale(driver);
         filters = new Filters(driver);
     }

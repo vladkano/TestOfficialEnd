@@ -60,7 +60,7 @@ public class Basket extends Base {
     public void clickToItemButton() {
         String firstItem = findFirstItemMoreThan5000();
         ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();", driver.findElement(By.xpath("//a[contains(text()," + "'" + firstItem.substring(0,20) + "')]")));
+                "arguments[0].click();", driver.findElement(By.xpath("//a[contains(text()," + "'" + firstItem.substring(0,15) + "')]")));
     }
 
 
@@ -300,7 +300,7 @@ public class Basket extends Base {
             e.printStackTrace();
         }
         Integer firstItem = findFirstItemIdMoreThan5000();
-//        System.out.println(hashMap.get(firstItem));
+//        System.out.println(hashMap);
         return hashMap.get(firstItem);
     }
 

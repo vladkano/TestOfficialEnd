@@ -2,6 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import basket.Basket;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import mainPage.MainPage;
@@ -27,7 +28,7 @@ public class PersonalAreaTest extends TestBase {
         basket = new Basket(driver);
         mainPage = new MainPage(driver);
         personalData = new PersonalData(driver);
-        driver.get(getUrl);
+        driver.get(TestConfig.SITE_URL);
         mainPage.sigInWithPhone(phoneForAuthorization);
         String codeToLogin = mainPage.getPhonePasswordForLC();
         mainPage.sigInWithPassword(codeToLogin);

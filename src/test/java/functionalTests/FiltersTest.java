@@ -1,6 +1,7 @@
 package functionalTests;
 
 import baseForTests.TestBase;
+import config.TestConfig;
 import filters.*;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -22,10 +23,13 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 @Epic("Тесты фильтров")
 public class FiltersTest extends TestBase {
 
+    private final By leftPriceSliderDot = By.xpath("//div[@class='price-slider__dot']");
+
+
     @BeforeEach
     public void setUp() {
         mainSetUp();
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         filters = new Filters(driver);
         material = new Material(driver);
         colorsAndCoverage = new ColorsAndCoverage(driver);
@@ -334,12 +338,10 @@ public class FiltersTest extends TestBase {
         filters.clickToFilterButton();
         String firstPriceRangeRight = filters.getPriceRangeRight();
         Actions act = new Actions(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='vue-slider-dot-handle']")));
-        WebElement priceBarRight = driver.findElement(By.xpath("(//div[@class='vue-slider-dot-handle'])[2]"));
+        waitForVisibilityOf(leftPriceSliderDot, 5);
+        WebElement priceBarRight = driver.findElement(By.xpath("(//div[@class='price-slider__dot'])[2]"));
         Actions actionsPriceBarRight = act.dragAndDropBy(priceBarRight, -263, 0);
         actionsPriceBarRight.build().perform();
-        sleep(1000);
         String secondPriceRangeRight = filters.getPriceRangeRight();
         assertNotEquals(firstPriceRangeRight, secondPriceRangeRight);
     }
@@ -354,13 +356,11 @@ public class FiltersTest extends TestBase {
     public void leftBarWithPrice() {
         filters.clickToFilterButton();
         String firstPriceRangeLeft = filters.getPriceRangeLeft();
+        waitForVisibilityOf(leftPriceSliderDot, 5);
+        WebElement priceBarLeft = driver.findElement(leftPriceSliderDot);
         Actions act = new Actions(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='vue-slider-dot-handle']")));
-        WebElement priceBarLeft = driver.findElement(By.xpath("//div[@class='vue-slider-dot-handle']"));
         Actions actionsPriceBarLeft = act.dragAndDropBy(priceBarLeft, 100, 0);
         actionsPriceBarLeft.build().perform();
-        sleep(1000);
         String secondPriceRangeLeft = filters.getPriceRangeLeft();
         assertNotEquals(firstPriceRangeLeft, secondPriceRangeLeft);
     }

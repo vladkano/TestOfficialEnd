@@ -64,7 +64,7 @@ public class Bracelets extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_translation.catalog_id in (3,18) and catalog_translation.locale = 'ru' and is_archive = 0 " +
-                "and filter_id in (155) and designer_translation.locale = 'ru' " +
+                "and item_sku_price.price != 0 and filter_id in (155) " +
                 "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_sku_price.price != 0 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
@@ -209,7 +209,7 @@ public class Bracelets extends Base {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 url = resultSet.getString("url");
-                System.out.println(url);
+//                System.out.println(url);
                 listOfUrl.add(url);
             }
         } catch (SQLException e) {
@@ -222,7 +222,7 @@ public class Bracelets extends Base {
     public List<String> getCodes() {
         String code;
         List<String> text = new ArrayList<>();
-        String query = "SELECT code from item " +
+        String query = "SELECT item.code from item " +
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +

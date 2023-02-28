@@ -5,6 +5,7 @@ import basket.Basket;
 import catalog.*;
 import collectionAndSet.Collection;
 import collectionAndSet.Set;
+import config.TestConfig;
 import filters.Filters;
 import filters.Size;
 import io.qameta.allure.Description;
@@ -58,7 +59,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Переход в раздел колец, в фильтре выбираем кольцо, далее переходим в карточку товара и переключаемся между размерами, далее" +
             " смотрим чтобы менялся размер, кладем в корзину и проверяем что верный размер попал в корзину(С 14 размером)")
     public void changeSize14() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         basket.clickToOkButton();
         filters.clickToFilterButton();
         size.clickToSizeButton();
@@ -87,7 +88,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Переход в раздел колец, в фильтре выбираем кольцо, далее переходим в карточку товара и переключаемся между размерами, далее" +
             " смотрим чтобы менялся размер, кладем в корзину и проверяем что верный размер попал в корзину(С 15.5 размером)")
     public void changeSize155() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         basket.clickToOkButton();
         filters.clickToFilterButton();
         size.clickToSizeButton();
@@ -116,7 +117,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Переход в раздел колец, в фильтре выбираем кольцо, далее переходим в карточку товара и переключаемся между размерами, далее" +
             " смотрим чтобы менялся размер, кладем в корзину и проверяем что верный размер попал в корзину(С 16 размером)")
     public void changeSize16() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         basket.clickToOkButton();
         filters.clickToFilterButton();
         size.clickToSizeButton();
@@ -146,7 +147,7 @@ public class ProductCardsTest extends TestBase {
 //    @Description("Проверяем, что если товар в наличии только на виртуальном складе, то в карточке товара должна быть плашка 'Доставка от 3-5 дней'")
 //    public void firstCheckPlate() {
 //        search = new Search(driver);
-//        driver.get(getUrl + "catalog");
+//        driver.get(TestConfig.SITE_URL + "catalog");
 //        basket.clickToOkButton();
 //        String firstItem = size.findItem35days();
 //        search.getSearch(firstItem + "\n");
@@ -163,7 +164,7 @@ public class ProductCardsTest extends TestBase {
 //    @Description("Проверяем, что если товар в наличии только на складе в Питере, то в карточке товара должна быть плашка 'Доставка от 7 дней'")
 //    public void secondCheckPlate() {
 //        search = new Search(driver);
-//        driver.get(getUrl + "catalog");
+//        driver.get(TestConfig.SITE_URL + "catalog");
 //        basket.clickToOkButton();
 //        String secondItem = size.findItem7days();
 //        search.getSearch(secondItem + "\n");
@@ -178,7 +179,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение картинок в карточке товара по разделам: Серьги")
     public void checkPictureListSergi() {
-        driver.get(getUrl + "catalog/sergi");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi");
         size.clickOnImageLink();
         int size = picture.getPicturesList().size();
         assertNotEquals(0, size);
@@ -187,7 +188,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение картинок в карточке товара по разделам: Браслеты")
     public void checkPictureListBraslety() {
-        driver.get(getUrl + "catalog/braslety");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety");
         size.clickOnImageLink();
         int size = picture.getPicturesList().size();
         assertNotEquals(0, size);
@@ -196,7 +197,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение картинок в карточке товара по разделам: Кольца")
     public void checkPictureListKoltsa() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         size.clickOnImageLink();
         int size = picture.getPicturesList().size();
         assertNotEquals(0, size);
@@ -205,7 +206,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение картинок в карточке товара по разделам: Колье")
     public void checkPictureListKole() {
-        driver.get(getUrl + "catalog/kole");
+        driver.get(TestConfig.SITE_URL + "catalog/kole");
         size.clickOnImageLink();
         int size = picture.getPicturesList().size();
         System.out.println(size);
@@ -219,7 +220,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Серьги")
     public void checkCartButtonSergi() {
         String s = earrings.getItemsIsOutOfStock().get(0);
-        driver.get(getUrl + "catalog/sergi/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
         assertEquals("этого украшения сейчас нет в наличии", noBasketHeader);
     }
@@ -228,7 +229,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Браслеты")
     public void checkCartButtonBraslety() {
         String s = bracelets.getItemsIsOutOfStock().get(0);
-        driver.get(getUrl + "catalog/braslety/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
         assertEquals("этого украшения сейчас нет в наличии", noBasketHeader);
     }
@@ -237,7 +238,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Колье")
     public void checkCartButtonKole() {
         String s = necklaces.getItemsIsOutOfStock().get(0);
-        driver.get(getUrl + "catalog/kole/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/kole/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
         assertEquals("этого украшения сейчас нет в наличии", noBasketHeader);
     }
@@ -246,8 +247,8 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем если товара нет в наличии, то кнопки 'в корзину' быть не должно. Проверка по разделам: Кольца")
     public void checkCartButtonKoltsa() {
         String s = rings.getItemsIsOutOfStock().get(0);
-        System.out.println(getUrl + "catalog/koltsa/" + s);
-        driver.get(getUrl + "catalog/koltsa/" + s);
+        System.out.println(TestConfig.SITE_URL + "catalog/koltsa/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/" + s);
         String noBasketHeader = basket.getNoBasketHeader();
         assertEquals("этого украшения сейчас нет в наличии", noBasketHeader);
     }
@@ -263,7 +264,7 @@ public class ProductCardsTest extends TestBase {
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Серьги")
     public void checkSetWindowSergi() {
         String s = earrings.getItemsFromSet().get(0);
-        driver.get(getUrl + "catalog/sergi/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/" + s);
         set.getSetWindow();
         String setHeader = set.getSetHeader();
         String href = set.getHrefFirstItemFromSet();
@@ -280,7 +281,7 @@ public class ProductCardsTest extends TestBase {
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Браслеты")
     public void checkSetWindowBraslety() {
         String s = bracelets.getItemsFromSet().get(0);
-        driver.get(getUrl + "catalog/braslety/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/" + s);
         set.getSetWindow();
         String setHeader = set.getSetHeader();
         String href = set.getHrefFirstItemFromSet();
@@ -297,7 +298,7 @@ public class ProductCardsTest extends TestBase {
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Колье")
     public void checkSetWindowKole() {
         String s = necklaces.getItemsFromSet().get(0);
-        driver.get(getUrl + "catalog/kole/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/kole/" + s);
         set.getSetWindow();
         String setHeader = set.getSetHeader();
         String href = set.getHrefFirstItemFromSet();
@@ -314,7 +315,7 @@ public class ProductCardsTest extends TestBase {
             "+ кликаем на первый товар из блока и смотрим правильно ли совершается переход на страницу товара. Проверка по разделам: Кольца")
     public void checkSetWindowKoltsa() {
         String s = rings.getItemsFromSet().get(0);
-        driver.get(getUrl + "catalog/koltsa/" + s);
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/" + s);
         set.getSetWindow();
         String setHeader = set.getSetHeader();
         String href = set.getHrefFirstItemFromSet();
@@ -339,7 +340,7 @@ public class ProductCardsTest extends TestBase {
 //    public void checkBasketSergi() {
 //        earrings = new Earrings(driver);
 //        String s = earrings.getItemsFromSet().get(0);
-//        driver.get(getUrl + "catalog/sergi/" + s);
+//        driver.get(TestConfig.SITE_URL + "catalog/sergi/" + s);
 //        basket.clickToOkButton();
 //        basket.clickToSetItemInBasketButton();
 //        String number = basket.getBasketNumber();
@@ -351,7 +352,7 @@ public class ProductCardsTest extends TestBase {
 //    public void checkBasketBraslety() {
 //        bracelets = new Bracelets(driver);
 //        String s = bracelets.getItemsFromSet().get(0);
-//        driver.get(getUrl + "catalog/braslety/" + s);
+//        driver.get(TestConfig.SITE_URL + "catalog/braslety/" + s);
 //        basket.clickToOkButton();
 //        basket.clickToSetItemInBasketButton();
 //        String number = basket.getBasketNumber();
@@ -363,7 +364,7 @@ public class ProductCardsTest extends TestBase {
 //    public void checkBasketKole() {
 //        necklaces = new Necklaces(driver);
 //        String s = necklaces.getItemsFromSet().get(0);
-//        driver.get(getUrl + "catalog/kole/" + s);
+//        driver.get(TestConfig.SITE_URL + "catalog/kole/" + s);
 //        basket.clickToOkButton();
 //        basket.clickToSetItemInBasketButton();
 //        String number = basket.getBasketNumber();
@@ -376,7 +377,7 @@ public class ProductCardsTest extends TestBase {
 //        set = new Set(driver);
 //        rings = new Rings(driver);
 //        String s = rings.getItemsFromSet().get(0);
-//        driver.get(getUrl + "catalog/koltsa/" + s);
+//        driver.get(TestConfig.SITE_URL + "catalog/koltsa/" + s);
 //        basket.clickToOkButton();
 //        basket.clickToSetItemInBasketButton();
 //        String number = basket.getBasketNumber();
@@ -390,7 +391,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Серьги")
     public void checkingDesignersBlockSergi() {
-        driver.get(getUrl + "catalog/sergi/");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
         String photoAlt = designers.getDesignerPhotoAlt();
@@ -407,7 +408,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Браслеты")
     public void checkingDesignersBlockBraslety() {
-        driver.get(getUrl + "catalog/braslety/");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
         String photoAlt = designers.getDesignerPhotoAlt();
@@ -423,7 +424,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Колье")
     public void checkingDesignersBlockKole() {
-        driver.get(getUrl + "catalog/kole/");
+        driver.get(TestConfig.SITE_URL + "catalog/kole/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
         String photoAlt = designers.getDesignerPhotoAlt();
@@ -440,7 +441,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение блока дизайнеры(фото, название, описание). Проверка по разделам: Кольца")
     public void checkingDesignersBlockKoltsa() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         String text = designers.getDescriptions();
         designers.clickOnItemName();
         String photoAlt = designers.getDesignerPhotoAlt();
@@ -460,7 +461,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Серьги")
     public void buttonForNavigatingToDesignerProductsSergi() {
-        driver.get(getUrl + "catalog/sergi/");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
         designers.clickToDesignerButton();
@@ -471,7 +472,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Браслеты")
     public void buttonForNavigatingToDesignerProductsBraslety() {
-        driver.get(getUrl + "catalog/braslety/");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
         designers.clickToDesignerButton();
@@ -482,7 +483,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Колье")
     public void buttonForNavigatingToDesignerProductsKole() {
-        driver.get(getUrl + "catalog/kole/");
+        driver.get(TestConfig.SITE_URL + "catalog/kole/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
         designers.clickToDesignerButton();
@@ -493,7 +494,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем работу кнопки перехода к товарам дизайнера. Проверка по разделам: Кольца")
     public void buttonForNavigatingToDesignerProductsKoltsa() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         String designerNameBeforeClick = designers.getDescriptions();
         designers.clickOnItemName();
         designers.clickToDesignerButton();
@@ -508,7 +509,7 @@ public class ProductCardsTest extends TestBase {
 //    @Test
 //    public void checkingShopTheLookBlockSergi() {
 //        shopTheLook = new ShopTheLook(driver);
-//        driver.get(getUrl + "catalog/sergi/rockah_bronzovye_sergi_s_barocnymi_zemcuzinami/?pokritie=zoloto");
+//        driver.get(TestConfig.SITE_URL + "catalog/sergi/rockah_bronzovye_sergi_s_barocnymi_zemcuzinami/?pokritie=zoloto");
 //        String shopTheLookHeader = shopTheLook.getShopTheLookHeader();
 //        shopTheLook.clickOnShopTheLookPhoto();
 //        String frisbuyMarker = shopTheLook.getFrisbuyMarker();
@@ -520,7 +521,7 @@ public class ProductCardsTest extends TestBase {
 //    @Test
 //    public void checkingShopTheLookBlockBraslety() {
 //        shopTheLook = new ShopTheLook(driver);
-//        driver.get(getUrl + "catalog/braslety/osnovnaya_xarakteristika_razmer_19_74");
+//        driver.get(TestConfig.SITE_URL + "catalog/braslety/osnovnaya_xarakteristika_razmer_19_74");
 //        String shopTheLookHeader = shopTheLook.getShopTheLookHeader();
 //        shopTheLook.clickOnShopTheLookPhoto();
 //        String frisbuyMarker = shopTheLook.getFrisbuyMarker();
@@ -532,7 +533,7 @@ public class ProductCardsTest extends TestBase {
 //    @Test
 //    public void checkingShopTheLookBlockKole() {
 //        shopTheLook = new ShopTheLook(driver);
-//        driver.get(getUrl + "catalog/kole/crystalline_pozolocennoe_kole_cep_s_kamnyami/?stone=zelyonyi-zad");
+//        driver.get(TestConfig.SITE_URL + "catalog/kole/crystalline_pozolocennoe_kole_cep_s_kamnyami/?stone=zelyonyi-zad");
 //        String shopTheLookHeader = shopTheLook.getShopTheLookHeader();
 //        shopTheLook.clickOnShopTheLookPhoto();
 //        String frisbuyMarker = shopTheLook.getFrisbuyMarker();
@@ -544,7 +545,7 @@ public class ProductCardsTest extends TestBase {
 //    @Test
 //    public void checkingShopTheLookBlockKoltsa() {
 //        shopTheLook = new ShopTheLook(driver);
-//        driver.get(getUrl + "catalog/koltsa/kolco_s_lunnym_kamnem_ogranki_baget_16");
+//        driver.get(TestConfig.SITE_URL + "catalog/koltsa/kolco_s_lunnym_kamnem_ogranki_baget_16");
 //        String shopTheLookHeader = shopTheLook.getShopTheLookHeader();
 //        shopTheLook.clickOnShopTheLookPhoto();
 //        String frisbuyMarker = shopTheLook.getFrisbuyMarker();
@@ -571,7 +572,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Серьги")
     public void checkingBlocksSergi() {
-        driver.get(getUrl + "catalog/sergi/");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
         String receivingCity = productCard.getReceivingCity();
@@ -621,7 +622,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Браслеты")
     public void checkingBlocksBraslety() {
-        driver.get(getUrl + "catalog/braslety/");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
         String receivingCity = productCard.getReceivingCity();
@@ -671,7 +672,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Колье")
     public void checkingBlocksKole() {
-        driver.get(getUrl + "catalog/kole/");
+        driver.get(TestConfig.SITE_URL + "catalog/kole/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
         String receivingCity = productCard.getReceivingCity();
@@ -721,7 +722,7 @@ public class ProductCardsTest extends TestBase {
     @Description("Проверяем отображение 6 блоков(ПОЛУЧЕНИЕ, СОСТАВ И ХАРАКТЕРИСТИКИ, НАЛИЧИЕ В МАГАЗИНАХ, " +
             "'ОПЛАТА, ВОЗВРАТ', ГАРАНТИЯ 6 МЕСЯЦЕВ, УХОД ЗА УКРАШЕНИЯМИ). Проверка по разделам: Кольца")
     public void checkingBlocksKoltsa() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         size.clickOnImageLink();
         String receivingText = productCard.getReceivingText();
         String receivingCity = productCard.getReceivingCity();
@@ -774,7 +775,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Серьги")
     public void checkingCodeSergi() {
-        driver.get(getUrl + "catalog/sergi/");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/");
         earrings.clickOnNameLink();
         String codeFromBase = earrings.getCodes().get(0);
         String codeFromSite = productCard.getItemCode();
@@ -784,7 +785,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Браслеты")
     public void checkingCodeBraslety() {
-        driver.get(getUrl + "catalog/braslety/");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/");
         bracelets.clickOnNameLink();
         String codeFromBase = bracelets.getCodes().get(0);
         String codeFromSite = productCard.getItemCode();
@@ -794,7 +795,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Колье")
     public void checkingCodeKole() {
-        driver.get(getUrl + "catalog/kole/");
+        driver.get(TestConfig.SITE_URL + "catalog/kole/");
         necklaces.clickOnNameLink();
         String codeFromBase = necklaces.getCodes().get(0);
         String codeFromSite = productCard.getItemCode();
@@ -804,7 +805,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Кольца")
     public void checkingCodeKoltsa() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         rings.clickOnNameLink();
         String codeFromBase = rings.getCodes().get(0);
         String codeFromSite = productCard.getItemCode();
@@ -819,7 +820,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Серьги")
     public void constructorSergi() {
-        driver.get(getUrl + "catalog/sergi/");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/");
         collection.clickOnFirstHref();
         String firstName = basket.getHeader();
         collection.clickOnSecondItem();
@@ -830,7 +831,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Браслеты")
     public void constructorBraslety() {
-        driver.get(getUrl + "catalog/braslety/");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/");
         for (int i = 0; i < 3; i++){
             navigation.clickOnShowMoreButton();
         }
@@ -844,7 +845,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Колье")
     public void constructorKole() {
-        driver.get(getUrl + "catalog/kole/");
+        driver.get(TestConfig.SITE_URL + "catalog/kole/");
         for (int i = 0; i < 3; i++){
             navigation.clickOnShowMoreButton();
         }
@@ -858,7 +859,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем отображение верного кода изделия в карточке товара. Проверка по разделам: Кольца")
     public void constructorKoltsa() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         for (int i = 0; i < 3; i++){
             navigation.clickOnShowMoreButton();
         }
@@ -880,7 +881,7 @@ public class ProductCardsTest extends TestBase {
     public void checkRecentlyViewedProductsDesignerName() {
         List<String> productList = new ArrayList<>();
         List<String> viewedProductList = new ArrayList<>();
-        driver.get(getUrl + "catalog");
+        driver.get(TestConfig.SITE_URL + "catalog");
         for (int i = 0; i <= 4; i++) {
             List<WebElement> elements = driver.findElements(nameLink);
             ((JavascriptExecutor) driver).executeScript(
@@ -908,7 +909,7 @@ public class ProductCardsTest extends TestBase {
     public void checkRecentlyViewedProductsPrice() {
         List<String> listOfPrices = new ArrayList<>();
         List<String> viewedListOfPrices = new ArrayList<>();
-        driver.get(getUrl + "catalog");
+        driver.get(TestConfig.SITE_URL + "catalog");
         for (int i = 0; i <= 4; i++) {
             List<WebElement> elements = driver.findElements(nameLink);
             ((JavascriptExecutor) driver).executeScript(
@@ -928,7 +929,7 @@ public class ProductCardsTest extends TestBase {
     @Test
     @Description("Проверяем секцию 'Недавно просмотренных товаров'. Смотрим 21 товар и проверяем, что среди просмотренных общее кол-во равно 20")
     public void productsNoMoreThan20() {
-        driver.get(getUrl + "catalog");
+        driver.get(TestConfig.SITE_URL + "catalog");
         for (int i = 0; i <= 20; i++) {
             List<WebElement> elements = driver.findElements(nameLink);
             ((JavascriptExecutor) driver).executeScript(

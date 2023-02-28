@@ -1,5 +1,6 @@
 package base;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,9 +16,16 @@ import java.util.List;
 public class Base {
 
     protected static DBWorker worker = new DBWorker();
+    private static Dotenv dotenv = Dotenv.load();
+
     protected WebDriver driver;
+
+
+
+
+    public static final String mainPageUrl = dotenv.get("SITE_URL");
     //Бой
-    protected static String mainPageUrl = "https://poisondrop.ru/";
+//    protected static String mainPageUrl = SITE_URL;
 
     //Тест(Сталинград)
 //    protected static String mainPageUrl = "https://ru.stalingrad.poisontestdrop.ru/";
@@ -49,6 +57,7 @@ public class Base {
     protected By catalogLocationButtonUSA = By.xpath("//p[text()='United States']");
 
     protected static String unavailableStorages = "(1006,1007)";
+    protected String phoneForRegistration = "+79956766482";
 
 
     public Base(WebDriver driver) {

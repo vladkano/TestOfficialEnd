@@ -2,6 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import catalog.CatalogNavigation;
+import config.TestConfig;
 import filters.Filters;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -23,7 +24,7 @@ public class SectionsTest extends TestBase {
     @BeforeEach
     public void setUp() {
         mainSetUp();
-        driver.get(getUrl);
+        driver.get(TestConfig.SITE_URL);
         footer = new Footer(driver);
         trends = new Trends(driver);
         designers = new Designers(driver);
@@ -47,7 +48,7 @@ public class SectionsTest extends TestBase {
     public void newItemsButton() {
         newItems.clickToNewItemsButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "catalog/new/", url);
+        assertEquals(TestConfig.SITE_URL + "catalog/new/", url);
     }
 
     /**
@@ -58,7 +59,7 @@ public class SectionsTest extends TestBase {
     public void jewelryButton() {
         jewelry.clickToJewelryButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "jewelry/", url);
+        assertEquals(TestConfig.SITE_URL + "jewelry/", url);
     }
 
     /**
@@ -69,7 +70,7 @@ public class SectionsTest extends TestBase {
     public void forManButton() {
         man.clickToManButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "catalog/men/", url);
+        assertEquals(TestConfig.SITE_URL + "catalog/men/", url);
     }
 
     /**
@@ -80,7 +81,7 @@ public class SectionsTest extends TestBase {
     public void trendsButton() {
         trends.clickToTrendsButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "trend/", url);
+        assertEquals(TestConfig.SITE_URL + "trend/", url);
     }
 
     /**
@@ -91,7 +92,7 @@ public class SectionsTest extends TestBase {
     public void designersButton() {
         designers.clickToDesignersButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "designers/", url);
+        assertEquals(TestConfig.SITE_URL + "designers/", url);
     }
 
     /**
@@ -102,7 +103,7 @@ public class SectionsTest extends TestBase {
     public void certificatesButton() {
         certificate.clickToCertificateButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "certificate", url);
+        assertEquals(TestConfig.SITE_URL + "certificate", url);
     }
 
     /**
@@ -113,7 +114,7 @@ public class SectionsTest extends TestBase {
     public void saleButton() {
         sale.clickToSaleButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "catalog/sale/", url);
+        assertEquals(TestConfig.SITE_URL + "catalog/sale/", url);
     }
 
     /**
@@ -126,7 +127,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String shopsHeader = shops.getShopsHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "shops/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "shops/", url),
                 () -> assertEquals("МАГАЗИНЫ", shopsHeader));
     }
 
@@ -135,12 +136,12 @@ public class SectionsTest extends TestBase {
      */
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Избранное.")
-    public void wishListButton() {
+    public void  wishListButton() {
         wishlist.clickToWishListButton();
         String url = driver.getCurrentUrl();
         String header = wishlist.getWishListHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "wishlist/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "wishlist/", url),
                 () -> assertEquals("избранное", header));
     }
 
@@ -155,7 +156,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getAboutHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "about/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "about/", url),
                 () -> assertEquals("ПРИВЕТ\n" +
                         "И ДОБРО ПОЖАЛОВАТЬ\n" +
                         "В POISON DROP", header));
@@ -171,7 +172,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getContactsHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "contacts/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "contacts/", url),
                 () -> assertEquals("Контакты", header));
     }
 
@@ -185,7 +186,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getShopsHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "shops/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "shops/", url),
                 () -> assertEquals("МАГАЗИНЫ", header));
     }
 
@@ -199,8 +200,8 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getVacancyHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "vacancy/", url),
-                () -> assertEquals("Доступные вакансии:", header));
+                () -> assertEquals(TestConfig.SITE_URL + "career/", url),
+                () -> assertEquals("карьера в Poison Drop", header));
     }
 
     /**
@@ -214,7 +215,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getSoglashenieHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "promotion/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "promotion/", url),
                 () -> assertEquals("Правила проведения и участия в Акции «при покупке от 20 000 рублей скидка 20%».", header));
     }
 
@@ -228,7 +229,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getDostavkaHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "dostavka-i-oplata/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "dostavka-i-oplata/", url),
                 () -> assertEquals("Доставка и оплата", header));
     }
 
@@ -242,7 +243,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getObmenHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "obmen-i-vozvrat/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "obmen-i-vozvrat/", url),
                 () -> assertEquals("Обмен и возврат", header));
     }
 
@@ -256,7 +257,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getGarantiiHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "garantii/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "garantii/", url),
                 () -> assertEquals("Гарантийный сервис", header));
     }
 
@@ -270,7 +271,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getOfertaHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "oferta/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "oferta/", url),
                 () -> assertEquals("Оферта", header));
     }
 
@@ -284,7 +285,7 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getPersonalnyeDannyeHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "polozhenie-ob-obrabotke-i-zashchite-personalnykh-dannykh/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "polozhenie-ob-obrabotke-i-zashchite-personalnykh-dannykh/", url),
                 () -> assertEquals("Положение об обработке и защите персональных данных", header));
     }
 
@@ -374,7 +375,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Золото и серебро(проверка по наименованию изделия)")
     public void jewelryNames() {
-        driver.get(getUrl + "jewelry/");
+        driver.get(TestConfig.SITE_URL + "jewelry/");
         String countHeader = filters.getCountHeader();
         Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
         List<String> sqlList = jewelry.getNames();
@@ -394,7 +395,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Золото и серебро(проверка по наименованию дизайнера)")
     public void jewelryDesigners() {
-        driver.get(getUrl + "jewelry/");
+        driver.get(TestConfig.SITE_URL + "jewelry/");
         List<String> sqlList = jewelry.getDesigners();
         List<WebElement> elements = driver.findElements(designerName);
         for (WebElement text : elements) {
@@ -411,7 +412,7 @@ public class SectionsTest extends TestBase {
     @Description("Золото и серебро(проверка на соответствие цены на сайте цене в базе)")
     public void priceOfJewelry() {
         List<Integer> priceList = new ArrayList<>();
-        driver.get(getUrl + "jewelry/");
+        driver.get(TestConfig.SITE_URL + "jewelry/");
         List<Integer> sqlList = jewelry.getPrice();
         List<WebElement> elements = driver.findElements(price);
         for (WebElement text : elements) {
@@ -430,7 +431,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Золото и серебро(проверка отображения картинок и их количество)")
     public void pictureOfJewelry() {
-        driver.get(getUrl + "jewelry/");
+        driver.get(TestConfig.SITE_URL + "jewelry/");
         List<WebElement> elements = driver.findElements(numberOfPictures);
         for (WebElement text : elements) {
             String s = text.getText();
@@ -447,7 +448,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Тренды(отображение баннеров, работа кнопки 'Показать еще', наименование и порядок их отображения)")
     public void bannersIsVisible() {
-        driver.get(getUrl + "trend/");
+        driver.get(TestConfig.SITE_URL + "trend/");
         navigation.clickOnShowMoreTrendsButton();
         List<WebElement> banners = driver.findElements(trendBanners);
         List<String> sqlList = trends.getNames();
@@ -467,7 +468,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Тренды(ссылки: переход на верную страницу)")
     public void mainBannerLink() {
-        driver.get(getUrl + "trend/");
+        driver.get(TestConfig.SITE_URL + "trend/");
         String href = trends.getMainHref();
         trends.clickToMainHref();
         String header = trends.linkHeader();
@@ -485,7 +486,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Тренды(проверка перехода по первому баннеру)")
     public void firstBannerLinkTrends() {
-        driver.get(getUrl + "trend/");
+        driver.get(TestConfig.SITE_URL + "trend/");
         String href = trends.getFirstHref();
         trends.clickToFirstHref();
         String header = trends.linkHeader();
@@ -502,7 +503,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Тренды(проверка перехода по второму баннеру)")
     public void secondBannerLink() {
-        driver.get(getUrl + "trend/");
+        driver.get(TestConfig.SITE_URL + "trend/");
         String href = trends.getSecondHref();
         trends.clickToSecondHref();
         String header = trends.linkHeader();
@@ -519,7 +520,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Тренды(проверка перехода по третьему баннеру)")
     public void thirdBannerLink() {
-        driver.get(getUrl + "trend/");
+        driver.get(TestConfig.SITE_URL + "trend/");
         String href = trends.getThirdHref();
         trends.clickToThirdHref();
         String header = trends.linkHeader();
@@ -536,7 +537,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Тренды(проверка перехода по четвертому баннеру)")
     public void fourBannerLink() {
-        driver.get(getUrl + "trend/");
+        driver.get(TestConfig.SITE_URL + "trend/");
         String href = trends.getFourthFineHref();
         trends.clickToFourthFineHref();
         String header = trends.linkHeader();
@@ -557,7 +558,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Новые дизайнеры(Отображение баннеров, наименование и порядок их отображения. Первый баннер 'Новые')")
     public void firstDesignersBannerLink() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.getDesignersFirstHref();
         designers.clickToFirstDesignerHref();
         String url = driver.getCurrentUrl();
@@ -582,7 +583,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Новые дизайнеры(Отображение баннеров, наименование и порядок их отображения. Второй баннер 'Новые')")
     public void secondDesignersBannerLink() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.getDesignersSecondHref();
         designers.clickToSecondDesignerHref();
         String url = driver.getCurrentUrl();
@@ -608,7 +609,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Новые дизайнеры(Отображение баннеров, наименование и порядок их отображения. Третий баннер 'Новые')")
     public void thirdDesignersBannerLink() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.getDesignersThirdHref();
         designers.clickToThirdDesignerHref();
         String url = driver.getCurrentUrl();
@@ -633,7 +634,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Популярные дизайнеры(Отображение баннеров, наименование и порядок их отображения. Первый баннер 'Популярные')")
     public void firstPopularBannerLink() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.getFirstPopularHref();
         designers.clickToFirstPopularHref();
         String url = driver.getCurrentUrl();
@@ -657,7 +658,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Популярные дизайнеры(Отображение баннеров, наименование и порядок их отображения. Последний баннер 'Популярные')")
     public void lastPopularBannerLink() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.getLastPopularHref();
         designers.clickToSecondPopularHref();
         String url = driver.getCurrentUrl();
@@ -684,7 +685,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Отображение корректного списка дизайнеров на сайте")
     public void listOfDesigners() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         List<String> sqlList = Designers.getListOfDesigners();
         List<WebElement> elements = driver.findElements(numberOfDesigners);
         for (WebElement text : elements) {
@@ -701,7 +702,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Выборочная проверка ссылок и товаров из таблицы на странице дизайнеров. Первый дизайнер из списка.")
     public void firstDesigner() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.getFirstDesignerHref();
         designers.clickToFirstDesignerLink();
         String url = driver.getCurrentUrl();
@@ -725,7 +726,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Выборочная проверка ссылок и товаров из таблицы на странице дизайнеров. Десятый дизайнер из списка.")
     public void secondDesigner() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.get10DesignerHref();
         designers.clickTo10DesignerLink();
         String url = driver.getCurrentUrl();
@@ -752,7 +753,7 @@ public class SectionsTest extends TestBase {
     @Test
     @Description("Выборочная проверка ссылок и товаров из таблицы на странице дизайнеров. Двадцатый дизайнер из списка.")
     public void thirdDesigner() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         String href = designers.get20dDesignerHref();
         designers.clickTo20DesignerLink();
         String url = driver.getCurrentUrl();

@@ -10,7 +10,7 @@ public class Footer extends Base {
     private final By aboutButton = By.xpath("//a[@href='/about/']");
     private final By contactsButton = By.xpath("//a[@href='/contacts/']");
     private final By shopsButton = By.xpath("//a[@href='/shops/']");
-    private final By vacancyButton = By.xpath("//a[@href='/vacancy/']");
+    private final By vacancyButton = By.xpath("//a[@href='/career/']");
     private final By soglashenieButton = By.xpath("//a[@href='/promotion/']");
     private final By dostavkaButton = By.xpath("//a[@href='/dostavka-i-oplata/']");
     private final By obmenButton = By.xpath("//a[@href='/obmen-i-vozvrat/']");
@@ -28,7 +28,7 @@ public class Footer extends Base {
     private final By aboutHeader = By.xpath("//div[@class='about-main-screen__group']/h1");
     private final By contactsHeader = By.xpath("//div[@class='service-page__container']/h1");
     private final By shopsHeader = By.xpath("//main[@class='service-page shops-page']/h1");
-    private final By vacancyHeader = By.xpath("//h1[@class='vacancies-page__title']");
+    private final By vacancyHeader = By.xpath("//h1[@class='career__heading career__heading_welcome']");
     private final By soglashenieHeader = By.xpath("//h1[@class='service-page__title']");
     private final By dostavkaHeader = By.xpath("//main[@class='service-page payment-and-delivery-page']/h1");
     private final By obmenHeader = By.xpath("//main[@class='service-page exchange-and-refund-page']/h1");

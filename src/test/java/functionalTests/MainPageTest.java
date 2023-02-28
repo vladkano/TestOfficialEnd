@@ -1,6 +1,7 @@
 package functionalTests;
 
 import baseForTests.TestBase;
+import config.TestConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.ResourceLock;
+import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -43,7 +45,8 @@ public class MainPageTest extends TestBase {
         options.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
 //        driver = new FirefoxDriver(options);
         driver = new ChromeDriver(options);
-        driver.get(getUrl);
+        driver.get(TestConfig.SITE_URL);
+//        driver.get(getUrl);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         mainPage = new MainPage(driver);
@@ -96,9 +99,10 @@ public class MainPageTest extends TestBase {
     public void signInWithPhoneNumber() {
         mainPage.sigInWithPhone(phoneForAuthorization);
         String heading = mainPage.getSigOutHeader();
-        String code2 = mainPage.getPhonePassword();
-        String sigInHeader = mainPage.getSigInHeader();
+        String code2 = mainPage.getPhonePasswordForLC();
         mainPage.sigInWithPassword(code2);
+        sleep(1000);
+        String sigInHeader = mainPage.getSigInHeader();
         Assertions.assertAll(
                 () -> assertEquals("вход или регистрация", heading),
                 () -> assertEquals("вход", sigInHeader));
@@ -141,7 +145,7 @@ public class MainPageTest extends TestBase {
     @Test
     @Description("Проверяем, что кнопка 'Зарегистрироваться' неактивна, если не заполнено поле 'Электронная почта'")
     public void registrationWithoutEmail() {
-        mainPage.sigInWithPhone("9956766482");
+        mainPage.sigInWithPhone(phoneForRegistration);
         String code = mainPage.getPhonePassword();
         mainPage.registerWithPhoneNumber(code, "", "Test Name");
         Boolean registerButtonAttribute = mainPage.getRegisterButtonAttribute();
@@ -154,7 +158,7 @@ public class MainPageTest extends TestBase {
     @Test
     @Description("Проверяем, что кнопка 'Зарегистрироваться' неактивна, если не заполнено поле 'Имя, можно с фамилией'")
     public void registrationWithoutName() {
-        mainPage.sigInWithPhone("9956766482");
+        mainPage.sigInWithPhone(phoneForRegistration);
         String code = mainPage.getPhonePassword();
         mainPage.registerWithPhoneNumber(code, "test13@mail.com", "");
         Boolean registerButtonAttribute = mainPage.getRegisterButtonAttribute();
@@ -168,7 +172,7 @@ public class MainPageTest extends TestBase {
     @Description("Проверяем, что кнопка 'Зарегистрироваться' неактивна, если не проставлена галочка напротив поля: " +
             "'даю согласие на обработку персональных данных'")
     public void registrationWithoutConsent() {
-        mainPage.sigInWithPhone("9956766482");
+        mainPage.sigInWithPhone(phoneForRegistration);
         String code = mainPage.getPhonePassword();
         mainPage.registerWithoutConsent(code, "test13@mail.com", "Test Name");
         Boolean registerButtonAttribute = mainPage.getRegisterButtonAttribute();
@@ -230,7 +234,8 @@ public class MainPageTest extends TestBase {
     @Description("Проверяем, что при наведении на значок личного кабинета и нажатии на кнопку 'выйти' происходит выход из ЛК")
     public void signOut() {
         mainPage.sigInWithPhone(phoneForAuthorization);
-        String code2 = mainPage.getPhonePassword();
+        String code2 = mainPage.getPhonePasswordForLC();
+//        sleep(1000);
         mainPage.sigInWithPassword(code2);
         mainPage.clickOnLcInButton();
         mainPage.clickOnExitButton();
@@ -247,7 +252,7 @@ public class MainPageTest extends TestBase {
     @Description("Проверяем, что при оформлении заказа через авторизацию в ЛК заказ успешно оформляется и осуществляется переход к оплате")
     public void signInWithOrder() {
         mainPage.sigInWithPhone(phoneForAuthorization);
-        String code2 = mainPage.getPhonePassword();
+        String code2 = mainPage.getPhonePasswordForLC();
         mainPage.sigInWithPassword(code2);
         sleep(1000);
         mainPage.clickOnCatalogButton();

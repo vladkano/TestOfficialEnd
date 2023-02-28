@@ -1,6 +1,7 @@
 package functionalTests;
 
 import baseForTests.TestBase;
+import config.TestConfig;
 import filters.Filters;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -22,7 +23,7 @@ public class NewItemsTest extends TestBase {
     @BeforeEach
     public void setUp() {
         mainSetUp();
-        driver.get(getUrl + "catalog/new/");
+        driver.get(TestConfig.SITE_URL + "catalog/new/");
         newItems = new NewItems(driver);
         filters = new Filters(driver);
     }

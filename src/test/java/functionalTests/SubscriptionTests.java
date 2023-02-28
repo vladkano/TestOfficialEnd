@@ -1,6 +1,7 @@
 package functionalTests;
 
 import baseForTests.TestBase;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.AfterEach;
@@ -41,7 +42,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на главной странице")
     public void checkSubscriptionTextMainPage() {
-        driver.get(getUrl);
+        driver.get(TestConfig.SITE_URL);
         checkSubscription();
     }
 
@@ -51,7 +52,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице новинок")
     public void checkSubscriptionTextNewItems() {
-        driver.get(getUrl + "catalog/new/");
+        driver.get(TestConfig.SITE_URL + "catalog/new/");
         checkSubscription();
     }
 
@@ -61,7 +62,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице основного каталога")
     public void checkSubscriptionTextCatalog() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         checkSubscription();
     }
 
@@ -71,7 +72,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице 'золото и серебро'")
     public void checkSubscriptionTextJewelry() {
-        driver.get(getUrl + "jewelry/");
+        driver.get(TestConfig.SITE_URL + "jewelry/");
         checkSubscription();
     }
 
@@ -81,7 +82,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице 'для мужчин'")
     public void checkSubscriptionTextMen() {
-        driver.get(getUrl + "catalog/men/");
+        driver.get(TestConfig.SITE_URL + "catalog/men/");
         checkSubscription();
     }
 
@@ -91,7 +92,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице 'тренды'")
     public void checkSubscriptionTextTrend() {
-        driver.get(getUrl + "trend/");
+        driver.get(TestConfig.SITE_URL + "trend/");
         checkSubscription();
     }
 
@@ -101,7 +102,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице 'дизайнеры'")
     public void checkSubscriptionTextDesigners() {
-        driver.get(getUrl + "designers/");
+        driver.get(TestConfig.SITE_URL + "designers/");
         checkSubscription();
     }
 
@@ -111,7 +112,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице 'сертификаты'")
     public void checkSubscriptionTextCertificates() {
-        driver.get(getUrl + "certificate/");
+        driver.get(TestConfig.SITE_URL + "certificate/");
         checkSubscription();
     }
 
@@ -121,7 +122,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается на странице 'sale'")
     public void checkSubscriptionTextSale() {
-        driver.get(getUrl + "catalog/sale/");
+        driver.get(TestConfig.SITE_URL + "catalog/sale/");
         checkSubscription();
     }
 
@@ -132,7 +133,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что блок с подпиской отображается в карточке товара.")
     public void checkSubscriptionTextProductCard() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         subscription.clickOnNameLink();
         checkSubscription();
     }
@@ -143,7 +144,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Проверяем что подписка прошла успешно.")
     public void successfulSubscription() {
-        driver.get(getUrl);
+        driver.get(TestConfig.SITE_URL);
         subscription.subscriptionWithEmail("ran.owen@rambler.ru");
         String successfulSubscriptionText = subscription.getSuccessfulSubscriptionText();
         assertEquals("наш почтовый голубь уже вылетел.", successfulSubscriptionText);
@@ -155,7 +156,7 @@ public class SubscriptionTests extends TestBase {
     @Test()
     @Description("Вводим некорректный адрес эл.почты и смотри что подписка не прошла успешно.")
     public void failedSubscription() {
-        driver.get(getUrl);
+        driver.get(TestConfig.SITE_URL);
         subscription.subscriptionWithEmail("ran.owen@");
         String failedSubscriptionText = subscription.getSubscriptionText();
         assertEquals("подписчики нашей рассылки выбирают самые классные украшения.", failedSubscriptionText);

@@ -290,7 +290,7 @@ public class Filters extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name.substring(0,10));
+                text.add(name.substring(0,8));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -350,7 +350,7 @@ public class Filters extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name.substring(0,10));
+                text.add(name.substring(0,8));
             }
         } catch (SQLException e) {
             e.printStackTrace();

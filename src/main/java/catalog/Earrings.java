@@ -231,7 +231,7 @@ public class Earrings extends Base {
     //Достаем коды товаров
     public List<String> getCodes() {
         String code;
-        String query = "SELECT code from item " +
+        String query = "SELECT item.code from item " +
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +

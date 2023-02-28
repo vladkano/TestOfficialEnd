@@ -39,7 +39,7 @@ public class Rings extends Base {
                 name = resultSet.getString("name");
 //                System.out.println(name);
 //                text.add(name);
-                text.add(name.substring(0, 10).toLowerCase());
+                text.add(name.substring(0, 9).toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -214,7 +214,7 @@ public class Rings extends Base {
     //Достаем коды товаров
     public List<String> getCodes() {
         String code;
-        String query = "SELECT code from item " +
+        String query = "SELECT item.code from item " +
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
@@ -252,7 +252,7 @@ public class Rings extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_id=5 and is_archive = 0 and item_sku_price.price != 0 " +
-                "and storage_id not in (1006, 1007) " +
+                "and storage_id not in "+ unavailableStorages + " " +
                 "group by storage_stock.sku_id having SUM(balance) = 0";
         try {
             Statement statement = worker.getCon().createStatement();

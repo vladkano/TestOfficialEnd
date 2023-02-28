@@ -144,9 +144,9 @@ public class Designers extends Base {
 
     public String getDesignerDescription(String text) {
         String description = "";
-        String query = "select description from designer " +
-
-                "where `show` = 1 and name = " + "'" + text + "'";
+        String query = "select designer_translation.description from designer_translation " +
+                "JOIN designer ON designer_translation.designer_id = designer.id " +
+                "where designer_translation.locale = 'ru' and `show` = 1 and designer_translation.name = " + "'" + text + "'";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -711,32 +711,20 @@ public class Designers extends Base {
     }
 
     public static void main(String[] args) {
-        String name;
-        List<String> text = new ArrayList<>();
-        String query = "SELECT item_translations.name from item " +
-                "JOIN item_translations ON item.id = item_translations.item_id " +
-                "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
-                "JOIN designer ON item.designer_id = designer.id " +
-                "JOIN item_sku ON item.id = item_sku.item_id " +
-                "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
-                "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
-                "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 and filter_id = " + "'" + getFirstFilterIDForPopular() + "'" +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name " +
-                "order by item_catalog_position.position ";
+        String description = "";
+        String query = "select designer_translation.description from designer_translation " +
+                "JOIN designer ON designer_translation.designer_id = designer.id " +
+                "where locale = ru and `show` = 1 ";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                name = resultSet.getString("name");
-//                System.out.println(name);
-                text.add(name);
+                description = resultSet.getString("description");
+                System.out.println(description);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("метод getNames: " + text);
 
         worker.getSession().disconnect();
 

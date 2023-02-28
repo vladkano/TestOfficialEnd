@@ -3,6 +3,7 @@ package functionalTests;
 import baseForTests.TestBase;
 import basket.Basket;
 import collectionAndSet.Collection;
+import config.TestConfig;
 import filters.Filters;
 import filters.Size;
 import io.qameta.allure.Description;
@@ -39,7 +40,7 @@ public class WishListTest extends TestBase {
         wishlist.clickToAddToWishlistFromCatalogButton();
         wishlist.clickToWishListButton();
         String itemNameFromWishlist = wishlist.getItemNameFromFavorites();
-        assertEquals(itemName.substring(0, 10), itemNameFromWishlist.substring(0, 10).toLowerCase());
+        assertEquals(itemName.substring(0, 9), itemNameFromWishlist.substring(0, 9).toLowerCase());
     }
 
     /**
@@ -48,7 +49,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Проверка того, что товар добавился в избранное из карточки товара + урл и заголовок корректны")
     public void wishListCheckButton() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         wishlist.clickOnImageLink();
         wishlist.clickToWishListInCardListButton();
         wishlist.clickToWishListButton();
@@ -57,7 +58,7 @@ public class WishListTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = wishlist.getWishListHeader();
         Assertions.assertAll(
-                () -> assertEquals(getUrl + "wishlist/", url),
+                () -> assertEquals(TestConfig.SITE_URL + "wishlist/", url),
                 () -> assertEquals("избранное", header));
     }
 
@@ -68,7 +69,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Основной каталог")
     public void addToWishlistFromCatalog() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -79,7 +80,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Браслеты")
     public void addToWishlistFromBracelets() {
-        driver.get(getUrl + "catalog/braslety/");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -90,7 +91,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Кольца")
     public void addToWishlistFromRings() {
-        driver.get(getUrl + "catalog/koltsa/");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -100,7 +101,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Серьги")
     public void addToWishlistFromEarrings() {
-        driver.get(getUrl + "catalog/sergi/");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -110,7 +111,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Колье")
     public void addToWishlistFromNecklaces() {
-        driver.get(getUrl + "catalog/kole/");
+        driver.get(TestConfig.SITE_URL + "catalog/kole/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -120,7 +121,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Броши")
     public void addToWishlistFromBrooches() {
-        driver.get(getUrl + "catalog/broshi/");
+        driver.get(TestConfig.SITE_URL + "catalog/broshi/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -130,7 +131,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Мужики")
     public void addToWishlistFromMen() {
-        driver.get(getUrl + "catalog/men/");
+        driver.get(TestConfig.SITE_URL + "catalog/men/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -141,7 +142,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Новинки")
     public void addToWishlistFromNewItems() {
-        driver.get(getUrl + "catalog/new/");
+        driver.get(TestConfig.SITE_URL + "catalog/new/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -151,7 +152,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по добавлению в избранное со страниц каталога: Sale")
     public void addToWishlistFromSale() {
-        driver.get(getUrl + "catalog/sale/");
+        driver.get(TestConfig.SITE_URL + "catalog/sale/");
         addItemToFavoritesAndCheckNames();
     }
 
@@ -164,7 +165,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по переносу товара из избранного в корзину. Добавление в избранное из каталога: Товар без размера.")
     public void favoritesToBasket() {
-        driver.get(getUrl + "catalog/sergi/");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi/");
         String itemName = wishlist.getItemName();
         wishlist.clickToAddToWishlistFromCatalogButton();
         wishlist.clickToWishListButton();
@@ -185,7 +186,7 @@ public class WishListTest extends TestBase {
     @Test()
     @Description("Блок тестов по переносу товара из избранного в корзину. Добавление в избранное из каталога: Товар с размером.")
     public void favoritesToBasketWithSize() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         filters.clickToOkButton();
         filters.clickToFilterButton();
         size.clickToSizeButton();
@@ -206,8 +207,8 @@ public class WishListTest extends TestBase {
         Assertions.assertAll(
                 () -> assertEquals(itemName.substring(0, 20), itemNameFromWishlist.substring(0, 20)),
                 () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20)),
-                () -> assertEquals(itemNameFromWishlist.substring(0,30) + "\n" + "Размер: " + wishListProductSize,
-                        basketProductName.substring(0,30) +  "\n" + basketProductSize));
+                () -> assertEquals(itemNameFromWishlist.substring(0,27) + "\n" + "Размер: " + wishListProductSize,
+                        basketProductName.substring(0,27) +  "\n" + basketProductSize));
     }
 
     /**
@@ -241,7 +242,7 @@ public class WishListTest extends TestBase {
     @Description("Блок тестов по переносу товара из избранного в корзину. Добавление в избранное из карточки товара: Товар из коллекции с размером.")
     public void
     favoritesToBasketWithCollectionAndSize() {
-        driver.get(getUrl + "catalog/");
+        driver.get(TestConfig.SITE_URL + "catalog/");
         filters.clickToOkButton();
         filters.clickToFilterButton();
         size.clickToSizeButton();

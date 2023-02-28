@@ -2,6 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import basket.Basket;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import order.Order;
@@ -20,7 +21,7 @@ public class CertificateTest extends TestBase {
     @BeforeEach
     public void setUp() {
         mainSetUp();
-        driver.get(getUrl + "certificate/?utm_source=test&utm_medium=test&utm_campaign=test");
+        driver.get(TestConfig.SITE_URL + "certificate/?utm_source=test&utm_medium=test&utm_campaign=test");
         certificate = new Certificate(driver);
         order = new Order(driver);
         basket = new Basket(driver);

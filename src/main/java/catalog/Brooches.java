@@ -115,7 +115,6 @@ public class Brooches extends Base {
 
     //Вытаскиваем ссылку
     public String getFirstLinkOfCollection() {
-        DBWorker worker = new DBWorker();
         String name;
         String name2;
         String name3;

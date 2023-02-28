@@ -2,6 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import basket.Basket;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import order.Order;
@@ -22,7 +23,7 @@ public class OrderTest extends TestBase {
     public void setUp() {
         mainSetUp();
         driver.manage().window().maximize();
-        driver.get(getUrl + "catalog/?utm_source=test&utm_medium=test&utm_campaign=test");
+        driver.get(TestConfig.SITE_URL + "catalog/?utm_source=test&utm_medium=test&utm_campaign=test");
         basket = new Basket(driver);
         order = new Order(driver);
     }
@@ -351,8 +352,9 @@ public class OrderTest extends TestBase {
     public void internationalDeliveryIsNotPossible() {
         putItemInBasket();
         order.deliveryIsNotPossible(phoneForOrder, email, testNameForOrder, "Рим");
+        sleep(1000);
         String comUrl = driver.getCurrentUrl();
-        assertEquals(getComUrl + "cart", comUrl);
+        assertEquals(TestConfig.COM_URL + "cart", comUrl);
     }
 
     /**
@@ -363,7 +365,7 @@ public class OrderTest extends TestBase {
     @Description("Доставка до постамата. Проверка перехода к оплате заказа на сайте, способ доставки: Доставка до постамата(Россия), Способ связи: Звонок по телефону.")
     public void postomatAndRussian() {
         putItemInBasket();
-        order.orderWithPickPointPhone(phoneForOrder, email, testNameForOrder, "Россия", "Екатеринбург", "родонитовая");
+        order.orderWithPickPointPhone(phoneForOrder, email, testNameForOrder, "Россия", "Екатеринбург", "Шварца");
         payConfirmAndHeaderCheck();
     }
 

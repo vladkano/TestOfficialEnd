@@ -2,6 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import basket.Basket;
+import config.TestConfig;
 import filters.Filters;
 import filters.Size;
 import io.qameta.allure.Description;
@@ -31,7 +32,8 @@ public class BasketTest extends TestBase {
     @BeforeEach
     public void setUp(TestInfo testInfo) {
         mainSetUp();
-        driver.navigate().to(getUrl + "catalog");
+        driver.navigate().to(TestConfig.SITE_URL + "catalog");
+//        driver.navigate().to(getUrl + "catalog");
         basket = new Basket(driver);
         filters = new Filters(driver);
         size = new Size(driver);
@@ -283,7 +285,7 @@ public class BasketTest extends TestBase {
         basket.clickToItemInBasketButton();
         basket.clickToBasketButton();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "cart", url);
+        assertEquals(TestConfig.SITE_URL + "cart", url);
     }
 
 
@@ -324,7 +326,7 @@ public class BasketTest extends TestBase {
     public void checkCartHref() {
         basket.clickToCart();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "cart/", url);
+        assertEquals(TestConfig.SITE_URL + "cart/", url);
     }
 
     @Test
@@ -333,7 +335,7 @@ public class BasketTest extends TestBase {
         basket.clickToCartFromNew();
         basket.clickToCart();
         String url = driver.getCurrentUrl();
-        assertEquals(getUrl + "cart/", url);
+        assertEquals(TestConfig.SITE_URL + "cart/", url);
     }
 
     /**

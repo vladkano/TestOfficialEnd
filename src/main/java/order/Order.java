@@ -58,14 +58,14 @@ public class Order extends Base {
     private final By pickPointButton = By.xpath("//b[contains(text(), 'постамат')]");
     private final By selectPostomatButton = By.xpath("//span[contains(text(), 'выбрать постамат')]");
     private final By searchboxButton = By.xpath("//div[@class='combobox searchbox']/span");
-    private final By rodonitButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"6605-238\"); return false;']");
+    private final By rodonitButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"6601-003\"); return false;']");
     private final By belarusButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"9001-009\"); return false;']");
     private final By selectButton = By.xpath("//div[text()='ВЫБРАТЬ']");
     private final By paperButton = By.xpath("//span[text()='Бумажный']");
     private final By firstPrice = By.xpath("//b[@class='cart-price__total']");
     private final By finalPrice = By.xpath("//div[@class='order-summary__row order-summary__row_total']/span[2]");
     private final By cloudPrice = By.xpath("//div[@class='header-component__cost']");
-    private final By checkoutPrice = By.xpath("//span[@class='PaymentMethodsstyle__TitleAmount-sc-2fx2mh-2 hQTIfy']");
+    private final By checkoutPrice = By.xpath("//h1[@id='payment-methods']/span");
     private final By frame = By.xpath("//iframe[@src='https://pickpoint.ru/select/?&ikn=9990653812']");
     private final By payFrame = By.xpath("//iframe[@class=' with-appled']");
     private final By ordinaryDeliveryButton = By.xpath("//label[@for='ordinaryDelivery']/span[@class='order-delivery__courier-type-variant']");

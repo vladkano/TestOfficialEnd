@@ -406,9 +406,11 @@ public class PersonalData extends Base {
 
     public String getLastOrderContent() {
         String name = null;
-        String query = "select name from `order`" +
+        String query = "select item_translations.name from `order`" +
                 "JOIN order_item ON order_item.order_id = order.id " +
                 "JOIN item_sku ON item_sku.id = order_item.sku_id " +
+                "JOIN item ON item.id = item_sku.item_id " +
+                "JOIN item_translations ON item.id = item_translations.item_id " +
                 "where user_id = 157982 and retail_status_id is not null " +
                 "order by item_sku.id";
         try {
@@ -426,9 +428,10 @@ public class PersonalData extends Base {
 
     public Integer getLastOrderPrice() {
         Integer price = null;
-        String query = "select item_sku.price from `order`" +
+        String query = "select item_sku_price.price from `order`" +
                 "JOIN order_item ON order_item.order_id = order.id " +
                 "JOIN item_sku ON item_sku.id = order_item.sku_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "where user_id = 157982 and retail_status_id is not null " +
                 "order by item_sku.id";
         try {

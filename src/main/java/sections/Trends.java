@@ -15,7 +15,7 @@ import java.util.List;
 public class Trends extends Base {
 
     private final By trendsButton = By.xpath("//a[@href='/trend/']");
-    private final By mainHref = By.xpath("//a[@class='trend-item js-trend-item trend-item_big']");
+    private final By mainHref = By.xpath("//a[@class='trend-item js-trend-item trend-item--big']");
     private final By firstHref = By.xpath("//div[@class='trends-page__grid js-trends-grid']/a[2]");
     private final By secondHref = By.xpath("//div[@class='trends-page__grid js-trends-grid']/a[3]");
     private final By thirdHref = By.xpath("//div[@class='trends-page__grid js-trends-grid']/a[10]");

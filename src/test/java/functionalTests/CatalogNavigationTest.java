@@ -2,6 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import catalog.CatalogNavigation;
+import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.AfterEach;
@@ -29,7 +30,7 @@ public class CatalogNavigationTest extends TestBase {
     @Test()
     @Description("Проверяем, что после нажатия кнопки 'Показать ещё' количество единиц товара на странице равно 96")
     public void numberOfItem() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         navigation.clickOnShowMoreButton();
         sleep(2000);
         List<WebElement> numbers = driver.findElements(numberOfItem);
@@ -43,7 +44,7 @@ public class CatalogNavigationTest extends TestBase {
     @Test
     @Description("Проверка отсутствия кнопки 'Показать ещё', кнопка должна отображается только, если в разделе больше 48 продуктов")
     public void showMoreNotVisible() {
-        driver.get(getUrl + "catalog/koltsa/?type_product=nabory-kolets");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/?type_product=nabory-kolets");
         int numbers = driver.findElements(showMore).size();
         assertEquals(0, numbers);
     }
@@ -54,7 +55,7 @@ public class CatalogNavigationTest extends TestBase {
     @Test
     @Description("Проверка отсутствия кнопки 'Показать ещё' при переходе на последнюю страницу каталога")
     public void showMoreLastPage() {
-        driver.get(getUrl + "catalog/koltsa/?type_product=pechatki");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa/?type_product=pechatki");
 //        navigation.clickOnShowMoreButton();
         int numbers = driver.findElements(showMore).size();
         assertEquals(0, numbers);
@@ -68,7 +69,7 @@ public class CatalogNavigationTest extends TestBase {
     @Description("Проверяем, что кол-во страниц в каталоге колец равняется количеству товаров в БД деленное на количество товаров отображаемых на странице каталога(48)")
     @Test
     public void numberOfPagesKoltsa() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         double count = Math.ceil((double) navigation.countRings()/numberOfFoto);
         int countOfRings = (int) count;
         int numberOfPages = Integer.parseInt(navigation.getNumberOfPages());
@@ -81,7 +82,7 @@ public class CatalogNavigationTest extends TestBase {
     @Test()
     @Description("Проверяем, что в каталоге на странице колец отображается 48 изделий")
     public void pageNumber48Koltsa() {
-        driver.get(getUrl + "catalog/koltsa");
+        driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         List<WebElement> numbers = driver.findElements(numberOfItem);
         assertEquals(numberOfFoto, numbers.size());
     }
@@ -92,7 +93,7 @@ public class CatalogNavigationTest extends TestBase {
     @Test()
     @Description("Проверяем, что в каталоге на странице серёг отображается 48 изделий")
     public void pageNumber48Sergi() {
-        driver.get(getUrl + "catalog/sergi");
+        driver.get(TestConfig.SITE_URL + "catalog/sergi");
         List<WebElement> numbers = driver.findElements(numberOfItem);
         assertEquals(numberOfFoto, numbers.size());
     }
@@ -103,7 +104,7 @@ public class CatalogNavigationTest extends TestBase {
     @Test()
     @Description("Проверяем, что в каталоге на странице колье отображается 48 изделий")
     public void pageNumber48Kole() {
-        driver.get(getUrl + "catalog/kole");
+        driver.get(TestConfig.SITE_URL + "catalog/kole");
         List<WebElement> numbers = driver.findElements(numberOfItem);
         assertEquals(numberOfFoto, numbers.size());
     }
@@ -114,7 +115,7 @@ public class CatalogNavigationTest extends TestBase {
     @Test()
     @Description("Проверяем, что в каталоге на странице браслетов отображается 48 изделий")
     public void pageNumber48Braslety() {
-        driver.get(getUrl + "catalog/braslety");
+        driver.get(TestConfig.SITE_URL + "catalog/braslety");
         List<WebElement> numbers = driver.findElements(numberOfItem);
         assertEquals(numberOfFoto, numbers.size());
     }
