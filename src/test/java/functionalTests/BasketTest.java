@@ -33,7 +33,6 @@ public class BasketTest extends TestBase {
     public void setUp(TestInfo testInfo) {
         mainSetUp();
         driver.navigate().to(TestConfig.SITE_URL + "catalog");
-//        driver.navigate().to(getUrl + "catalog");
         basket = new Basket(driver);
         filters = new Filters(driver);
         size = new Size(driver);

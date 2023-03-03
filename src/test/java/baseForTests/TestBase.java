@@ -157,25 +157,4 @@ public class TestBase {
         driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
-
-    //Бой
-//    protected String getUrl = "https://poisondrop.ru/";
-//    protected String getComUrl = "https://poisondrop.com/";
-
-    //Тест(Сталинград)
-//    protected String getUrl = "https://ru.stalingrad.poisontestdrop.ru/";
-//    protected String getComUrl = "https://en.stalingrad.poisontestdrop.ru/";
-
-    //Тест(Севастополь)
-//    protected String getUrl = "https://ru.sevastopol.poisontestdrop.ru/";
-//    protected String getComUrl = "https://en.sevastopol.poisontestdrop.ru/";
-
-    //Тест(Курск)
-//    protected String getUrl = "https://ru.kursk.poisontestdrop.ru/";
-//    protected String getComUrl = "https://en.kursk.poisontestdrop.ru/";
-
-    //Тест(Тула)
-//    protected static String getUrl = "https://ru.tula.poisontestdrop.ru/";
-//    protected String getComUrl = "https://en.tula.poisontestdrop.ru/";
-
 }
