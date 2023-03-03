@@ -108,6 +108,7 @@ public class MainPageTest extends TestBase {
                 () -> assertEquals("вход", sigInHeader));
     }
 
+    
     /**
      * Авторизация по почте + проверка, что отображается подпись во время процесса авторизации
      */
