@@ -114,8 +114,8 @@ public class MainPageBanner extends Base {
                 "JOIN item ON item.id = item_translations.item_id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
-                "where item_translations.locale = 'ru' " +
-                "group by bestsellers.id  LIMIT 5";
+                "where item_translations.locale = 'ru' and bestsellers.locale = 'ru' " +
+                "order by bestsellers.id ASC LIMIT 5";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -142,7 +142,7 @@ public class MainPageBanner extends Base {
                 "JOIN item_sku ON item_sku.item_id = item.id " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
                 "where bestsellers.locale = 'ru' and designer_translation.locale = 'ru' " +
-                "order by bestsellers.id";
+                "order by bestsellers.id LIMIT 5";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -168,7 +168,7 @@ public class MainPageBanner extends Base {
                 "JOIN item_sku ON item_sku_price.item_sku_id = item_sku.id " +
                 "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
                 "where locale = 'ru' " +
-                "group by bestsellers.id";
+                "group by bestsellers.id LIMIT 5";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);

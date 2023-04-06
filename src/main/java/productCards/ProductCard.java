@@ -42,7 +42,7 @@ public class ProductCard extends Base {
 
     private final By receivingText = By.xpath("//span[@class='delivery-accordion__title-text']");
     private final By receivingCity = By.xpath("//h3[@class='delivery-accordion__title']/span[2]");
-    private final By location = By.xpath("//span[@class='icon-with-title__text']");
+
 
     private final By recentlyViewedProductsHeader = By.xpath("//section[@class='products-slider viewed-products product-card__products-slider']/h2");
     private final By designerNameFromRecentlyViewedProducts = By.xpath("//div[@class='catalog-card__designer']/a");
@@ -108,6 +108,7 @@ public class ProductCard extends Base {
     public String getKrasnodar() {
         return driver.findElement(krasnodar).getAttribute("textContent");
     }
+
     public String getKazan() {
         return driver.findElement(kazan).getAttribute("textContent");
     }
@@ -170,6 +171,8 @@ public class ProductCard extends Base {
     public String getLocation() {
         return driver.findElement(location).getAttribute("textContent");
     }
+
+
 
     public String getItemCode() {
         return driver.findElement(code).getText();

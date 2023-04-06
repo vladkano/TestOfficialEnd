@@ -870,75 +870,77 @@ public class ProductCardsTest extends TestBase {
         assertNotEquals(firstName, secondName);
     }
 
-    /**
-     * Тесты секции "Недавно просмотренных товаров" в карточке товара: <p>
-     * Последовательный просмотр 5 товаров и проверка того, что они отразились в секции: <p>
-     * Проверка по наименованию дизайнера
-     */
-    @Test
-    @Description("Проверяем секцию 'Недавно просмотренных товаров'. Последовательный просмотр 5 товаров и проверка того, что они отразились в секции." +
-            " Проверка по наименованию дизайнера")
-    public void checkRecentlyViewedProductsDesignerName() {
-        List<String> productList = new ArrayList<>();
-        List<String> viewedProductList = new ArrayList<>();
-        driver.get(TestConfig.SITE_URL + "catalog");
-        for (int i = 0; i <= 4; i++) {
-            List<WebElement> elements = driver.findElements(nameLink);
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].click();", elements.get(i));
-            String designerName = basket.getNextDesignerHeader();
-            String designerNameFromViewedProducts = productCard.getDesignerNameFromRecentlyViewedProducts();
-            productList.add(designerName);
-//            System.out.println(designerNameFromViewedProducts);
-            viewedProductList.add(designerNameFromViewedProducts);
-            basket.clickOnCatalogButton();
-        }
-        basket.clickOnNameLink();
-        String recentlyViewedProductsHeader = productCard.getRecentlyViewedProductsHeader();
-        Assertions.assertAll(
-                () -> assertEquals("вы смотрели", recentlyViewedProductsHeader),
-                () -> assertEquals(productList, viewedProductList));
-    }
 
-    /**
-     * Проверка по цене товара
-     */
-    @Test
-    @Description("Проверяем секцию 'Недавно просмотренных товаров'. Последовательный просмотр 5 товаров и проверка того, что они отразились в секции." +
-            " Проверка по цене товара")
-    public void checkRecentlyViewedProductsPrice() {
-        List<String> listOfPrices = new ArrayList<>();
-        List<String> viewedListOfPrices = new ArrayList<>();
-        driver.get(TestConfig.SITE_URL + "catalog");
-        for (int i = 0; i <= 4; i++) {
-            List<WebElement> elements = driver.findElements(nameLink);
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].click();", elements.get(i));
-            String price = basket.getPriceFromProductCard();
-            String priceFromRecentlyViewedProducts = productCard.getPriceFromRecentlyViewedProducts();
-            listOfPrices.add(price);
-            viewedListOfPrices.add(priceFromRecentlyViewedProducts);
-            basket.clickOnCatalogButton();
-        }
-        assertEquals(listOfPrices, viewedListOfPrices);
-    }
-
-    /**
-     * Смотрим 21 товар и проверяем, что среди просмотренных общее кол-во равно 20.
-     */
-    @Test
-    @Description("Проверяем секцию 'Недавно просмотренных товаров'. Смотрим 21 товар и проверяем, что среди просмотренных общее кол-во равно 20")
-    public void productsNoMoreThan20() {
-        driver.get(TestConfig.SITE_URL + "catalog");
-        for (int i = 0; i <= 20; i++) {
-            List<WebElement> elements = driver.findElements(nameLink);
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].click();", elements.get(i));
-            basket.clickOnCatalogButton();
-        }
-        basket.clickOnNameLink();
-        List<WebElement> productList = driver.findElements(By.xpath("//section[@class='products-slider viewed-products product-card__products-slider']//div[@class='catalog-card__designer']/a"));
-        assertEquals(20, productList.size());
-    }
+    //функционал секции временно отключен
+//    /**
+//     * Тесты секции "Недавно просмотренных товаров" в карточке товара: <p>
+//     * Последовательный просмотр 5 товаров и проверка того, что они отразились в секции: <p>
+//     * Проверка по наименованию дизайнера
+//     */
+//    @Test
+//    @Description("Проверяем секцию 'Недавно просмотренных товаров'. Последовательный просмотр 5 товаров и проверка того, что они отразились в секции." +
+//            " Проверка по наименованию дизайнера")
+//    public void checkRecentlyViewedProductsDesignerName() {
+//        List<String> productList = new ArrayList<>();
+//        List<String> viewedProductList = new ArrayList<>();
+//        driver.get(TestConfig.SITE_URL + "catalog");
+//        for (int i = 0; i <= 4; i++) {
+//            List<WebElement> elements = driver.findElements(nameLink);
+//            ((JavascriptExecutor) driver).executeScript(
+//                    "arguments[0].click();", elements.get(i));
+//            String designerName = basket.getNextDesignerHeader();
+//            String designerNameFromViewedProducts = productCard.getDesignerNameFromRecentlyViewedProducts();
+//            productList.add(designerName);
+////            System.out.println(designerNameFromViewedProducts);
+//            viewedProductList.add(designerNameFromViewedProducts);
+//            basket.clickOnCatalogButton();
+//        }
+//        basket.clickOnNameLink();
+//        String recentlyViewedProductsHeader = productCard.getRecentlyViewedProductsHeader();
+//        Assertions.assertAll(
+//                () -> assertEquals("вы смотрели", recentlyViewedProductsHeader),
+//                () -> assertEquals(productList, viewedProductList));
+//    }
+//
+//    /**
+//     * Проверка по цене товара
+//     */
+//    @Test
+//    @Description("Проверяем секцию 'Недавно просмотренных товаров'. Последовательный просмотр 5 товаров и проверка того, что они отразились в секции." +
+//            " Проверка по цене товара")
+//    public void checkRecentlyViewedProductsPrice() {
+//        List<String> listOfPrices = new ArrayList<>();
+//        List<String> viewedListOfPrices = new ArrayList<>();
+//        driver.get(TestConfig.SITE_URL + "catalog");
+//        for (int i = 0; i <= 4; i++) {
+//            List<WebElement> elements = driver.findElements(nameLink);
+//            ((JavascriptExecutor) driver).executeScript(
+//                    "arguments[0].click();", elements.get(i));
+//            String price = basket.getPriceFromProductCard();
+//            String priceFromRecentlyViewedProducts = productCard.getPriceFromRecentlyViewedProducts();
+//            listOfPrices.add(price);
+//            viewedListOfPrices.add(priceFromRecentlyViewedProducts);
+//            basket.clickOnCatalogButton();
+//        }
+//        assertEquals(listOfPrices, viewedListOfPrices);
+//    }
+//
+//    /**
+//     * Смотрим 21 товар и проверяем, что среди просмотренных общее кол-во равно 20.
+//     */
+//    @Test
+//    @Description("Проверяем секцию 'Недавно просмотренных товаров'. Смотрим 21 товар и проверяем, что среди просмотренных общее кол-во равно 20")
+//    public void productsNoMoreThan20() {
+//        driver.get(TestConfig.SITE_URL + "catalog");
+//        for (int i = 0; i <= 20; i++) {
+//            List<WebElement> elements = driver.findElements(nameLink);
+//            ((JavascriptExecutor) driver).executeScript(
+//                    "arguments[0].click();", elements.get(i));
+//            basket.clickOnCatalogButton();
+//        }
+//        basket.clickOnNameLink();
+//        List<WebElement> productList = driver.findElements(By.xpath("//section[@class='products-slider viewed-products product-card__products-slider']//div[@class='catalog-card__designer']/a"));
+//        assertEquals(20, productList.size());
+//    }
 
 }

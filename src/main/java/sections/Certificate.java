@@ -16,7 +16,7 @@ public class Certificate extends Base {
 
     private final By firstSectionPlusButton = By.xpath("//button[@class='certificate-page__btn-plus']");
     private final By firstSectionMinusButton = By.xpath("//button[@class='certificate-page__btn-minus']");
-    private final By firstSectionOrderButton = By.xpath("//button[@class='certificate-page__send-button button-fill']/span");
+    private final By firstSectionOrderButton = By.xpath("//button[@class='button-default certificate-page__send-button button-default--black']/span");
 
     private final By checkValue = By.xpath("//input[@name='quantity']");
     private final By certificatesButton = By.xpath("//a[text()='сертификаты']");

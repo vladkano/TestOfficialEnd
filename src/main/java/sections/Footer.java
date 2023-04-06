@@ -30,14 +30,14 @@ public class Footer extends Base {
     private final By shopsHeader = By.xpath("//main[@class='service-page shops-page']/h1");
     private final By vacancyHeader = By.xpath("//h1[@class='career__heading career__heading_welcome']");
     private final By soglashenieHeader = By.xpath("//h1[@class='service-page__title']");
-    private final By dostavkaHeader = By.xpath("//main[@class='service-page payment-and-delivery-page']/h1");
+    private final By dostavkaHeader = By.xpath("//h1[@class='shipping-and-payment__title shipping-and-payment__title_main']");
     private final By obmenHeader = By.xpath("//main[@class='service-page exchange-and-refund-page']/h1");
     private final By garantiiHeader = By.xpath("//main[@class='service-page warranties-page']/h1");
     private final By ofertaHeader = By.xpath("//main[@class='service-page offer-page']/h1");
     private final By personalnyeDannyeHeader = By.xpath("//h1[@class='service-page__title']");
-    private final By telegaHeader = By.xpath("//a[text()='@poisondrop_life']");
+    private final By telegaHeader = By.xpath("//a[text()='@poisonedstaff']");
     private final By youtubeHeader = By.xpath("//yt-formatted-string[text()='Poison Drop']");
-    private final By whatsAppHeader = By.xpath("//h3[text()='Poison Drop by ООО \"ПойзонДроп\"']");
+    private final By whatsAppHeader = By.xpath("//h3[text()='Poison Drop | универмаг украшений']");
 
     public Footer(WebDriver driver) {
         super(driver);

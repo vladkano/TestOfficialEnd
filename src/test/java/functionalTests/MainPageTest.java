@@ -101,7 +101,7 @@ public class MainPageTest extends TestBase {
         String heading = mainPage.getSigOutHeader();
         String code2 = mainPage.getPhonePasswordForLC();
         mainPage.sigInWithPassword(code2);
-        sleep(1000);
+//        sleep(1000);
         String sigInHeader = mainPage.getSigInHeader();
         Assertions.assertAll(
                 () -> assertEquals("вход или регистрация", heading),

@@ -26,7 +26,7 @@ public class Designers extends Base {
     private final By designer = By.xpath("//li[@class='index-designers__name']/a");
 
     //карточка товара
-    private final By designerPhoto = By.xpath("//span[@class='picture designer-block__picture lazy']/picture/img");
+    private final By designerPhoto = By.xpath("//span[@class='picture designer-block__picture']/picture/img");
     private final By designerName = By.xpath("//a[@class='designer-block__link']");
     private final By designerText = By.xpath("//p[@class='designer-block__description']");
 
@@ -437,16 +437,18 @@ public class Designers extends Base {
     public static List<String> getListOfDesigners() {
         String name;
         List<String> text = new ArrayList<>();
-        String query = "select designer.name from designer " +
+        String query = "select designer_translation.name from designer " +
+                "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
                 "JOIN item ON item.designer_id = designer.id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 " +
-                "and item_sku.url is not null and balance > 0 and designer.show = 1 " +
-                "group by designer.name";
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_sku_price.price != 0 " +
+                "and designer_translation.locale = 'ru' " +
+                "group by designer_translation.name";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);

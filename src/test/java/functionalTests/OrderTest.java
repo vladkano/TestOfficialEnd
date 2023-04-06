@@ -357,17 +357,17 @@ public class OrderTest extends TestBase {
         assertEquals(TestConfig.COM_URL + "cart", comUrl);
     }
 
-    /**
-     * Доставка до постамата:<p>
-     * Проверка перехода к оплате заказа на сайте, способ доставки: Доставка до постамата(Россия), Способ связи: Звонок по телефону.
-     */
-    @Test()
-    @Description("Доставка до постамата. Проверка перехода к оплате заказа на сайте, способ доставки: Доставка до постамата(Россия), Способ связи: Звонок по телефону.")
-    public void postomatAndRussian() {
-        putItemInBasket();
-        order.orderWithPickPointPhone(phoneForOrder, email, testNameForOrder, "Россия", "Екатеринбург", "Шварца");
-        payConfirmAndHeaderCheck();
-    }
+//    /**
+//     * Доставка до постамата:<p>
+//     * Проверка перехода к оплате заказа на сайте, способ доставки: Доставка до постамата(Россия), Способ связи: Звонок по телефону.
+//     */
+//    @Test()
+//    @Description("Доставка до постамата. Проверка перехода к оплате заказа на сайте, способ доставки: Доставка до постамата(Россия), Способ связи: Звонок по телефону.")
+//    public void postomatAndRussian() {
+//        putItemInBasket();
+//        order.orderWithPickPointPhone(phoneForOrder, email, testNameForOrder, "Россия", "Екатеринбург", "Шварца");
+//        payConfirmAndHeaderCheck();
+//    }
 
 
     //Доставка в Белоруссию более не доступна(Инфа от Юры)

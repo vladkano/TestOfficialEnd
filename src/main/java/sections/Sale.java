@@ -70,7 +70,8 @@ public class Sale extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and item_sku_price.discount is not null " +
-                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and designer_translation.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 " +
+                "and currency_id = 1 and designer_translation.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -102,7 +103,8 @@ public class Sale extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and item_sku_price.discount is not null " +
-                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 " +
+                "and currency_id = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -134,7 +136,7 @@ public class Sale extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and item_sku_price.discount is not null " +
+                "and currency_id = 1 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and item_sku_price.discount is not null " +
                 "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
@@ -164,7 +166,7 @@ public class Sale extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and item_sku_price.discount is not null " +
+                "and currency_id = 1 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and item_sku_price.discount is not null " +
                 "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
