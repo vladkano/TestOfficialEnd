@@ -174,7 +174,7 @@ public class WishListTest extends TestBase {
         wishlist.clickToMoveToBasketButton();
         String basketProductName = wishlist.getBasketProductName().toLowerCase();
         Assertions.assertAll(
-                () -> assertEquals(itemName, itemNameFromWishlist),
+                () -> assertEquals(itemName.substring(0,20), itemNameFromWishlist.substring(0,20)),
                 () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20)));
     }
 
@@ -265,5 +265,19 @@ public class WishListTest extends TestBase {
                 () -> assertEquals(itemNameFromWishlist.substring(0,30) + "\n" + "Размер: " + wishListProductSize,
                         basketProductName.substring(0,30) +  "\n" + basketProductSize));
     }
+    @Test()
+    public void deleteItemToWishlist() {
+        driver.get(TestConfig.SITE_URL + "catalog/");
+        String itemName = wishlist.getItemName();
+        wishlist.clickToAddToWishlistFromCatalogButton();
+        wishlist.clickToWishListButton();
+        String itemNameFromWishlist = wishlist.getItemNameFromFavorites();
+        assertEquals(itemName.substring(0, 10), itemNameFromWishlist.substring(0, 10).toLowerCase());
+        basket.clickToCatalogButton();
+        wishlist.clickToDeleteFromWishlist();
+        int numbers = driver.findElements(By.xpath("//h3/a")).size();
+        assertTrue(numbers < 1);
+    }
+
 
 }

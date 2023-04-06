@@ -18,8 +18,8 @@ public class Order extends Base {
     private final By changeCityButton = By.xpath("//span[@class='order-delivery__location-city-output']");
     private final By locationSearch = By.id("locationSearch");
     private final By locationButton = By.xpath("//p[@class='location-choose__variant-city']");
+    private final By confirmButton = By.xpath("//button[@class='confirm-phone__button']");
 
-    private final By deliveryButton = By.xpath("//b[@class='order-delivery__tab-title']");
 
     private final By orderPhone = By.xpath("//input[@id='orderPhone']");
     private final By orderEmail = By.xpath("//input[@id='orderEmail']");
@@ -35,9 +35,12 @@ public class Order extends Base {
     private final By orderCommentForCourier = By.xpath("//textarea[@id='courierComment']");
     private final By orderComment = By.xpath("//textarea[@name='comment']");
 
+    private final By deliveryCity = By.id("deliveryCity");
+
+
     private final By payButton = By.xpath("//button[@class='submit-block__button button-fill']/span");
     private final By orderButton = By.xpath("//span[text()='Оформить заказ']");
-    private final By addAddressButton = By.xpath("//span[contains(text(), 'добавить этаж, домофон, комментарий для курьера')]");
+    private final By addAddressButton = By.xpath("//div[@class='dropdown courier-delivery__additional']//span");
     private final By searchBox = By.xpath("//input[@id='searchbox']");
     private final By countrySearchBox = By.xpath("//input[@class='reg']");
     private final By citySearchBox = By.xpath("(//input[@class='reg'])[2]");
@@ -61,6 +64,7 @@ public class Order extends Base {
     private final By rodonitButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"6601-003\"); return false;']");
     private final By belarusButton = By.xpath("//div[@onclick='PickPointWidgetHost.showPointBox(\"9001-009\"); return false;']");
     private final By selectButton = By.xpath("//div[text()='ВЫБРАТЬ']");
+    private final By certificateButton = By.xpath("//label[@for='onlineCertificate']/span");
     private final By paperButton = By.xpath("//span[text()='Бумажный']");
     private final By firstPrice = By.xpath("//b[@class='cart-price__total']");
     private final By finalPrice = By.xpath("//div[@class='order-summary__row order-summary__row_total']/span[2]");
@@ -69,8 +73,8 @@ public class Order extends Base {
     private final By frame = By.xpath("//iframe[@src='https://pickpoint.ru/select/?&ikn=9990653812']");
     private final By payFrame = By.xpath("//iframe[@class=' with-appled']");
     private final By ordinaryDeliveryButton = By.xpath("//label[@for='ordinaryDelivery']/span[@class='order-delivery__courier-type-variant']");
-    private final By promoButton = By.xpath("//button[@class='cart-promocode__trigger']/span");
-    private final By orderPromocode = By.xpath("//input[@id='promocodeInput']");
+    private final By promoButton = By.xpath("//button[@class='cart-promo-code__trigger']/span");
+    private final By orderPromocode = By.xpath("//input[@id='promoCodeInput']");
     private final By enterPromoCodeButton = By.xpath("//button[@aria-label='Применить промокод']/span");
 
 
@@ -107,8 +111,8 @@ public class Order extends Base {
                 "arguments[0].click();", driver.findElement(cartLocationButtonNY));
     }
 
-    public void clickOnDeliveryButton() {
-        click(deliveryButton);
+    public void clickOnConfirmButton() {
+        click(confirmButton);
     }
 
     public void typeLocationSearch(String searchCity) {
@@ -137,7 +141,7 @@ public class Order extends Base {
 
     public String getPayComHeader() {
 //        wait.until(ExpectedConditions.presenceOfElementLocated(payComHeader));
-        waitForVisibilityOf(payComHeader,10);
+        waitForVisibilityOf(payComHeader, 10);
         return driver.findElement(payComHeader).getText();
     }
 
@@ -207,8 +211,11 @@ public class Order extends Base {
     }
 
     public void typeComment(String comment) {
-
         driver.findElement(orderComment).sendKeys(comment);
+    }
+
+    public void typeDeliveryCity(String city) {
+        driver.findElement(deliveryCity).sendKeys(city);
     }
 
     public void clickOnPayButton() {
@@ -340,6 +347,11 @@ public class Order extends Base {
     public void clickOnPaperButton() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].click();", driver.findElement(paperButton));
+    }
+
+    public void clickOnCertificateButton() {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", driver.findElement(certificateButton));
     }
 
     public void basicParameters(String phone, String email, String fio) {
@@ -713,24 +725,36 @@ public class Order extends Base {
     }
 
     //Доставить в другую страну(Dubai):
-    public void deliveryFromDubai(String phone, String email, String fio, String city, String comment) {
+    public void deliveryFromDubai(String phone, String email, String fio, String city, String address, String apartment,
+                                  String frontDoor, String floor, String houseCode, String commentForCourier, String comment) {
         driver.findElement(orderPhone).clear();
         basicParameters(phone, email, fio);
-        clickOnChangeCityButton();
-        typeLocationSearch(city);
-        clickOnLocationButton();
+        typeDeliveryCity(city);
+        type(address, orderAddressButton);
+        typeApartment(apartment);
+        typeFrontDoor(frontDoor);
+        clickOnAddAdresButton();
+        typeFloor(floor);
+        typeHouseCode(houseCode);
+        typeCommentForCourier(commentForCourier);
         clickOnAddCommentButton();
         typeComment(comment);
         clickOnPayButton();
     }
 
-    //Доставить в другую страну(Dubai):
-    public void deliveryFromDubaiToNY(String phone, String email, String fio, String city, String comment) {
+    //Доставить в другую страну(USA):
+    public void deliveryFromDubaiToNY(String phone, String email, String fio, String city, String address, String apartment,
+                                      String frontDoor, String floor, String houseCode, String commentForCourier, String comment) {
         driver.findElement(orderPhone).clear();
         basicParameters(phone, email, fio);
-        clickOnChangeCityButton();
-        typeLocationSearch(city);
-        clickOnLocationButtonNY();
+        typeDeliveryCity(city);
+        type(address, orderAddressButton);
+        typeApartment(apartment);
+        typeFrontDoor(frontDoor);
+        clickOnAddAdresButton();
+        typeFloor(floor);
+        typeHouseCode(houseCode);
+        typeCommentForCourier(commentForCourier);
         clickOnAddCommentButton();
         typeComment(comment);
         clickOnPayButton();
@@ -767,6 +791,7 @@ public class Order extends Base {
     //Сертификаты:
     public void elCertificateWithPhone(String phone, String email, String fio, String comment) {
         basicParameters(phone, email, fio);
+        clickOnCertificateButton();
         this.clickOnAddCommentButton();
         this.typeComment(comment);
         this.clickOnPayButton();

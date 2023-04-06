@@ -53,6 +53,8 @@ public class Base {
     protected By goodButton = By.xpath("//button[@class='button-default button-default--black']");
     protected By catalogLocationButton = By.xpath("//li[@class='location-choose__variant _initial']/p");
 
+    protected By location = By.xpath("//span[@class='icon-with-title__text']");
+
     protected By cartLocationButtonNY = By.xpath("//p[text()='New York']");
     protected By catalogLocationButtonUSA = By.xpath("//p[text()='United States']");
 
@@ -76,7 +78,7 @@ public class Base {
     }
 
     protected void click(By locator) {
-        waitForVisibilityOf(locator, 5);
+        waitForVisibilityOf(locator, 10);
         find(locator).click();
     }
 
@@ -108,7 +110,12 @@ public class Base {
         click(okButton);
     }
 
+    public void clickToLocationButton() {
+        click(location);
+    }
+
     public void chooseDubai() {
+        clickToLocationButton();
         click(noButton);
         click(catalogLocationButton);
         sleep(1000);
@@ -117,7 +124,7 @@ public class Base {
     public void chooseNewYork() {
         click(noButton);
         click(catalogLocationButtonUSA);
-        sleep(1000);
+//        sleep(1000);
     }
 
     public void clickToGoodButton() {

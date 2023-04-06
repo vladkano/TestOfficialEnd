@@ -120,7 +120,9 @@ public class Filters extends Base {
     }
 
     public void clickToAllNecklacesComButton() {
-        click(allNecklacesComButton);
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", driver.findElement(allNecklacesComButton));
+//        click(allNecklacesComButton);
     }
 
     public void clickToAllBraceletsButton() {
@@ -282,7 +284,7 @@ public class Filters extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_translation.catalog_id in (1) and catalog_translation.locale = 'en' and is_archive = 0 " +
                 "and item_sku_price.price != 0 and filter_id = 155 " +
-                "and storage_id in (1006) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
+                "and storage_id in (1006,1007,1009) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -342,7 +344,7 @@ public class Filters extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
                 "and catalog_translation.catalog_id in (5) and catalog_translation.locale = 'en' " +
-                "and storage_id in (1006) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
+                "and storage_id in (1006,1007,1009) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -402,7 +404,7 @@ public class Filters extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_translation.catalog_id=2 and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
                 "and catalog_translation.locale = 'en' " +
-                "and storage_id in (1006) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
+                "and storage_id in (1006,1007,1009) and balance > 0 and designer.show = 1 and item_translations.locale = 'en' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();

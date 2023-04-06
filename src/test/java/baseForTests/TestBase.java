@@ -78,7 +78,7 @@ public class TestBase {
     protected By countOfBanners = By.xpath("//div[@class='banner index-page__banner']/a");
     protected By namesOfTrends = By.xpath("//h4");
     protected By numberOfDesigners = By.xpath("//li[@class='index-designers__name']/a");
-    protected By trendBanners = By.xpath("//span[@class='picture']");
+    protected By trendBanners = By.xpath("//span[@class='picture trend-item__image']");
     protected By nameLink = By.xpath("//p[@class='catalog-card__name']/a");
     protected By showMore = By.xpath("//span[text()='Показать ещё']");
     protected By designerName = By.xpath("//p[@class='catalog-card__designer']/a");

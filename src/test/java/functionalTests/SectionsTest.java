@@ -230,7 +230,7 @@ public class SectionsTest extends TestBase {
         String header = footer.getDostavkaHeader();
         Assertions.assertAll(
                 () -> assertEquals(TestConfig.SITE_URL + "dostavka-i-oplata/", url),
-                () -> assertEquals("Доставка и оплата", header));
+                () -> assertEquals("доставка и оплата", header));
     }
 
     /**
@@ -318,8 +318,8 @@ public class SectionsTest extends TestBase {
         String url = driver.getCurrentUrl();
         String header = footer.getTelegaHeader();
         Assertions.assertAll(
-                () -> assertEquals("https://t.me/poisondrop_life", url),
-                () -> assertEquals("@poisondrop_life", header));
+                () -> assertEquals("https://t.me/impoisoned", url),
+                () -> assertEquals("@poisonedstaff", header));
     }
 
     /**
@@ -364,7 +364,7 @@ public class SectionsTest extends TestBase {
         String header = footer.getWhatsAppHeader();
         Assertions.assertAll(
                 () -> assertEquals("https://api.whatsapp.com/send/?phone=74952551533&text&type=phone_number&app_absent=0", url),
-                () -> assertEquals("Poison Drop by ООО \"ПойзонДроп\"", header));
+                () -> assertEquals("Poison Drop | универмаг украшений", header));
     }
 
 

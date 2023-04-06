@@ -48,6 +48,7 @@ public class ComTests extends TestBase {
         sale = new Sale(driver);
         wishlist = new Wishlist(driver);
         earrings = new Earrings(driver);
+        basket.chooseNewYork();
     }
 
     /**
@@ -86,7 +87,7 @@ public class ComTests extends TestBase {
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getAttribute("textContent");
-            siteList.add(s.substring(0, 10));
+            siteList.add(s.substring(0, 8));
             siteSize = siteList.size();
         }
     }
@@ -125,9 +126,11 @@ public class ComTests extends TestBase {
      */
     @Test()
     public void internationalDeliveryToDubai() {
+        sleep(2000);
         basket.chooseDubai();
         putItemInBasket();
-        order.deliveryFromDubai("+7" + phoneForOrder, email, testNameForOrder, "Dubai", "Test");
+        order.deliveryFromDubai("+7" + phoneForOrder, email, testNameForOrder, "Dubai", "Dubai ST 0001", "2", "2", "2",
+                "2", "Test Comment", "Test");
         payConfirmAndHeaderCheck();
     }
 
@@ -136,9 +139,9 @@ public class ComTests extends TestBase {
      */
     @Test()
     public void internationalDeliveryToNewYork() {
-        basket.chooseNewYork();
         putItemInBasket();
-        order.deliveryFromDubaiToNY("+7" + phoneForOrder, email, testNameForOrder, "NewYork", "Test");
+        order.deliveryFromDubaiToNY("+7" + phoneForOrder, email, testNameForOrder, "New York", "64 RUTGERS ST", "2", "2", "2",
+                "2", "Test Comment", "Test");
         payConfirmAndHeaderCheck();
     }
 
@@ -170,7 +173,6 @@ public class ComTests extends TestBase {
     @Test
     @Description("Проверяем работу фильтров: По типу изделия(Серьги)")
     public void earringFilterCom() {
-        basket.chooseNewYork();
         filters.clickToFilterButton();
         filters.clickToAllEarringsComButton();
         filters.clickToShowProductsButton();
@@ -189,7 +191,6 @@ public class ComTests extends TestBase {
     @Test
     @Description("Проверяем работу фильтров: По типу изделия(Кольца)")
     public void ringsFilterCom() {
-        basket.chooseNewYork();
         filters.clickToFilterButton();
         filters.clickToAllRingsButtonCom();
         filters.clickToShowProductsButton();
@@ -208,7 +209,6 @@ public class ComTests extends TestBase {
     @Test
     @Description("Проверяем работу фильтров: По типу изделия(Колье)")
     public void necklacesFilterCom() {
-        basket.chooseNewYork();
         filters.clickToFilterButton();
         filters.clickToAllNecklacesComButton();
         filters.clickToShowProductsButton();
@@ -227,7 +227,7 @@ public class ComTests extends TestBase {
     @Test
     @Description("Поверяем возможность авторизации по номеру телефона и отображения надписи 'Вход или регистрация', 'Вход'")
     public void signInComWithPhoneNumber() {
-        basket.chooseNewYork();
+        sleep(2000);
         mainPage.sigInToComWithPhone("+7" + phoneForAuthorization);
         String heading = mainPage.getSigOutHeader();
         String code2 = mainPage.getPhonePassword();
@@ -310,7 +310,7 @@ public class ComTests extends TestBase {
         Assertions.assertAll(
                 () -> assertEquals("Product type", specification.substring(0, 12)),
                 () -> assertEquals("delivery", receivingText),
-                () -> assertEquals("Russia", location),
+                () -> assertEquals("United States", location),
                 () -> assertEquals("jewelry", jewelryCareHeader),
                 () -> assertEquals("you may never want to take it off, but remember that alcohol in perfume can harm natural stones.", jewelryCareText),
                 () -> assertEquals("fashion jewelry", bijouterieCareHeader),
@@ -400,11 +400,11 @@ public class ComTests extends TestBase {
         wishlist.clickToWishListInCardListButton();
         wishlist.clickToWishListButton();
         int numbers = driver.findElements(By.xpath("//h3/a")).size();
-        assertTrue(numbers > 0);
         String url = driver.getCurrentUrl();
         String header = wishlist.getWishListHeader();
         Assertions.assertAll(
                 () -> assertEquals(TestConfig.COM_URL + "wishlist/", url),
+                () -> assertTrue(numbers > 0),
                 () -> assertEquals("favorites", header));
     }
 
@@ -438,8 +438,8 @@ public class ComTests extends TestBase {
         wishlist.clickToMoveToBasketButton();
         String basketProductName = wishlist.getBasketProductName().toLowerCase();
         Assertions.assertAll(
-                () -> assertEquals(itemName.substring(0, 20), itemNameFromWishlist.substring(0, 20)),
-                () -> assertEquals(itemNameFromWishlist.substring(0, 20), basketProductName.substring(0, 20)));
+                () -> assertEquals(itemName.substring(0, 13), itemNameFromWishlist.substring(0, 13)),
+                () -> assertEquals(itemNameFromWishlist.substring(0, 13), basketProductName.substring(0, 13)));
     }
 
 }

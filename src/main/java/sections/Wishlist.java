@@ -64,12 +64,14 @@ public class Wishlist extends Base {
     }
 
     public String getItemNameFromFavorites() {
+        waitForVisibilityOf(favoriteName, 5);
         return driver.findElement(favoriteName).getText();
     }
 
     public void clickToAddToWishlistFromCatalogButton() {
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();", driver.findElement(addToFavoritesFromCatalogButton));
+//        ((JavascriptExecutor) driver).executeScript(
+//                "arguments[0].click();", driver.findElement(addToFavoritesFromCatalogButton));
+        click(addToFavoritesFromCatalogButton);
     }
 
     public void clickToWishListButton() {
@@ -78,8 +80,9 @@ public class Wishlist extends Base {
     }
 
     public void clickToWishListInCardListButton() {
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();", driver.findElement(wishListInCardListButton));
+//        ((JavascriptExecutor) driver).executeScript(
+//                "arguments[0].click();", driver.findElement(wishListInCardListButton));
+        click(wishListInCardListButton);
     }
 
     public String getWishListHeader() {
@@ -153,4 +156,12 @@ public class Wishlist extends Base {
         worker.getSession().disconnect();
 
     }
+
+    private final By deleteToItemFromWishlist = By.xpath("//span[@class='wish-button__icon-block']");
+    public void clickToDeleteFromWishlist() {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", driver.findElement(deleteToItemFromWishlist));
+    }
+
+
 }

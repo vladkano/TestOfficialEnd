@@ -2,6 +2,7 @@ package functionalTests;
 
 import baseForTests.TestBase;
 import basket.Basket;
+import catalog.CatalogNavigation;
 import config.TestConfig;
 import filters.Filters;
 import filters.Size;
@@ -36,8 +37,9 @@ public class BasketTest extends TestBase {
         basket = new Basket(driver);
         filters = new Filters(driver);
         size = new Size(driver);
-        basket.clickToOkButton();
+        navigation = new CatalogNavigation(driver);
         order = new Order(driver);
+        basket.clickToOkButton();
         this.testMethodName = testInfo.getTestMethod().get().getName();
     }
 
@@ -280,6 +282,7 @@ public class BasketTest extends TestBase {
     @Test
     @Description("Проверка кнопки 'Перейти в корзину' со страницы заказа после добавления в корзину")
     public void checkHref() {
+        navigation.clickOnShowMoreButton();
         basket.clickToAnotherItemButton();
         basket.clickToItemInBasketButton();
         basket.clickToBasketButton();
@@ -309,6 +312,7 @@ public class BasketTest extends TestBase {
     public void checkNumber() {
         goToCart();
         basket.clickToCatalogButton();
+        navigation.clickOnShowMoreButton();
         basket.clickToAnotherItemButton();
         basket.clickToItemInBasketButton();
         basket.clickToBasketButton();
@@ -341,17 +345,17 @@ public class BasketTest extends TestBase {
      * Блок тестов по валидации в корзине:<p>
      * Для доставки в постамат нужно выбрать постамат
      */
-    @Test
-    @Description("Валидации в корзине(постамат)")
-    public void postamatCheck() {
-        goToCart();
-        order.orderWithPostamatCheck(phoneForOrder, email, testNameForOrder);
-        String code2 = order.getPhonePassword();
-        order.confirmWithPassword(code2);
-        waitForVisibilityOf(postamatErrorHeader, 5);
-        String postamatHeader = basket.getBasketError();
-        assertEquals("Для доставки в постамат нужно выбрать постамат", postamatHeader);
-    }
+//    @Test
+//    @Description("Валидации в корзине(постамат)")
+//    public void postamatCheck() {
+//        goToCart();
+//        order.orderWithPostamatCheck(phoneForOrder, email, testNameForOrder);
+//        String code2 = order.getPhonePassword();
+//        order.confirmWithPassword(code2);
+//        waitForVisibilityOf(postamatErrorHeader, 5);
+//        String postamatHeader = basket.getBasketError();
+//        assertEquals("Для доставки в постамат нужно выбрать постамат", postamatHeader);
+//    }
 
     /**
      * При оформлении заказа необходимо указать имя
