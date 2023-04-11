@@ -30,7 +30,7 @@ public class TagTest extends TestBase {
     @Description("Отображение тегов в каталогах: Серьги")
     public void tagIsVisibleEarrings() {
         driver.get(TestConfig.SITE_URL + "catalog/sergi");
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 5; i++){
             navigation.clickOnShowMoreButton();
         }
         String firstTag = tag.getTag();

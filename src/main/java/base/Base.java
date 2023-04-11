@@ -124,7 +124,7 @@ public class Base {
     public void chooseNewYork() {
         click(noButton);
         click(catalogLocationButtonUSA);
-//        sleep(1000);
+        sleep(1000);
     }
 
     public void clickToGoodButton() {
