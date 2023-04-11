@@ -53,7 +53,7 @@ public class WishListTest extends TestBase {
         wishlist.clickOnImageLink();
         wishlist.clickToWishListInCardListButton();
         wishlist.clickToWishListButton();
-        int numbers = driver.findElements(By.xpath("//h3/a")).size();
+        int numbers = driver.findElements(By.xpath("//p/a")).size();
         assertTrue(numbers > 0);
         String url = driver.getCurrentUrl();
         String header = wishlist.getWishListHeader();

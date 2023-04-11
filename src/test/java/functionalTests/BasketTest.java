@@ -364,7 +364,7 @@ public class BasketTest extends TestBase {
     @Description("Валидации в корзине(При оформлении заказа необходимо указать имя)")
     public void nameCheck() {
         goToCart();
-        order.orderWithPostamatCheck(phoneForOrder, email, "");
+        order.orderWithCompanyStoreTsvetnoy(phoneForOrder, email, "");
         String nameError = basket.getDataError();
         String basketError = basket.getBasketError();
         Assertions.assertAll(
@@ -379,7 +379,7 @@ public class BasketTest extends TestBase {
     @Description("Валидации в корзине(При оформлении заказа необходимо указать электронную почту)")
     public void emailCheck() {
         goToCart();
-        order.orderWithPostamatCheck(phoneForOrder, "", testNameForOrder);
+        order.orderWithCompanyStoreMetropolisWA(phoneForOrder, "", testNameForOrder);
         String emailError = basket.getDataError();
         String basketError = basket.getBasketError();
         Assertions.assertAll(
@@ -395,7 +395,7 @@ public class BasketTest extends TestBase {
     public void phoneCheck() {
         goToCart();
         driver.findElement(By.xpath("//input[@id='orderPhone']")).clear();
-        order.orderWithPostamatCheck("", email, testNameForOrder);
+        order.orderWithCompanyStoreAtriumSms("", email, testNameForOrder);
         String phoneError = basket.getDataError();
         String basketError = basket.getBasketError();
         Assertions.assertAll(
