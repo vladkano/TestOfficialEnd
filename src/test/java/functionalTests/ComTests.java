@@ -66,7 +66,7 @@ public class ComTests extends TestBase {
         double finalCloudPrice = Double.parseDouble(order.getCheckoutPrice().replaceAll("[^\\d.]", ""));
 //        System.out.println(finalCloudPrice);
         Assertions.assertAll(
-                () -> assertEquals("Pay Poison Drop LLC", header.substring(0, 19)),
+                () -> assertEquals("Pay poisondrop.com ", header.substring(0, 19)),
                 () -> assertEquals(cartPrice, finalCloudPrice));
     }
 

@@ -52,7 +52,6 @@ public class TestBase {
     protected DesignersFilter designersFilter;
     protected Designers designers;
     protected MainPageBanner banner;
-    protected NameNecklaces nameNecklaces;
     protected Sale sale;
     protected NewItems newItems;
     protected Jewelry jewelry;

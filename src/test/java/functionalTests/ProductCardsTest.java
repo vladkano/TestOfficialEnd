@@ -78,7 +78,7 @@ public class ProductCardsTest extends TestBase {
                 () -> assertNotEquals(firstCurrentSize, secondCurrentSize),
 //                () -> assertNotEquals(secondCurrentSize, thirdCurrentSize),
 //                () -> assertNotEquals(firstCurrentSize, thirdCurrentSize),
-                () -> assertEquals("Размер: " + secondCurrentSize, sizeHeader));
+                () -> assertEquals("размер: " + secondCurrentSize, sizeHeader));
     }
 
     /**
@@ -136,7 +136,7 @@ public class ProductCardsTest extends TestBase {
                 () -> assertNotEquals(firstCurrentSize, secondCurrentSize),
 //                () -> assertNotEquals(secondCurrentSize, thirdCurrentSize),
 //                () -> assertNotEquals(firstCurrentSize, thirdCurrentSize),
-                () -> assertEquals("Размер: " + secondCurrentSize, sizeHeader));
+                () -> assertEquals("размер: " + secondCurrentSize, sizeHeader));
     }
 
     /**

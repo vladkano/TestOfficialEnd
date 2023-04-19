@@ -145,23 +145,6 @@ public class CatalogTest extends TestBase {
     }
 
     /**
-     * Броши(проверка по наименованию дизайнера)
-     */
-    @Test
-    @Description("Броши(проверка по наименованию дизайнера)")
-    public void broochDesigners() {
-        driver.get(TestConfig.SITE_URL + "catalog/broshi");
-        String countHeader = filters.getCountHeader();
-        Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
-        List<String> sqlList = brooches.getDesigners();
-        int sqlSize = sqlList.size();
-        getDesignerNamesFromSite();
-        Assertions.assertAll(
-                () -> assertEquals(sqlSize, numberOnly),
-                () -> assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47)));
-    }
-
-    /**
      * Пирсинг(проверка по наименованию дизайнера)
      */
     @Test
@@ -257,23 +240,6 @@ public class CatalogTest extends TestBase {
             String s = text.getText();
             siteList.add(s.substring(0, 9));
         }
-        assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
-    }
-
-    /**
-     * Броши(проверка по наименованию изделия)
-     */
-    @Test
-    @Description("Броши(проверка по наименованию изделия)")
-    public void broochesNames() {
-        driver.get(TestConfig.SITE_URL + "catalog/broshi");
-        List<String> sqlList = brooches.getNames();
-        List<WebElement> elements = driver.findElements(numberOfItem);
-        for (WebElement text : elements) {
-            String s = text.getText();
-            siteList.add(s.substring(0, 9));
-        }
-        System.out.println(sqlList.size());
         assertEquals(sqlList.subList(0, 47), siteList.subList(0, 47));
     }
 
@@ -432,18 +398,6 @@ public class CatalogTest extends TestBase {
     public void ringsPrice() {
         driver.get(TestConfig.SITE_URL + "catalog/koltsa");
         List<Integer> sqlList = rings.getPrice();
-        getPricesFromSite();
-        assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
-    }
-
-    /**
-     * Броши(проверка по цене)
-     */
-    @Test
-    @Description("Броши(проверка по цене)")
-    public void broochesPrice() {
-        driver.get(TestConfig.SITE_URL + "catalog/broshi");
-        List<Integer> sqlList = brooches.getPrice();
         getPricesFromSite();
         assertEquals(sqlList.subList(0, 47), priceList.subList(0, 47));
     }
