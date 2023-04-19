@@ -317,6 +317,8 @@ public class Order extends Base {
 
     public void confirmWithPassword(String password) {
         type(password, authPassword);
+        sleep(1000);
+        clickOnPayButton();
     }
 
     public void typeSearchBox(String search) {
@@ -792,9 +794,9 @@ public class Order extends Base {
     public void elCertificateWithPhone(String phone, String email, String fio, String comment) {
         basicParameters(phone, email, fio);
         clickOnCertificateButton();
-        this.clickOnAddCommentButton();
-        this.typeComment(comment);
-        this.clickOnPayButton();
+        clickOnAddCommentButton();
+        typeComment(comment);
+        clickOnPayButton();
     }
 
     public void elCertificateWithWA(String phone, String email, String fio, String comment) {

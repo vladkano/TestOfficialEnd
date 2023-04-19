@@ -35,7 +35,6 @@ public class Basket extends Base {
     private final By dataError = By.xpath("//p[@class='text-input__message message message_error']");
 
 
-
     public Basket(WebDriver driver) {
         super(driver);
     }
@@ -60,7 +59,7 @@ public class Basket extends Base {
     public void clickToItemButton() {
         String firstItem = findFirstItemMoreThan5000();
         ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();", driver.findElement(By.xpath("//a[contains(text()," + "'" + firstItem.substring(0,15) + "')]")));
+                "arguments[0].click();", driver.findElement(By.xpath("//a[contains(text()," + "'" + firstItem.substring(0, 15) + "')]")));
     }
 
 
@@ -234,7 +233,7 @@ public class Basket extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list.get(1);
+        return list.get(0);
     }
 
 
@@ -284,7 +283,7 @@ public class Basket extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price > 5000 and filter_id = 155 " +
-                "and storage_id not in "+ unavailableStorages + " and designer.show = 1 and item_translations.locale = 'ru' " +
+                "and storage_id not in " + unavailableStorages + " and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position " +
                 "HAVING count>1";
         try {
@@ -327,7 +326,7 @@ public class Basket extends Base {
                 "JOIN item_collection ON item_collection_consist.item_collection_id = item_collection.id " +
                 "JOIN item_collection_translation ON item_collection_translation.item_collection_id = item_collection.id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and storage_id not in "+ unavailableStorages + " and filter_id = 149" +
+                "and storage_id not in " + unavailableStorages + " and filter_id = 149" +
                 " and item_collection_consist.item_collection_characteristic_id!=0 and item_collection_consist.item_collection_characteristic_value_id != 0 " +
                 " and item_collection_consist.item_collection_id != 0 and catalog_translation.locale = 'ru' and item_collection_translation.locale = 'ru' " +
                 " and item_collection_characteristic_translation.locale = 'ru' and item_collection_characteristic_value_translation.locale = 'ru' " +
@@ -375,7 +374,7 @@ public class Basket extends Base {
                 "JOIN item_collection ON item_collection_consist.item_collection_id = item_collection.id " +
                 "JOIN item_collection_translation ON item_collection_translation.item_collection_id = item_collection.id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and storage_id not in "+ unavailableStorages + " and filter_id = 149" +
+                "and storage_id not in " + unavailableStorages + " and filter_id = 149" +
                 " and item_collection_consist.item_collection_characteristic_id!=0 and item_collection_consist.item_collection_characteristic_value_id != 0 " +
                 " and item_collection_consist.item_collection_id != 0 and catalog_translation.locale = 'ru' and item_collection_translation.locale = 'ru' " +
                 " and item_collection_characteristic_translation.locale = 'ru' and item_collection_characteristic_value_translation.locale = 'ru' " +
