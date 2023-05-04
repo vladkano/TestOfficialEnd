@@ -589,8 +589,10 @@ public class ProductCardsTest extends TestBase {
         String krasnodar = productCard.getKrasnodar();
         String kazan = productCard.getKazan();
 
-        String jewelryCareHeader = productCard.clickToJewelryCareButton()
-                .getJewelryCareHeader();
+        productCard.clickToJewelryCareButton();
+        String cuffsHeader = productCard.getCuffsHeader();
+        String cuffsText = productCard.getCuffsText();
+        String jewelryCareHeader = productCard.getJewelryCareHeader();
         String jewelryCareText = productCard.getJewelryCareText();
         String bijouterieCareHeader = productCard.getBijouterieCareHeader();
         String bijouterieCareText = productCard.getBijouterieCareText();
@@ -610,12 +612,14 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
                 () -> assertEquals("Россия", location),
+                () -> assertEquals("каффы с кристаллами", cuffsHeader),
+                () -> assertEquals("сжимать и деформировать нельзя, так как это приводит к выпадению камней", cuffsText),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
                 () -> assertEquals("украшения из ювелирного сплава боятся воды (особенно солёной), крема и парфюма — снимайте их перед душем и нанесением косметики.", bijouterieCareText),
                 () -> assertEquals("оплатить заказ можно как наличными курьеру непосредственно при получении заказа", deliveryText.substring(0, 79)),
-                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop, действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 151)));
+                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop , действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 152)));
     }
 
     @Test
@@ -639,8 +643,10 @@ public class ProductCardsTest extends TestBase {
         String krasnodar = productCard.getKrasnodar();
         String kazan = productCard.getKazan();
 
-        String jewelryCareHeader = productCard.clickToJewelryCareButton()
-                .getJewelryCareHeader();
+        productCard.clickToJewelryCareButton();
+        String cuffsHeader = productCard.getCuffsHeader();
+        String cuffsText = productCard.getCuffsText();
+        String jewelryCareHeader = productCard.getJewelryCareHeader();
         String jewelryCareText = productCard.getJewelryCareText();
         String bijouterieCareHeader = productCard.getBijouterieCareHeader();
         String bijouterieCareText = productCard.getBijouterieCareText();
@@ -660,12 +666,14 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
                 () -> assertEquals("Россия", location),
+                () -> assertEquals("каффы с кристаллами", cuffsHeader),
+                () -> assertEquals("сжимать и деформировать нельзя, так как это приводит к выпадению камней", cuffsText),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
                 () -> assertEquals("украшения из ювелирного сплава боятся воды (особенно солёной), крема и парфюма — снимайте их перед душем и нанесением косметики.", bijouterieCareText),
                 () -> assertEquals("оплатить заказ можно как наличными курьеру непосредственно при получении заказа", deliveryText.substring(0, 79)),
-                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop, действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 151)));
+                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop , действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 152)));
     }
 
     @Test
@@ -689,8 +697,10 @@ public class ProductCardsTest extends TestBase {
         String krasnodar = productCard.getKrasnodar();
         String kazan = productCard.getKazan();
 
-        String jewelryCareHeader = productCard.clickToJewelryCareButton()
-                .getJewelryCareHeader();
+        productCard.clickToJewelryCareButton();
+        String cuffsHeader = productCard.getCuffsHeader();
+        String cuffsText = productCard.getCuffsText();
+        String jewelryCareHeader = productCard.getJewelryCareHeader();
         String jewelryCareText = productCard.getJewelryCareText();
         String bijouterieCareHeader = productCard.getBijouterieCareHeader();
         String bijouterieCareText = productCard.getBijouterieCareText();
@@ -710,12 +720,14 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
                 () -> assertEquals("Россия", location),
+                () -> assertEquals("каффы с кристаллами", cuffsHeader),
+                () -> assertEquals("сжимать и деформировать нельзя, так как это приводит к выпадению камней", cuffsText),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
                 () -> assertEquals("украшения из ювелирного сплава боятся воды (особенно солёной), крема и парфюма — снимайте их перед душем и нанесением косметики.", bijouterieCareText),
                 () -> assertEquals("оплатить заказ можно как наличными курьеру непосредственно при получении заказа", deliveryText.substring(0, 79)),
-                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop, действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 151)));
+                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop , действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 152)));
     }
 
     @Test
@@ -739,8 +751,10 @@ public class ProductCardsTest extends TestBase {
         String krasnodar = productCard.getKrasnodar();
         String kazan = productCard.getKazan();
 
-        String jewelryCareHeader = productCard.clickToJewelryCareButton()
-                .getJewelryCareHeader();
+        productCard.clickToJewelryCareButton();
+        String cuffsHeader = productCard.getCuffsHeader();
+        String cuffsText = productCard.getCuffsText();
+        String jewelryCareHeader = productCard.getJewelryCareHeader();
         String jewelryCareText = productCard.getJewelryCareText();
         String bijouterieCareHeader = productCard.getBijouterieCareHeader();
         String bijouterieCareText = productCard.getBijouterieCareText();
@@ -760,12 +774,14 @@ public class ProductCardsTest extends TestBase {
                 () -> assertEquals("KazanMall", kazan),
                 () -> assertEquals("доставка", receivingText),
                 () -> assertEquals("Россия", location),
+                () -> assertEquals("каффы с кристаллами", cuffsHeader),
+                () -> assertEquals("сжимать и деформировать нельзя, так как это приводит к выпадению камней", cuffsText),
                 () -> assertEquals("ювелирные украшения", jewelryCareHeader),
                 () -> assertEquals("носим не снимая, но помним, что натуральные камни не любят духи (из-за содержащегося в них спирта).", jewelryCareText),
                 () -> assertEquals("бижутерия", bijouterieCareHeader),
                 () -> assertEquals("украшения из ювелирного сплава боятся воды (особенно солёной), крема и парфюма — снимайте их перед душем и нанесением косметики.", bijouterieCareText),
                 () -> assertEquals("оплатить заказ можно как наличными курьеру непосредственно при получении заказа", deliveryText.substring(0, 79)),
-                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop, действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 151)));
+                () -> assertEquals("на украшения, купленные в магазинах или на сайте Poison Drop , действует гарантия шесть месяцев, если украшение было с производственным браком. Что это?", guaranteeText.substring(0, 152)));
     }
 
     /**

@@ -28,10 +28,12 @@ public class ProductCard extends Base {
     private final By availabilityText = By.xpath("//p[@class='storages-list__description']");
 
     private final By jewelryCareButton = By.xpath("//div[@class='accordion-vue product-info__maintenance']/h3");
-    private final By jewelryCareHeader = By.xpath("//div[@class='accordion-vue product-info__maintenance accordion-vue_opened']//h4");
-    private final By jewelryCareText = By.xpath("//div[@id='maintenance-accordion']/p[@class='product-info__text']");
-    private final By bijouterieCareHeader = By.xpath("(//div[@class='accordion-vue product-info__maintenance accordion-vue_opened']//h4)[2]");
-    private final By bijouterieCareText = By.xpath("(//div[@id='maintenance-accordion']/p[@class='product-info__text'])[2]");
+    private final By cuffsHeader = By.xpath("//div[@class='accordion-vue product-info__maintenance accordion-vue_opened']//h4");
+    private final By cuffsText = By.xpath("//div[@id='maintenance-accordion']/p[@class='product-info__text']");
+    private final By jewelryCareHeader = By.xpath("(//div[@class='accordion-vue product-info__maintenance accordion-vue_opened']//h4)[2]");
+    private final By jewelryCareText = By.xpath("(//div[@id='maintenance-accordion']/p[@class='product-info__text'])[2]");
+    private final By bijouterieCareHeader = By.xpath("(//div[@class='accordion-vue product-info__maintenance accordion-vue_opened']//h4)[3]");
+    private final By bijouterieCareText = By.xpath("(//div[@id='maintenance-accordion']/p[@class='product-info__text'])[3]");
 
     private final By payInfoButton = By.xpath("//div[@class='accordion-vue product-info__payment-return']/h3");
     private final By payInfoText = By.xpath("//div[@id='payment-accordion']/p[@class='product-info__text']");
@@ -120,7 +122,6 @@ public class ProductCard extends Base {
     public ProductCard clickToJewelryCareButton() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].click();", driver.findElement(jewelryCareButton));
-//        driver.findElement(jewelryCareButton).click();
         return this;
     }
 
@@ -128,8 +129,16 @@ public class ProductCard extends Base {
         return driver.findElement(jewelryCareHeader).getAttribute("textContent");
     }
 
+    public String getCuffsHeader() {
+        return driver.findElement(cuffsHeader).getAttribute("textContent");
+    }
+
     public String getJewelryCareText() {
         return driver.findElement(jewelryCareText).getAttribute("textContent");
+    }
+
+    public String getCuffsText() {
+        return driver.findElement(cuffsText).getAttribute("textContent");
     }
 
     public String getBijouterieCareHeader() {

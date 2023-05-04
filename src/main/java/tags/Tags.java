@@ -45,9 +45,9 @@ public class Tags extends Base {
 
 
     public String nameEarringsTags() {
-        String query = "SELECT item_tag.name from item_sku " +
-                "JOIN item ON item.id = item_sku.item_id " +
-                "JOIN item_translations ON item.id = item_translations.item_id " +
+        String query = "SELECT item_tag.name from item_translations " +
+                "JOIN item ON item.id = item_translations.item_id " +
+                "JOIN item_sku ON item.id = item_sku.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_tag_list ON item.id = item_tag_list.item_id " +
                 "JOIN item_tag ON item_tag_list.tag_id = item_tag.id " +

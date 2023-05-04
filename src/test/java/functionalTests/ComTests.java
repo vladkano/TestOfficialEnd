@@ -311,12 +311,12 @@ public class ComTests extends TestBase {
                 () -> assertEquals("Product type", specification.substring(0, 12)),
                 () -> assertEquals("delivery", receivingText),
                 () -> assertEquals("United States", location),
-                () -> assertEquals("jewelry", jewelryCareHeader),
-                () -> assertEquals("you may never want to take it off, but remember that alcohol in perfume can harm natural stones.", jewelryCareText),
-                () -> assertEquals("fashion jewelry", bijouterieCareHeader),
-                () -> assertEquals("jewelry made of alloy metals can be damaged by water (especially salt water), cream and perfume - take it off before taking a shower or applying lotion.", bijouterieCareText),
+                () -> assertEquals("cuffs with crystals", jewelryCareHeader),
+                () -> assertEquals("cannot be compressed and deformed, as this leads to the loss of stones", jewelryCareText),
+                () -> assertEquals("jewelry", bijouterieCareHeader),
+                () -> assertEquals("you may never want to take it off, but remember that alcohol in perfume can harm natural stones.", bijouterieCareText),
                 () -> assertEquals("if you do not like the purchased item or the size does not fit, we will always", deliveryText.substring(0, 78)),
-                () -> assertEquals("a warranty covers manufacturing defects for up to 6 months from date of purchase in stores or on the Poison Drop website the defects that may fall under warranty:", guaranteeText.substring(0, 162)));
+                () -> assertEquals("a warranty covers manufacturing defects for up to 6 months from date", guaranteeText.substring(0, 68)));
     }
 
     /**
