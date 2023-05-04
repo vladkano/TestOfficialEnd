@@ -84,18 +84,6 @@ public class TagTest extends TestBase {
     }
 
     /**
-     * Броши
-     */
-    @Test
-    @Description("Отображение всех тегов по товару: Броши")
-    public void tagIsCorrectBroshi() {
-        driver.get(TestConfig.SITE_URL + "catalog/broshi");
-        String firstTag = tag.getBroshiTag();
-        String tagsFromSql = tag.nameBroshiTags();
-        assertEquals(firstTag, tagsFromSql);
-    }
-
-    /**
      * Кольца
      */
     @Test

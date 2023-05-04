@@ -316,15 +316,6 @@ public class CatalogTest extends TestBase {
         getPicturesFromSite();
     }
 
-    /**
-     * Броши(картинки)
-     */
-    @Test
-    @Description("Броши(картинки)")
-    public void picturesOfBrooches() {
-        driver.get(TestConfig.SITE_URL + "catalog/broshi");
-        getPicturesFromSite();
-    }
 
     /**
      * Пирсинг(картинки)

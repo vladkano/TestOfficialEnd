@@ -34,6 +34,9 @@ public class Basket extends Base {
     private final By basketError = By.xpath("//p[@class='submit-block__message message message_error']");
     private final By dataError = By.xpath("//p[@class='text-input__message message message_error']");
 
+    private final By ponytnoButton = By.xpath("//button[@class='button-default pre-share-subscribe-popup__button button-default--total-black']/span");
+
+
 
     public Basket(WebDriver driver) {
         super(driver);
@@ -77,6 +80,10 @@ public class Basket extends Base {
 
     public void clickToItemInBasketButton() {
         click(itemInBasketButton);
+    }
+
+    public void clickToPonytnoButton() {
+        click(ponytnoButton);
     }
 
     public void clickToSetItemInBasketButton() {
@@ -233,7 +240,7 @@ public class Basket extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list.get(0);
+        return list.get(1);
     }
 
 
