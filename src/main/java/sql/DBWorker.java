@@ -40,7 +40,8 @@ public class DBWorker {
             Class.forName("org.mariadb.jdbc.Driver");
             String url = "jdbc:mysql://localhost:" + forwardedPort;
             con = DriverManager.getConnection(url + dotenv.get("DB_URL"), dotenv.get("DB_USER"), dotenv.get("DB_PASSWORD"));
-//            con = DriverManager.getConnection("jdbc:mysql://dev-goritskov.poisontestdrop.ru:3306/poisondrop", "db_user","db_user_pwd123");
+//            con = DriverManager.getConnection("jdbc:mysql://test-1.poisontestdrop.ru:33306/poisondrop",
+//                    "poisondrop","6D74evAhb5VzgTBrfkz2CJYcB4zJ44Kv");
         } catch (Exception e) {
             e.printStackTrace();
         }

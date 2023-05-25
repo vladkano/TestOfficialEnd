@@ -47,7 +47,7 @@ public class Earrings extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name.substring(0, 8).toLowerCase());
+                text.add(name.substring(0, 6).toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();

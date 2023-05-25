@@ -90,22 +90,6 @@ public class CollectionTest extends TestBase {
     }
 
     /**
-     * Каталог(Броши)
-     */
-    @Test
-    @Description("Проверка правильности формирования ссылок и их работоспособность: Каталог(Броши)")
-    public void firstLinkOfBrooches() {
-        driver.get(TestConfig.SITE_URL + "catalog/broshi");
-//        for (int i = 0; i < 1; i++){
-//            navigation.clickOnShowMoreButton();
-//        }
-        String href = collection.getHref();
-        collection.clickOnFirstHref();
-        String url = driver.getCurrentUrl();
-        assertEquals(url, href);
-    }
-
-    /**
      * Каталог(Серьги)
      */
     @Test

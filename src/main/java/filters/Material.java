@@ -19,9 +19,9 @@ public class Material extends Base {
     private final By kristallyButton = By.xpath("//div[text()='Кристалл']");
     private final By kamenButton = By.xpath("//div[text()='Натуральный камень']");
     private final By stekloButton = By.xpath("//div[text()='Стекло']");
-    private final By bronzeButton = By.xpath("//div[contains(text(), 'бронза')]");
+    private final By bronzeButton = By.xpath("//div[contains(text(), 'Бронза')]");
     private final By silverButton = By.xpath("//div[contains(text(), 'Серебро')]");
-    private final By jewelryAlloyButton = By.xpath("//div[@class='filters__section filters__section_material']//div[contains(text(), 'ювелирный сплав')]");
+    private final By jewelryAlloyButton = By.xpath("//div[@class='filters__section filters__section_material']//div[contains(text(), 'Ювелирный сплав')]");
 
     public Material(WebDriver driver) {
         super(driver);
