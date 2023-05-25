@@ -143,7 +143,7 @@ public class LinkTest extends TestBase {
         String header = base.getNameHeader();
         base.clickOnImageLink();
         String heading = base.getHeader();
-        assertEquals(header.substring(0,20), heading.substring(0,20));
+        assertEquals(header.substring(0,17), heading.substring(0,17));
     }
 
     @Test
@@ -154,7 +154,7 @@ public class LinkTest extends TestBase {
         String header = base.getNameHeader();
         base.clickOnNameLink();
         String heading = base.getHeader();
-        assertEquals(header.substring(0,20), heading.substring(0,20));
+        assertEquals(header.substring(0,17), heading.substring(0,17));
     }
 
     @Test

@@ -273,26 +273,19 @@ public class Basket extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        System.out.println(list.get(0));
+        System.out.println(list.get(1));
         return list.get(1);
     }
 
     public Integer getBalance() {
+        Integer firstItem = findFirstItemIdMoreThan5000();
         int id;
         Map<Integer, Integer> hashMap = new HashMap<>();
-        String query = "SELECT item.id, item_translations.name, sum(storage_stock.balance) AS count FROM item " +
-                "JOIN item_translations ON item.id = item_translations.item_id " +
-                "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
-                "JOIN designer ON item.designer_id = designer.id " +
+        String query = "SELECT item.id, storage_stock.balance AS count FROM item_translations " +
+                "JOIN item ON item.id = item_translations.item_id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
-                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
-                "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
-                "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and item_sku_price.price > 5000 and filter_id = 155 " +
-                "and storage_id not in " + unavailableStorages + " and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item_catalog_position.position " +
-                "HAVING count>1";
+                "where item.id= " +  firstItem;
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -305,8 +298,8 @@ public class Basket extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Integer firstItem = findFirstItemIdMoreThan5000();
-//        System.out.println(hashMap);
+//        Integer firstItem = findFirstItemIdMoreThan5000();
+        System.out.println(hashMap);
         return hashMap.get(firstItem);
     }
 
