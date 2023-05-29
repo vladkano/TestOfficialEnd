@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import sections.Subscription;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @Epic("Тесты окна с подпиской")
 public class SubscriptionTests extends TestBase {
