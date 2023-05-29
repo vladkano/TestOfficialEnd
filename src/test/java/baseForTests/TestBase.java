@@ -21,13 +21,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import personal.PersonalData;
 import productCards.Picture;
 import productCards.ProductCard;
-import search.Search;
 import sections.*;
 import tags.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
@@ -63,7 +61,7 @@ public class TestBase {
     protected Tags tag;
     protected MainPage mainPage;
     protected PersonalData personalData;
-    protected Search search;
+    protected Searchs search;
     protected Picture picture;
     protected Set set;
     protected ProductCard productCard;
