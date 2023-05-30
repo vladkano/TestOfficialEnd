@@ -438,6 +438,7 @@ public class ComTests extends TestBase {
         String itemName = wishlist.getItemName();
         wishlist.clickToAddToWishlistFromCatalogButton();
         wishlist.clickToWishListButton();
+        wishlist.clickToCookiesButton();
         String itemNameFromWishlist = wishlist.getItemNameFromFavorites().toLowerCase();
         wishlist.clickToTransferToBasketButton();
         wishlist.clickToMoveToBasketButton();
