@@ -68,7 +68,7 @@ public class Order extends Base {
     private final By paperButton = By.xpath("//span[text()='Бумажный']");
     private final By firstPrice = By.xpath("//b[@class='cart-price__total']");
     private final By finalPrice = By.xpath("//div[@class='order-summary__row order-summary__row_total']/span[2]");
-    private final By cloudPrice = By.xpath("//div[@class='header-component__cost']");
+    private final By cloudPrice = By.xpath("//div[@class='text p0 cost-value']");
     private final By checkoutPrice = By.xpath("//h1[@id='payment-methods']/span");
     private final By frame = By.xpath("//iframe[@src='https://pickpoint.ru/select/?&ikn=9990653812']");
     private final By payFrame = By.xpath("//iframe[@class=' with-appled']");
@@ -79,7 +79,7 @@ public class Order extends Base {
 
 
     //headers
-    private final By payHeader = By.xpath("//span[contains(text(), 'Оплата заказа')]");
+    private final By payHeader = By.xpath("//div[@class='text p2']");
     private final By orderHeader = By.xpath("//span[text()='Мы приняли ваш заказ']");
     private final By interHeader = By.xpath("//p[@class='order-delivery__tab-text']");
     private final By payComHeader = By.id("payment-methods");
@@ -136,6 +136,7 @@ public class Order extends Base {
         waitForVisibilityOf(payFrame, 10);
         WebElement payWindow = wait.until(ExpectedConditions.presenceOfElementLocated(payFrame));
         driver.switchTo().frame(payWindow);
+        waitForVisibilityOf(payHeader, 10);
         return driver.findElement(payHeader).getText();
     }
 
@@ -146,6 +147,7 @@ public class Order extends Base {
     }
 
     public String getCloudPrice() {
+        waitForVisibilityOf(cloudPrice, 10);
         return driver.findElement(cloudPrice).getText();
     }
 

@@ -37,10 +37,11 @@ public class OrderTest extends TestBase {
         String code2 = order.getPhonePassword();
         order.confirmWithPassword(code2);
         String header = order.getPayHeader();
-        int cloudPrice = parseInt(order.getCloudPrice().replaceAll("[^A-Za-z0-9]", ""));
+        String cloudPrice = order.getCloudPrice().replaceAll("[^0-9,]", "");
+        Double cloudPrice2 = Double.valueOf(cloudPrice.replaceAll(",", "."));
         Assertions.assertAll(
                 () -> assertEquals("Оплата заказа", header.substring(0, 13)),
-                () -> assertEquals(cartPrice, cloudPrice));
+                () -> assertEquals(cartPrice, Math.round(cloudPrice2)));
     }
 
     /**
@@ -337,7 +338,7 @@ public class OrderTest extends TestBase {
         putItemInBasket();
         int price = parseInt(order.getFirstPrice().replaceAll("[^A-Za-z0-9]", ""));
         order.internationalWithPhone(phoneForOrder, email, testNameForOrder,
-                "Минск", "улица Пушкина 12", "Test");
+                "Ереван", "улица Пушкина 12", "Test");
         int finalPrice = parseInt(order.getFinalPrice().replaceAll("[^A-Za-z0-9]", ""));
         System.out.println(price);
         System.out.println(finalPrice);

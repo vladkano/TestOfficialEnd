@@ -348,7 +348,7 @@ public class Basket extends Base {
             e.printStackTrace();
         }
 //        System.out.println(list);
-        return list.get(0);
+        return list.get(1);
     }
 
     //Вытаскиваем ссылки на браслеты, которые входят в коллекции
@@ -395,7 +395,7 @@ public class Basket extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list.get(0);
+        return list.get(1);
     }
 
 

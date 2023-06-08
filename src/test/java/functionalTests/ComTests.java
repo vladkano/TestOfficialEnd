@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Epic("Тесты com сайта")
 public class ComTests extends TestBase {
 
-
     @BeforeEach
     public void setUp() {
         mainSetUp();
@@ -438,6 +437,7 @@ public class ComTests extends TestBase {
         String itemName = wishlist.getItemName();
         wishlist.clickToAddToWishlistFromCatalogButton();
         wishlist.clickToWishListButton();
+        wishlist.clickToCookiesButton();
         String itemNameFromWishlist = wishlist.getItemNameFromFavorites().toLowerCase();
         wishlist.clickToTransferToBasketButton();
         wishlist.clickToMoveToBasketButton();

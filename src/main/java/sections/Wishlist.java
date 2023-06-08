@@ -16,6 +16,8 @@ public class Wishlist extends Base {
     private final By wishListButton = By.xpath("//a[@href='/wishlist/']");
     private final By wishListInCardListButton = By.xpath("//button[@class='wish-button__button']");
     private final By addToFavoritesFromCatalogButton = By.xpath("//span[@class='wish-button__icon-block']");
+
+    private final By cookiesButton = By.xpath("//div [@class='cookies__popup']/button");
     private final By transferToBasketButton = By.xpath("//button[@class='favorites-card__buy-button']/span");
     private final By transferToBasketWithSizeButton = By.xpath("//button[@class='size-selection-popup__add-to-cart button-fill']/span");
 
@@ -51,6 +53,10 @@ public class Wishlist extends Base {
 
     public void clickToTransferToBasketButton() {
         click(transferToBasketButton);
+    }
+
+    public void clickToCookiesButton() {
+        click(cookiesButton);
     }
 
     public void clickToTransferToBasketWithSizeButton() {

@@ -67,6 +67,7 @@ public class TestBase {
     protected ProductCard productCard;
     protected Base base;
     protected Subscription subscription;
+    protected ErrorPage errorPage;
 
 
     protected By numberOfItem = By.xpath("//p[@class='catalog-card__name']");

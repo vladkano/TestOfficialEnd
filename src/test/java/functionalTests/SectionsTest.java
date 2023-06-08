@@ -6,6 +6,7 @@ import config.TestConfig;
 import filters.Filters;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
+import mainPage.MainPageBanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,8 @@ public class SectionsTest extends TestBase {
         sale = new Sale(driver);
         shops = new Shops(driver);
         wishlist = new Wishlist(driver);
+        errorPage = new ErrorPage(driver);
+        banner = new MainPageBanner(driver);
     }
 
     /**
@@ -136,7 +139,7 @@ public class SectionsTest extends TestBase {
      */
     @Test()
     @Description("Проверка кнопок разделов на главной странице. Избранное.")
-    public void  wishListButton() {
+    public void wishListButton() {
         wishlist.clickToWishListButton();
         String url = driver.getCurrentUrl();
         String header = wishlist.getWishListHeader();
@@ -770,6 +773,36 @@ public class SectionsTest extends TestBase {
                 () -> assertEquals(href, url),
                 () -> assertEquals(sqlSize, numberOnly),
                 () -> assertEquals(sqlList.subList(0, sqlSize), siteList.subList(0, numberOnly)));
+    }
+
+    //создана задача https://tracker.yandex.ru/PD-3243
+    /**
+     * Блок тестов по 404 странице: <p>
+     * Проверка отображения надписи об 404 ошибке и раздела бестселлеров на странице https://poisondrop.ru/404
+     */
+    @Test
+    @Description("Проверка отображения надписи об 404 ошибке и раздела бестселлеров на странице https://poisondrop.ru/404")
+    public void errorPage() {
+        driver.get(TestConfig.SITE_URL + "404");
+        String errorHeader = errorPage.getErrorHeader();
+        String bestsellersHeader = errorPage.getBestsellersHeader();
+        Assertions.assertAll(
+                () -> assertEquals("Ошибка 404", errorHeader),
+                () -> assertEquals("бестселлеры", bestsellersHeader));
+    }
+
+
+    /**
+     * Раздел бестселлеров. Переход по наименованию изделия на 404 странице
+     */
+    @Test
+    @Description("Проверка отображения надписи об 404 ошибке и раздела бестселлеров на странице https://poisondrop.ru/404")
+    public void bestsellersOnErrorPage() {
+        driver.get(TestConfig.SITE_URL + "404");
+        String name = banner.getName();
+        banner.clickToBestsellerNameButton();
+        String header = banner.getBestsellerNameHeader();
+        assertEquals(name, header);
     }
 
 }
