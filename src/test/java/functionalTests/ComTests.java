@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Epic("Тесты com сайта")
 public class ComTests extends TestBase {
 
-
     @BeforeEach
     public void setUp() {
         mainSetUp();

@@ -522,7 +522,7 @@ public class Filters extends Base {
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and storage_id not in "+ unavailableStorages + " and is_archive = 0 and item_sku_price.price != 0 and filter_id = 155 " +
-                "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' and item_sku_price.discount >= 30 " +
+                "and balance > 0 and designer.show = 1 and currency_id = 1 and item_translations.locale = 'ru' and item_sku_price.discount >= 30 " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -552,7 +552,7 @@ public class Filters extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = 156 and currency_id =1 " +
                 "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 " +
-                "and item_translations.locale = 'ru' and item_sku_price.discount >= 50 " +
+                "and item_translations.locale = 'ru' and currency_id = 1 and item_sku_price.discount >= 50 " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();

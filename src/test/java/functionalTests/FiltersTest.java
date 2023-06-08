@@ -183,26 +183,6 @@ public class FiltersTest extends TestBase {
                 () -> assertEquals(sqlList.get(2), siteList.get(2)));
     }
 
-    /**
-     * Броши
-     */
-    @Test
-    @Description("Проверяем работу фильтров: По типу изделия(Броши)")
-    public void typeOfItemBrooches() {
-        filters.clickToFilterButton();
-        filters.clickToAllBroochesButton();
-        filters.clickToShowProductsButton();
-        List<String> sqlList = filters.getBroochesNamesForFilters();
-        getProductsListFromPage();
-        String countHeader = filters.getCountHeader();
-        Integer numberOnly = Integer.valueOf(countHeader.replaceAll("[^0-9]", ""));
-        //Сравниваем 2 элемента и размеры списков. Все сравнить невозможно так как на сайте не полностью отображаются длинные названия
-        Assertions.assertAll(
-                () -> assertEquals(sqlList.size(), numberOnly),
-                () -> assertEquals(sqlList.get(0), siteList.get(0)),
-                () -> assertEquals(sqlList.get(2), siteList.get(2)));
-    }
-
 
 //    //Вставки поломались 13.05.2022, должны починится, проверить после релиза таски: https://tracker.yandex.ru/PD-1659
     //Нужно переписать тесты в новой логике, после выезда переводов

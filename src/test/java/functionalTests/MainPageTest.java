@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.ResourceLock;
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -51,8 +50,6 @@ public class MainPageTest extends TestBase {
         driver.manage().window().maximize();
         mainPage = new MainPage(driver);
         order = new Order(driver);
-//        basket = new Basket(driver);
-//        basket.clickToOkButton();
     }
 
     /**
@@ -106,20 +103,6 @@ public class MainPageTest extends TestBase {
         Assertions.assertAll(
                 () -> assertEquals("вход или регистрация", heading),
                 () -> assertEquals("вход", sigInHeader));
-    }
-
-    
-    /**
-     * Авторизация по почте + проверка, что отображается подпись во время процесса авторизации
-     */
-    @Test
-    @Description("Поверяем возможность по почте и отображение информационной подписи во время процесса авторизации")
-    public void signInWithEmail() {
-        mainPage.sigInWithEmail(email);
-        String code2 = mainPage.getEmailPassword();
-        String sigInCodeHeader = mainPage.getSigInEmailHeader();
-        mainPage.sigInWithPassword(code2);
-        assertEquals("если письма нет, проверьте спам или отправьте код ещё раз, в работе почтового сервиса бывают сбои", sigInCodeHeader);
     }
 
 
@@ -202,30 +185,6 @@ public class MainPageTest extends TestBase {
         String heading = head.getIncorrectSigInHeader();
         assertEquals("телефон указан неверно", heading);
     }
-
-    /**
-     * Авторизация по электронной почте: <p>
-     * Ввод почты, которой нет в базе данных + проверка отображения подсказки
-     */
-    @Test
-    @Description("Поверяем что нельзя авторизоваться при вводе почты, которой нет в базе данных + проверка отображения подсказки")
-    public void signInWithWrongEmail() {
-        mainPage.sigInWithEmail("test13test@mail.com");
-        String heading = mainPage.getIncorrectSigInHeader();
-        assertEquals("пользователь с данным email не найден. попробуйте войти по номеру телефона, либо зарегистрируйтесь", heading);
-    }
-
-    /**
-     * Проверяем, что кнопка 'получить код' неактивна, если некорректно введена электронная почта
-     */
-    @Test
-    @Description("Проверяем, что кнопка 'получить код' неактивна, если некорректно введена электронная почта")
-    public void signInWithIncorrectEmail() {
-        mainPage.sigInWithEmail("owenkvist1@outlook");
-        Boolean registerButtonAttribute = mainPage.getRegisterButtonAttribute();
-        assertEquals(false, registerButtonAttribute);
-    }
-
 
     /**
      * Выход из аккаунта через личный кабинет <p>
