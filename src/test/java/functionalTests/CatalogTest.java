@@ -254,7 +254,7 @@ public class CatalogTest extends TestBase {
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
-            siteList.add(s.substring(0, 18));
+            siteList.add(s.substring(0, 17));
         }
         assertEquals(sqlList.subList(0, sqlList.size()), siteList.subList(0, siteList.size()));
     }

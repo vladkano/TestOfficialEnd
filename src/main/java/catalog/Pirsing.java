@@ -38,7 +38,7 @@ public class Pirsing extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name.substring(0, 18).toLowerCase());
+                text.add(name.substring(0, 17).toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();

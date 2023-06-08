@@ -136,6 +136,7 @@ public class Order extends Base {
         waitForVisibilityOf(payFrame, 10);
         WebElement payWindow = wait.until(ExpectedConditions.presenceOfElementLocated(payFrame));
         driver.switchTo().frame(payWindow);
+        waitForVisibilityOf(payHeader, 10);
         return driver.findElement(payHeader).getText();
     }
 
@@ -146,6 +147,7 @@ public class Order extends Base {
     }
 
     public String getCloudPrice() {
+        waitForVisibilityOf(cloudPrice, 10);
         return driver.findElement(cloudPrice).getText();
     }
 
