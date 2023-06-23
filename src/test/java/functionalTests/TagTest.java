@@ -5,7 +5,6 @@ import catalog.CatalogNavigation;
 import config.TestConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tags.Tags;
@@ -45,11 +44,12 @@ public class TagTest extends TestBase {
     @Description("Отображение тегов в каталогах: Браслеты")
     public void tagIsVisibleBracelets() {
         driver.get(TestConfig.SITE_URL + "catalog/braslety");
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 6; i++){
             navigation.clickOnShowMoreButton();
         }
         String firstTag = tag.getTag();
-        assertEquals("EXCLUSIVE", firstTag);
+        String braceletTags = tag.braceletTags();
+        assertEquals(braceletTags.toUpperCase(), firstTag);
     }
 
     /**

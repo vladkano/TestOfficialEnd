@@ -88,7 +88,7 @@ public class Trends extends Base {
         int count = 0;
         String query = "SELECT count(url) as countURL from trend_translations " +
                 "JOIN trend ON trend.id = trend_translations.trend_id " +
-                "where `show` = 1 and locale ='ru' and trend.description is not null and trend.description not like '' ";
+                "where `show` = 1 and locale ='ru' and trend_translations.short_description is not null";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -107,7 +107,7 @@ public class Trends extends Base {
         List<String> text = new ArrayList<>();
         String query = "SELECT trend_translations.name from trend_translations " +
                 "JOIN trend ON trend.id = trend_translations.trend_id " +
-                "where `show` = 1 and locale = 'ru' and trend.description is not null " +
+                "where `show` = 1 and locale = 'ru' and trend_translations.description is not null " +
                 "group by position, trend.id";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -115,7 +115,7 @@ public class Trends extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name").replaceAll("<br>", "");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.trim());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,7 +131,7 @@ public class Trends extends Base {
         String query = "SELECT trend_translations.description from trend_translations " +
                 "JOIN trend ON trend.id = trend_translations.trend_id " +
                 "where `show` = 1 and locale = 'ru' " +
-                "group by position";
+                "group by position, trend.id";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -176,22 +176,20 @@ public class Trends extends Base {
     }
 
     public static void main(String[] args) {
-        String description;
-        List<String> text = new ArrayList<>();
-        String query = "SELECT description from trend " +
-                "where `show` = 1 " +
-                "group by position";
+        int count = 0;
+        String query = "SELECT count(url) as countURL from trend_translations " +
+                "JOIN trend ON trend.id = trend_translations.trend_id " +
+                "where `show` = 1 and locale ='ru' and trend_translations.short_description is not null";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                description = resultSet.getString("description");
-                System.out.println(description);
-                text.add(description);
+                count = resultSet.getInt("countURL");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println(count);
         worker.getSession().disconnect();
 //        System.out.println("метод getNames: " + text);
 

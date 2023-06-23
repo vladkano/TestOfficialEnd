@@ -22,7 +22,7 @@ public class Designers extends Base {
     private final By designersSecondHref = By.xpath("//div[@class='new-designers__wrapper']/a[2]");
     private final By designersThirdHref = By.xpath("//div[@class='new-designers__wrapper']/a[3]");
     private final By firstPopularHref = By.xpath("//div[@class='popular-designers__item']/a");
-    private final By lastPopularHref = By.xpath("//div[@class='popular-designers__item'][12]/a");
+    private final By lastPopularHref = By.xpath("//div[@class='popular-designers__item'][last()]/a");
     private final By designer = By.xpath("//li[@class='index-designers__name']/a");
 
     //карточка товара
@@ -185,7 +185,7 @@ public class Designers extends Base {
     public static List<String> getDesignerUrlForFilter() {
         String name;
         List<String> text = new ArrayList<>();
-        String query = "select url from designer " +
+        String query = "select designer_translation.url from designer " +
                 "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
                 "where designer.show = 1 and designer_translation.locale = 'ru' " +
                 "group by designer.created_at desc limit 3";
@@ -194,22 +194,21 @@ public class Designers extends Base {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 name = resultSet.getString("url");
-                System.out.println(name);
+//                System.out.println(name);
                 text.add(name);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+//        System.out.println(text);
         return text;
     }
 
     public static Integer getFirstFilterID() {
         int filter = 0;
-        String query = "select item_catalog_position_filter.id from designer " +
-                "JOIN item on item.designer_id = designer.id " +
-                "JOIN item_catalog_position on item.id = item_catalog_position.item_id " +
-                "JOIN item_catalog_position_filter on item_catalog_position.filter_id = item_catalog_position_filter.id " +
-                "where item_catalog_position_filter.filters like " + "'%" + getDesignerUrlForFilter().get(0) + "%'";
+        String query = "select item_catalog_position_filter.id from item_catalog_position_filter " +
+                "where item_catalog_position_filter.filters like " + "'%" + getDesignerUrlForFilter().get(0) + "%' " +
+                "order by id desc";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -219,16 +218,15 @@ public class Designers extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+//        System.out.println(filter);
         return filter;
     }
 
     public static Integer getSecondFilterID() {
         int filter = 0;
-        String query = "select item_catalog_position_filter.id from designer " +
-                "JOIN item on item.designer_id = designer.id " +
-                "JOIN item_catalog_position on item.id = item_catalog_position.item_id " +
-                "JOIN item_catalog_position_filter on item_catalog_position.filter_id = item_catalog_position_filter.id " +
-                "where item_catalog_position_filter.filters like " + "'%" + getDesignerUrlForFilter().get(1) + "%'";
+        String query = "select item_catalog_position_filter.id from item_catalog_position_filter " +
+                "where item_catalog_position_filter.filters like " + "'%" + getDesignerUrlForFilter().get(1) + "%' " +
+                "order by id desc";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -266,7 +264,7 @@ public class Designers extends Base {
         String query = "select designer_translation.url from designer " +
                 "JOIN designer_translation ON designer.id = designer_translation.designer_id " +
                 "where designer.show = 1 and designer_translation.locale = 'ru' and is_popular = 1 " +
-                "group by designer_translation.id ";
+                "group by designer.id";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -305,11 +303,9 @@ public class Designers extends Base {
 
     public static Integer getFirstFilterIDForPopular() {
         int filter = 0;
-        String query = "select item_catalog_position_filter.id from designer " +
-                "JOIN item on item.designer_id = designer.id " +
-                "JOIN item_catalog_position on item.id = item_catalog_position.item_id " +
-                "JOIN item_catalog_position_filter on item_catalog_position.filter_id = item_catalog_position_filter.id " +
-                "where item_catalog_position_filter.filters like " + "'%" + getDesignerUrlsForPopular().get(0) + "%'";
+        String query = "select item_catalog_position_filter.id from item_catalog_position_filter " +
+                "where item_catalog_position_filter.filters like " + "'%" + getDesignerUrlsForPopular().get(0) + "%' " +
+                "order by id desc";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -326,12 +322,10 @@ public class Designers extends Base {
 
     public static Integer getLastFilterIDForPopular() {
         int filter = 0;
-        String query = "select item_catalog_position_filter.id from designer " +
-                "JOIN item on item.designer_id = designer.id " +
-                "JOIN item_catalog_position on item.id = item_catalog_position.item_id " +
-                "JOIN item_catalog_position_filter on item_catalog_position.filter_id = item_catalog_position_filter.id " +
+        String query = "select item_catalog_position_filter.id from item_catalog_position_filter " +
                 "where item_catalog_position_filter.filters like" +
-                " " + "'%" + getDesignerUrlsForPopular().get(getDesignerUrlsForPopular().size() - 1) + "%'";
+                " " + "'%" + getDesignerUrlsForPopular().get(getDesignerUrlsForPopular().size() - 1) + "%'" +
+                "order by id desc";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -341,7 +335,7 @@ public class Designers extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(filter);
+//        System.out.println(filter);
         return filter;
     }
 
@@ -353,12 +347,13 @@ public class Designers extends Base {
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0  and filter_id = " + "" + getFirstFilterID() + " " +
+                "and is_archive = 0 and item_sku_price.price != 0  and filter_id = " + "" + getFirstFilterID() + " " +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name " +
+                "group by item.id, item_translations.name, designer.id, designer.name " +
                 "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -366,12 +361,12 @@ public class Designers extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("метод getNames: " + text);
+//        System.out.println("метод getNames: " + text);
         return text;
     }
 
@@ -383,12 +378,13 @@ public class Designers extends Base {
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0  and filter_id = " + "" + getSecondFilterID() + " " +
+                "and is_archive = 0 and item_sku_price.price != 0  and filter_id = "  + "" + getSecondFilterID() + " " +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name " +
+                "group by item.id, item_translations.name, designer.id, designer.name " +
                 "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -396,7 +392,7 @@ public class Designers extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -412,12 +408,13 @@ public class Designers extends Base {
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0  and filter_id = " + "" + getThirdFilterID() + " " +
+                "and is_archive = 0 and item_sku_price.price != 0  and filter_id = " + "" + getThirdFilterID() + " " +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name " +
+                "group by item.id, item_translations.name, designer.id, designer.name " +
                 "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
@@ -425,7 +422,7 @@ public class Designers extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -446,7 +443,7 @@ public class Designers extends Base {
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_sku_price.price != 0 " +
+                "and storage_id not in " + unavailableStorages + " and balance > 0 and designer.show = 1 and item_sku_price.price != 0 " +
                 "and designer_translation.locale = 'ru' " +
                 "group by designer_translation.name";
         try {
@@ -489,7 +486,7 @@ public class Designers extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(text.get(9));
+//        System.out.println(text.get(0));
         return text;
     }
 
@@ -511,7 +508,7 @@ public class Designers extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(filterID);
+//        System.out.println(filterID);
         return filterID;
     }
 
@@ -531,7 +528,7 @@ public class Designers extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(filterID);
+//        System.out.println(filterID);
         return filterID;
     }
 
@@ -551,7 +548,7 @@ public class Designers extends Base {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(filterID);
+//        System.out.println(filterID);
         return filterID;
     }
 
@@ -571,15 +568,15 @@ public class Designers extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getFirstFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
-                "order by item_catalog_position.position ";
+                "group by item.id, item_translations.name, designer.id, designer.name " +
+                "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.substring(0,15).toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -603,8 +600,8 @@ public class Designers extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getTenFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
-                "order by item_catalog_position.position ";
+                "group by item.id, item_translations.name, designer.id, designer.name " +
+                "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -635,15 +632,15 @@ public class Designers extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getTwentyFilterIDForList() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name, catalog.id, catalog.name " +
-                "order by item_catalog_position.position ";
+                "group by item.id, item_translations.name, designer.id, designer.name " +
+                "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.toLowerCase());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -659,21 +656,23 @@ public class Designers extends Base {
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
+                "JOIN catalog ON item.catalog_id = catalog.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 and filter_id = " + "'" + getFirstFilterIDForPopular() + "'" +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getFirstFilterIDForPopular() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name " +
-                "order by item_catalog_position.position ";
+                "group by item.id, item_translations.name, designer.id, designer.name " +
+                "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.toLowerCase().substring(0,20));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -689,21 +688,23 @@ public class Designers extends Base {
                 "JOIN item_translations ON item.id = item_translations.item_id " +
                 "JOIN item_catalog_position ON item.id = item_catalog_position.item_id " +
                 "JOIN designer ON item.designer_id = designer.id " +
+                "JOIN catalog ON item.catalog_id = catalog.id " +
                 "JOIN item_sku ON item.id = item_sku.item_id " +
+                "JOIN item_sku_price ON item_sku.id = item_sku_price.item_sku_id " +
                 "JOIN item_picture_list ON item.id = item_picture_list.item_id " +
                 "JOIN storage_stock ON item_sku.id = storage_stock.sku_id " +
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
-                "and is_archive = 0 and price != 0 and filter_id = " + "'" + getLastFilterIDForPopular() + "'" +
+                "and is_archive = 0 and item_sku_price.price != 0 and filter_id = " + "'" + getLastFilterIDForPopular() + "'" +
                 "and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
-                "group by item.id, item.name, designer.id, designer.name " +
-                "order by item_catalog_position.position ";
+                "group by item.id, item_translations.name, designer.id, designer.name " +
+                "order by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name);
+                text.add(name.toLowerCase().substring(0,20));
             }
         } catch (SQLException e) {
             e.printStackTrace();

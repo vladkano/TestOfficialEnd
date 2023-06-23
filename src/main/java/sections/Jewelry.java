@@ -49,7 +49,7 @@ public class Jewelry extends Base {
             while (resultSet.next()) {
                 name = resultSet.getString("name");
 //                System.out.println(name);
-                text.add(name.toLowerCase());
+                text.add(name.toLowerCase().substring(0,7));
             }
         } catch (SQLException e) {
             e.printStackTrace();

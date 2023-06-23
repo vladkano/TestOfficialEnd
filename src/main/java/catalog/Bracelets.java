@@ -33,7 +33,7 @@ public class Bracelets extends Base {
                 "where EXISTS (SELECT * FROM item WHERE item.id = item_picture_list.item_id and (tag_id = 1 or tag_id = 4)) " +
                 "and catalog_translation.catalog_id in (3,18) and catalog_translation.locale = 'ru' and is_archive = 0 " +
                 "and item_sku_price.price != 0 and filter_id in (148) " +
-                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_sku_price.price != 0 and item_translations.locale = 'ru' " +
+                "and storage_id not in "+ unavailableStorages + " and balance > 0 and designer.show = 1 and item_translations.locale = 'ru' " +
                 "group by item_catalog_position.position";
         try {
             Statement statement = worker.getCon().createStatement();

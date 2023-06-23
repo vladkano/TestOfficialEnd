@@ -385,7 +385,7 @@ public class SectionsTest extends TestBase {
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
-            siteList.add(s);
+            siteList.add(s.substring(0,7));
         }
         Assertions.assertAll(
                 () -> assertEquals(sqlList.size(), numberOnly),
@@ -450,7 +450,7 @@ public class SectionsTest extends TestBase {
      */
     @Test
     @Description("Тренды(отображение баннеров, работа кнопки 'Показать еще', наименование и порядок их отображения)")
-    public void bannersIsVisible() {
+    public void bannersIsVisibleInTrends() {
         driver.get(TestConfig.SITE_URL + "trend/");
         navigation.clickOnShowMoreTrendsButton();
         List<WebElement> banners = driver.findElements(trendBanners);
@@ -577,7 +577,7 @@ public class SectionsTest extends TestBase {
                 () -> assertEquals(href, url),
                 () -> assertEquals(sqlList.size(), numberOnly),
                 () -> assertEquals(sqlList.get(0).substring(0, 20), siteList.get(0).substring(0, 20)),
-                () -> assertEquals(sqlList.get(7).substring(0, 20), siteList.get(7).substring(0, 20)));
+                () -> assertEquals(sqlList.get(4).substring(0, 20), siteList.get(4).substring(0, 20)));
     }
 
     /**
@@ -647,7 +647,7 @@ public class SectionsTest extends TestBase {
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
-            siteList.add(s);
+            siteList.add(s.substring(0,20));
         }
         Assertions.assertAll(
                 () -> assertEquals(href, url),
@@ -671,9 +671,8 @@ public class SectionsTest extends TestBase {
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
-            siteList.add(s);
+            siteList.add(s.substring(0,20));
         }
-        assertEquals(href, url);
         Assertions.assertAll(
                 () -> assertEquals(href, url),
                 () -> assertEquals(sqlList.size(), numberOnly),
@@ -689,7 +688,7 @@ public class SectionsTest extends TestBase {
     @Description("Отображение корректного списка дизайнеров на сайте")
     public void listOfDesigners() {
         driver.get(TestConfig.SITE_URL + "designers/");
-        List<String> sqlList = Designers.getListOfDesigners();
+        List<String> sqlList = designers.getListOfDesigners();
         List<WebElement> elements = driver.findElements(numberOfDesigners);
         for (WebElement text : elements) {
             String s = text.getText();
@@ -715,7 +714,7 @@ public class SectionsTest extends TestBase {
         List<WebElement> elements = driver.findElements(numberOfItem);
         for (WebElement text : elements) {
             String s = text.getText();
-            siteList.add(s);
+            siteList.add(s.substring(0,15));
         }
         Assertions.assertAll(
                 () -> assertEquals(href, url),

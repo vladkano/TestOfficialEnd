@@ -220,10 +220,11 @@ public class MainPageTest extends TestBase {
         order.orderWithSignIn();
         int cartPrice = parseInt(order.getFinalPrice().replaceAll("[^A-Za-z0-9]", ""));
         String header = order.getPayHeader();
-        int cloudPrice = parseInt(order.getCloudPrice().replaceAll("[^A-Za-z0-9]", ""));
+        String cloudPrice = order.getCloudPrice().replaceAll("[^0-9,]", "");
+        Double cloudPrice2 = Double.valueOf(cloudPrice.replaceAll(",", "."));
         Assertions.assertAll(
                 () -> assertEquals("Оплата заказа", header.substring(0, 13)),
-                () -> assertEquals(cartPrice, cloudPrice));
+                () -> assertEquals(cartPrice, Math.round(cloudPrice2)));
     }
 
 

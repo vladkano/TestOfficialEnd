@@ -15,12 +15,12 @@ import java.util.List;
 public class MainPageBanner extends Base {
 
     private final By carouselButton = By.xpath("//button[@aria-label='Carousel Page 2']");
-    private final By designerButton = By.xpath("//div[@class='catalog-card__designer']/a");
+    private final By designerButton = By.xpath("//p[@class='catalog-card__designer']/a");
     private final By mainCatalogHref = By.xpath("//div[@class='main-banner']/a");
     private final By countOfBanners = By.xpath("//div[@class='banner index-page__banner']/a");
 
-    private final By designerButtonHeader = By.xpath("//div[@class='catalog-card__designer']/a");
-    private final By nameButtonHeader = By.xpath("//h3[@class='catalog-card__name']/a");
+    private final By designerButtonHeader = By.xpath("//p[@class='catalog-card__designer']/a");
+    private final By nameButtonHeader = By.xpath("//p[@class='catalog-card__name']/a");
     private final By designerHeader = By.xpath("//a[@class='product-main-info__designer-link']");
     private final By firstCatalogHeader = By.xpath("//span[@class='filters__label-text']");
     private final By mainCatalogHeader = By.xpath("//h1[text()='Самой сверкающей']");
@@ -166,7 +166,8 @@ public class MainPageBanner extends Base {
         List<Integer> list = new ArrayList<>();
         String query = "SELECT item_sku_price.price, (item_sku_price.price * item_sku_price.discount/100) as discount from item_sku_price " +
                 "JOIN item_sku ON item_sku_price.item_sku_id = item_sku.id " +
-                "JOIN bestsellers ON bestsellers.sku_id = item_sku.id " +
+                "JOIN item ON item_sku.item_id = item.id " +
+                "JOIN bestsellers ON bestsellers.item_code = item.code " +
                 "where locale = 'ru' " +
                 "group by bestsellers.id LIMIT 5";
         try {
